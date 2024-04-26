@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  /* align-items: center; */
   height: 25vh;
   width: 100vw;
-  border: red solid 1px;
+  /* border: red solid 1px; */
 }
 
 .headerIcons {
@@ -26,21 +27,59 @@
   justify-content: center;
   align-items: center;
   width: 125px;
-  height: 100px;
+  height: 75px;
   /* border: red solid 1px; */
 }
 
 .userIcon {
-  width: 25px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   /* border: red solid 1px; */
 }
 
 .userTitle {
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-top: 4px;
   margin-bottom: 0;
   /* border: red solid 1px; */
+}
+
+.navbarBootstrap {
+  background: #eee0e0;
+  font-size: 16px;
+  /* border: green solid 1px; */
+}
+
+.navbarContainer {
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* border: green solid 1px; */
+}
+
+.navbarCollapse {
+  max-height: 75px;
+  overflow-y: auto;
+}
+
+.navbarBrand,
+.navbarNav {
+  color: #4b5c6b;
+  font-weight: 500;
+}
+
+.navbarBrand:hover,
+.navbarDropdown a:hover,
+.navbarLink:hover,
+.navbarBrand:active,
+.navbarBrand:focus,
+.navbarDropdown a:active,
+.navbarDropdown a:focus,
+.navbarLink:active,
+.navbarLink:focus {
+  color: purple;
+  font-weight: bold;
 }
