@@ -31,15 +31,15 @@ export default function Header() {
             <Navbar.Brand href="#home" className={styles.navbarBrand}>
               LCDBP
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
-              id="navbarScroll"
+              id="basic-navbar-nav"
               className={styles.navbarCollapse}
             >
-              <Nav className={`ms-auto ${styles.navbarNav}`} navbarScroll>
+              <Nav className={`ms-auto ${styles.navbarNav}`}>
                 <NavDropdown
                   title="Accueil"
-                  id="navbarScrollingDropdown"
+                  id="basic-nav-dropdown"
                   className={styles.navbarDropdown}
                   active={false}
                 >

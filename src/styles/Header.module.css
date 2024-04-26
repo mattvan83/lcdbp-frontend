@@ -60,10 +60,10 @@
   /* border: green solid 1px; */
 }
 
-.navbarCollapse {
-  max-height: 75px;
+/* .navbarCollapse {
+  max-height: 200px;
   overflow-y: auto;
-}
+} */
 
 .navbarBrand,
 .navbarNav {
