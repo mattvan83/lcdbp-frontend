@@ -71,7 +71,7 @@
   font-weight: 500;
 }
 
-.navbarBrand:hover,
+/* .navbarBrand:hover,
 .navbarDropdown a:hover,
 .navbarLink:hover,
 .navbarBrand:active,
@@ -80,6 +80,12 @@
 .navbarDropdown a:focus,
 .navbarLink:active,
 .navbarLink:focus {
+  color: purple;
+  font-weight: bold;
+} */
+
+.navbarBrand:hover,
+.navbarDropdown a:hover {
   color: purple;
   font-weight: bold;
 }

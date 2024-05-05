@@ -7,9 +7,8 @@ import { faUser, faXmark, faEye } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import React, { useState } from "react";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import {
   HouseFill,
   EnvelopeFill,
@@ -18,6 +17,24 @@ import {
 } from "react-bootstrap-icons";
 
 export default function Header() {
+  const [activeKey, setActiveKey] = useState("");
+  const [hoveredKey, setHoveredKey] = useState("");
+
+  console.log("activeKey: ", activeKey);
+
+  const handleSelect = (eventKey) => {
+    setActiveKey(eventKey);
+  };
+
+  const getNavbarTitleStyle = (keys) => ({
+    color:
+      keys.includes(activeKey) || keys.includes(hoveredKey)
+        ? "purple"
+        : "#4b5c6b", // Change colors as needed
+    fontWeight:
+      keys.includes(activeKey) || keys.includes(hoveredKey) ? "bold" : "500",
+  });
+
   return (
     <>
       <header className={styles.header}>
@@ -42,24 +59,56 @@ export default function Header() {
               id="basic-navbar-nav"
               className={styles.navbarCollapse}
             >
-              <Nav className={`ms-auto ${styles.navbarNav}`}>
+              <Nav
+                className={`ms-auto ${styles.navbarNav}`}
+                onSelect={handleSelect}
+              >
                 <NavDropdown
-                  title="Accueil"
+                  title={
+                    <span
+                      style={getNavbarTitleStyle([
+                        "home",
+                        "home1",
+                        "home2",
+                        "home3",
+                        "home4",
+                      ])}
+                    >
+                      Accueil
+                    </span>
+                  }
                   id="basic-nav-dropdown"
                   className={styles.navbarDropdown}
-                  active={false}
+                  onMouseEnter={() => setHoveredKey("home")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
-                  <NavDropdown.Item as={Link} href="#action/3.1">
+                  <NavDropdown.Item
+                    as={Link}
+                    href="#action/3.1"
+                    eventKey="home1"
+                  >
                     Action
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} href="#action/3.2">
+                  <NavDropdown.Item
+                    as={Link}
+                    href="#action/3.2"
+                    eventKey="home2"
+                  >
                     Another action
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} href="#action/3.3">
+                  <NavDropdown.Item
+                    as={Link}
+                    href="#action/3.3"
+                    eventKey="home3"
+                  >
                     Something
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} href="#action/3.4">
+                  <NavDropdown.Item
+                    as={Link}
+                    href="#action/3.4"
+                    eventKey="home4"
+                  >
                     Separated link
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -67,7 +116,10 @@ export default function Header() {
                   as={Link}
                   href="#link"
                   className={styles.navbarLink}
-                  active={false}
+                  eventKey="chore"
+                  style={getNavbarTitleStyle(["chore"])}
+                  onMouseEnter={() => setHoveredKey("chore")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
                   Le Chœur
                 </Nav.Link>
@@ -75,7 +127,10 @@ export default function Header() {
                   as={Link}
                   href="#link"
                   className={styles.navbarLink}
-                  active={false}
+                  eventKey="events"
+                  style={getNavbarTitleStyle(["events"])}
+                  onMouseEnter={() => setHoveredKey("events")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
                   Évènements
                 </Nav.Link>
@@ -83,7 +138,10 @@ export default function Header() {
                   as={Link}
                   href="#link"
                   className={styles.navbarLink}
-                  active={false}
+                  eventKey="listen"
+                  style={getNavbarTitleStyle(["listen"])}
+                  onMouseEnter={() => setHoveredKey("listen")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
                   Nous Écouter
                 </Nav.Link>
@@ -91,7 +149,10 @@ export default function Header() {
                   as={Link}
                   href="#link"
                   className={styles.navbarLink}
-                  active={false}
+                  eventKey="pressReview"
+                  style={getNavbarTitleStyle(["pressReview"])}
+                  onMouseEnter={() => setHoveredKey("pressReview")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
                   Revue de Presse
                 </Nav.Link>
@@ -99,7 +160,10 @@ export default function Header() {
                   as={Link}
                   href="#link"
                   className={styles.navbarLink}
-                  active={false}
+                  eventKey="contactUS"
+                  style={getNavbarTitleStyle(["contactUS"])}
+                  onMouseEnter={() => setHoveredKey("contactUS")}
+                  onMouseLeave={() => setHoveredKey("")}
                 >
                   Nous contacter
                 </Nav.Link>
