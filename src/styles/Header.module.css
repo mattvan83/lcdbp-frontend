@@ -71,6 +71,19 @@
   font-weight: 500;
 }
 
+/* Flexbox styles for the span wrapping the icon and title */
+.navbarDropdown > span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+}
+
+.navbarLink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 /* .navbarBrand:hover,
 .navbarDropdown a:hover,
 .navbarLink:hover,
@@ -88,4 +101,11 @@
 .navbarDropdown a:hover {
   color: purple;
   font-weight: bold;
+}
+
+.navbarIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 5px;
 }

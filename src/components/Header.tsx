@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faXmark, faEye } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faEye,
+  faHome,
+  faCircleInfo,
+  faCalendar,
+  faCirclePlay,
+  faNewspaper,
+  faAddressBook,
+} from "@fortawesome/free-solid-svg-icons";
 // import { IconContext } from "react-icons";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
@@ -20,7 +30,8 @@ export default function Header() {
   const [activeKey, setActiveKey] = useState("");
   const [hoveredKey, setHoveredKey] = useState("");
 
-  console.log("activeKey: ", activeKey);
+  // console.log("activeKey: ", activeKey);
+  // console.log("hoveredKey: ", hoveredKey);
 
   const handleSelect = (eventKey) => {
     setActiveKey(eventKey);
@@ -74,6 +85,20 @@ export default function Header() {
                         "home4",
                       ])}
                     >
+                      <FontAwesomeIcon
+                        icon={faHome}
+                        color={
+                          ["home", "home1", "home2", "home3", "home4"].includes(
+                            activeKey
+                          ) ||
+                          ["home", "home1", "home2", "home3", "home4"].includes(
+                            hoveredKey
+                          )
+                            ? "purple"
+                            : "#4b5c6b"
+                        }
+                        className={styles.navbarIcon}
+                      />
                       Accueil
                     </span>
                   }
@@ -121,6 +146,16 @@ export default function Header() {
                   onMouseEnter={() => setHoveredKey("chore")}
                   onMouseLeave={() => setHoveredKey("")}
                 >
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    color={
+                      ["chore"].includes(activeKey) ||
+                      ["chore"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
                   Le Chœur
                 </Nav.Link>
                 <Nav.Link
@@ -132,6 +167,16 @@ export default function Header() {
                   onMouseEnter={() => setHoveredKey("events")}
                   onMouseLeave={() => setHoveredKey("")}
                 >
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    color={
+                      ["events"].includes(activeKey) ||
+                      ["events"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
                   Évènements
                 </Nav.Link>
                 <Nav.Link
@@ -143,6 +188,16 @@ export default function Header() {
                   onMouseEnter={() => setHoveredKey("listen")}
                   onMouseLeave={() => setHoveredKey("")}
                 >
+                  <FontAwesomeIcon
+                    icon={faCirclePlay}
+                    color={
+                      ["listen"].includes(activeKey) ||
+                      ["listen"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
                   Nous Écouter
                 </Nav.Link>
                 <Nav.Link
@@ -154,6 +209,16 @@ export default function Header() {
                   onMouseEnter={() => setHoveredKey("pressReview")}
                   onMouseLeave={() => setHoveredKey("")}
                 >
+                  <FontAwesomeIcon
+                    icon={faNewspaper}
+                    color={
+                      ["pressReview"].includes(activeKey) ||
+                      ["pressReview"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
                   Revue de Presse
                 </Nav.Link>
                 <Nav.Link
@@ -165,6 +230,16 @@ export default function Header() {
                   onMouseEnter={() => setHoveredKey("contactUS")}
                   onMouseLeave={() => setHoveredKey("")}
                 >
+                  <FontAwesomeIcon
+                    icon={faAddressBook}
+                    color={
+                      ["contactUS"].includes(activeKey) ||
+                      ["contactUS"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
                   Nous contacter
                 </Nav.Link>
               </Nav>
