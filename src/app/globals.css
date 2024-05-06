@@ -9,6 +9,14 @@ body {
   box-sizing: border-box;
 }
 
-/* p {
-  font-size: 18px;
-} */
+h3 {
+  margin: 18px;
+}
+
+h4 {
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 14px;
+}
