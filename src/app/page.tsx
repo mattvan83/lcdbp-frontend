@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Button from "react-bootstrap/Button";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
               Notre devise : éprouver du plaisir à se retrouver pour chanter et
               le transmettre.
             </p>
+            <Button variant="primary">Nous Découvrir</Button>
           </div>
           <Image
             src="/heroSection.jpg"
