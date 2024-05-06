@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 40vh;
+  /* height: 40vh; */
   width: 95vw;
   margin: 0 auto;
   /* border: red solid 1px; */
@@ -33,7 +33,7 @@
 
 .heroText > p {
   text-align: center;
-  min-width: 390px;
+  /* min-width: 390px; */
   margin-bottom: 18px;
   /* font-style: italic; */
 }
@@ -53,9 +53,20 @@
   .heroText {
     width: 95vw;
   }
+}
 
+/* Media query for window width between 576px and 1167px */
+@media (min-width: 576px) and (max-width: 1167px) {
   .heroImage {
-    width: 575px;
-    height: 287.5px;
+    width: 536px;
+    height: 268px;
+  }
+}
+
+/* Media query for window width less than 575px */
+@media (max-width: 575px) {
+  .heroImage {
+    width: 100%;
+    object-fit: cover;
   }
 }
