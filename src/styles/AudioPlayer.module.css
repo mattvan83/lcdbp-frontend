@@ -38,6 +38,11 @@
   margin-bottom: 10px;
 }
 
+/* .audioPlayerControls {
+  margin-top: 20px;
+  align-self: flex-start;
+} */
+
 /* Media query for window width less than 499px */
 /* @media (max-width: 499px) {
   .audioPlayer {

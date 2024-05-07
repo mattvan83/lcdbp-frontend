@@ -78,11 +78,13 @@ export default function AudioPlayer({
             </span>
           )}
         </div>
-        <div>
-          <audio src={audioFile} controls={true}>
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+        <audio
+          src={audioFile}
+          controls={true}
+          className={styles.audioPlayerControls}
+        >
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
   );
