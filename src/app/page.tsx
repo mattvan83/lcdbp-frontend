@@ -1,8 +1,58 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
+import AudioPlayer from "@/components/AudioPlayer";
+
+const tracks = [
+  {
+    title: "O Cher Jura",
+    artwork: "",
+    audioFile: "/data/O_cher_Jura_(extrait).mp3",
+    authorText: "Henri Cordier",
+    authorMusic: "Henri Cordier",
+    arrangement: "Jean Sarrazin",
+    harmonization: "",
+    thumbnail: "/data/Jura.jpg",
+    thumbnailDescription: "Photo du Jura",
+  },
+  {
+    title: "Still Ruht Der See",
+    artwork: "",
+    audioFile: "/data/Still_ruht_der_See_(extrait).mp3",
+    authorText: "Heinrich Pfeil",
+    authorMusic: "Heinrich Pfeil",
+    arrangement: "",
+    harmonization: "",
+    thumbnail: "/data/Heinrich_Pfeil.jpg",
+    thumbnailDescription: "Heinrich Pfeil",
+  },
+  {
+    title: "Tête En l'Air",
+    artwork: "",
+    audioFile: "/data/Tete_en_l'air_(extrait).mp3",
+    authorText: "Jacques Higelin",
+    authorMusic: "Jacques Higelin",
+    arrangement: "Roland Ménéguz",
+    harmonization: "",
+    thumbnail: "/data/JacquesHigelin.jpeg",
+    thumbnailDescription: "Jacques Higelin",
+  },
+  {
+    title: "Va Pensiero",
+    artwork: "Chœur des Hébreux",
+    audioFile: "/data/Va_pensiero_(extrait).mp3",
+    authorText: "",
+    authorMusic: "Guiseppe Verdi",
+    arrangement: "",
+    harmonization: "",
+    thumbnail: "/data/GuiseppeVerdi.jpg",
+    thumbnailDescription: "Guiseppe Verdi",
+  },
+];
 
 export default function Home() {
+  const audioPlayers = tracks.map((track) => <AudioPlayer {...track} />);
+
   return (
     <main>
       <div className={styles.heroDivision}>
@@ -66,7 +116,7 @@ export default function Home() {
       <div className={styles.listenDivision}>
         <div className={styles.listenSection}>
           <h3>Nos derniers chants</h3>
-          <div className={styles.listenContent}></div>
+          <div className={styles.listenContent}>{audioPlayers}</div>
           <Button variant="primary" className={styles.listenButton}>
             Ecouter plus de chants
           </Button>
