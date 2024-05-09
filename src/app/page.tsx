@@ -50,6 +50,33 @@ const tracks = [
   },
 ];
 
+const pressReviews = [
+  {
+    title: "Le Chœur du Bon Pays a repris les répétitions",
+    journal: "Le Progrès",
+    date: new Date("2021-9-7T00:00:00"),
+    city: "Cousance",
+    thumbnail: "/press/210926_162048.jpg",
+    thumbnailDescription: "Revue de presse du 7 Septembre 2021",
+  },
+  {
+    title: "Commémoration en mémoire des Résistants du maquis de Lanézia",
+    journal: "La Voix du Jura",
+    date: new Date("2021-8-3T00:00:00"),
+    city: "Cuisia",
+    thumbnail: "/press/210828_193917.jpg",
+    thumbnailDescription: "Revue de presse du 3 Août 2021 ",
+  },
+  {
+    title: "Le Chœur du Bon Pays prépare son avenir",
+    journal: "Actu Lons et Région",
+    date: new Date("2021-7-8T00:00:00"),
+    city: "Cousance",
+    thumbnail: "/press/210727_165940.jpg",
+    thumbnailDescription: "Revue de presse du 8 Juillet 2021 ",
+  },
+];
+
 export default function Home() {
   const audioPlayers = tracks.map((track) => <AudioPlayer {...track} />);
 
@@ -119,6 +146,38 @@ export default function Home() {
           <div className={styles.listenContent}>{audioPlayers}</div>
           <Button variant="primary" className={styles.listenButton}>
             Ecouter plus de chants
+          </Button>
+        </div>
+      </div>
+
+      <div className={styles.pressDivision}>
+        <div className={styles.pressSection}>
+          <h3>Nos dernières revues de presse</h3>
+          <div className={styles.pressContent}>
+            <Image
+              src="/press/210926_162048.jpg"
+              alt="Revue de presse du 7 Septembre 2021 (Le Progrès)"
+              width={400}
+              height={550}
+              className={styles.pressReview}
+            />
+            <Image
+              src="/press/210828_193917.jpg"
+              alt="Revue de presse du 3 Août 2021 (La Voix du Jura)"
+              width={400}
+              height={550}
+              className={styles.pressReview}
+            />
+            <Image
+              src="/press/210727_165940.jpg"
+              alt="Revue de presse du 8 Juillet 2021 (Actu Lons et Région)"
+              width={400}
+              height={550}
+              className={styles.pressReview}
+            />
+          </div>
+          <Button variant="primary" className={styles.pressButton}>
+            Voir toutes les revues de presse
           </Button>
         </div>
       </div>
