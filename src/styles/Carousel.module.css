@@ -1,0 +1,34 @@
+.zoomedImageContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.zoomedImage {
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: auto;
+}
+
+.pressReview {
+  margin: 20px;
+  border-radius: 5px;
+  /* border: green solid 1px; */
+}
+
+/* Media query for window width less than 575px */
+@media (max-width: 575px) {
+  .pressReview {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
+import Carousel from "@/components/Carousel";
 
 const tracks = [
   {
@@ -154,7 +155,7 @@ export default function Home() {
         <div className={styles.pressSection}>
           <h3>Nos dernières revues de presse</h3>
           <div className={styles.pressContent}>
-            <Image
+            {/* <Image
               src="/press/210926_162048.jpg"
               alt="Revue de presse du 7 Septembre 2021 (Le Progrès)"
               width={400}
@@ -174,7 +175,8 @@ export default function Home() {
               width={400}
               height={550}
               className={styles.pressReview}
-            />
+            /> */}
+            <Carousel images={pressReviews} />
           </div>
           <Button variant="primary" className={styles.pressButton}>
             Voir toutes les revues de presse
