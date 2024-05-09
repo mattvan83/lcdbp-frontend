@@ -155,7 +155,7 @@ export default function Home() {
         <div className={styles.pressSection}>
           <h3>Nos dernières revues de presse</h3>
           <div className={styles.pressContent}>
-            <Carousel images={pressReviews} />
+            <Carousel images={pressReviews} width={400} height={550} />
           </div>
           <Button variant="primary" className={styles.pressButton}>
             Voir toutes les revues de presse

@@ -4,7 +4,7 @@ import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Carousel({ images }) {
+export default function Carousel({ images, width, height }) {
   const [zoomedImage, setZoomedImage] = useState({});
 
   // Function to open zoomed image
@@ -25,11 +25,8 @@ export default function Carousel({ images }) {
           onClick={() => openZoomedImage(item)}
           src={item.thumbnail}
           alt={item.thumbnailDescription}
-          width={400}
-          height={550}
-          //   layout="fill"
-          //   objectFit="cover"
-          objectFit="contain"
+          width={width}
+          height={height}
           className={styles.pressReview}
         />
       ))}
