@@ -19,11 +19,9 @@ export default function Carousel({ images }) {
 
   return (
     <>
-      {/* Render the images */}
       {images.map((item, index) => (
-        // <div key={item.id} onClick={() => openZoomedImage(item)}>
         <Image
-          key={item.id}
+          key={index}
           onClick={() => openZoomedImage(item)}
           src={item.thumbnail}
           alt={item.thumbnailDescription}
@@ -31,13 +29,12 @@ export default function Carousel({ images }) {
           height={550}
           //   layout="fill"
           //   objectFit="cover"
+          objectFit="contain"
           className={styles.pressReview}
         />
-        // </div>
       ))}
 
-      {/* Render the zoomed image */}
-      {Object.keys(zoomedImage).length && (
+      {Object.keys(zoomedImage).length > 0 && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
             src={zoomedImage.thumbnail}

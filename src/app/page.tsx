@@ -155,27 +155,6 @@ export default function Home() {
         <div className={styles.pressSection}>
           <h3>Nos dernières revues de presse</h3>
           <div className={styles.pressContent}>
-            {/* <Image
-              src="/press/210926_162048.jpg"
-              alt="Revue de presse du 7 Septembre 2021 (Le Progrès)"
-              width={400}
-              height={550}
-              className={styles.pressReview}
-            />
-            <Image
-              src="/press/210828_193917.jpg"
-              alt="Revue de presse du 3 Août 2021 (La Voix du Jura)"
-              width={400}
-              height={550}
-              className={styles.pressReview}
-            />
-            <Image
-              src="/press/210727_165940.jpg"
-              alt="Revue de presse du 8 Juillet 2021 (Actu Lons et Région)"
-              width={400}
-              height={550}
-              className={styles.pressReview}
-            /> */}
             <Carousel images={pressReviews} />
           </div>
           <Button variant="primary" className={styles.pressButton}>
