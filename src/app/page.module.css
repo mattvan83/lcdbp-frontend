@@ -1,15 +1,22 @@
 .heroDivision,
 .newsDivision,
 .listenDivision,
-.pressDivision {
+.pressDivision,
+.contactDivision {
   width: 100vw;
   padding: 40px 0px;
+}
+
+.newsDivision,
+.pressDivision {
+  background-color: #eee0e0;
 }
 
 .heroSection,
 .newsSection,
 .listenSection,
-.pressSection {
+.pressSection,
+.contactSection {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +26,8 @@
   /* border: red solid 1px; */
 }
 
-.heroContent {
+.heroContent,
+.contactContent {
   display: flex;
   /* flex-wrap: wrap-reverse; */
   justify-content: center;
@@ -28,7 +36,25 @@
   /* border: red solid 1px; */
 }
 
-.heroText {
+.newsContent {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.listenContent,
+.pressContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.heroText,
+.contactText {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +75,20 @@
   /* font-style: italic; */
 }
 
+.contactBodyText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contactBodyAdministrators {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 .heroButton,
 .newsButton,
 .listenButton,
@@ -64,35 +104,15 @@
   /* border: green solid 1px; */
 }
 
-.newsDivision,
-.pressDivision {
-  background-color: #eee0e0;
-}
-
-.newsContent {
-  display: flex;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.listenContent,
-.pressContent {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 /* Media query for window width less than 1167px */
 @media (max-width: 1167px) {
-  .heroContent {
+  .heroContent,
+  .contactContent {
     flex-direction: column-reverse; /* change direction to column-reverse */
   }
 
-  .heroText {
+  .heroText,
+  .contactText {
     width: 95vw;
   }
 }

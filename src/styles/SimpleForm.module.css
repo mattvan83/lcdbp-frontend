@@ -1,0 +1,10 @@
+.simpleForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee0e0;
+  width: 50%;
+}
+
+.pressButton {
+  margin-top: 20px;
+}

@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
 import Carousel from "@/components/Carousel";
+import SimpleForm from "@/components/SimpleForm";
 
 const tracks = [
   {
@@ -79,7 +80,9 @@ const pressReviews = [
 ];
 
 export default function Home() {
-  const audioPlayers = tracks.map((track) => <AudioPlayer {...track} />);
+  const audioPlayers = tracks.map((track, index) => (
+    <AudioPlayer key={index} {...track} />
+  ));
 
   return (
     <main>
@@ -160,6 +163,52 @@ export default function Home() {
           <Button variant="primary" className={styles.pressButton}>
             Voir toutes les revues de presse
           </Button>
+        </div>
+      </div>
+
+      <div className={styles.contactDivision}>
+        <div className={styles.contactSection}>
+          <h3>Nous contacter</h3>
+          <div className={styles.contactContent}>
+            <div className={styles.contactText}>
+              <h4>Notre conseil d'administration</h4>
+              <div className={styles.contactBodyText}>
+                <span>
+                  <b>Président honoraire : </b>Edouard De Thoisy
+                </span>
+                <span>
+                  <b>Président : </b>Gérard Besançon
+                </span>
+                <span>
+                  <b>Vice-président : </b>Dominique Bon
+                </span>
+                <span>
+                  <b>Secrétaire : </b>Patrick Delizy
+                </span>
+                <span>
+                  <b>Secrétaire : </b>Patrick Delizy
+                </span>
+                <span>
+                  <b>Secrétaire-adjoint : </b>Jean-Claude Chattot
+                </span>
+                <span>
+                  <b>Trésorier : </b>Jean-Paul Vanhoutte
+                </span>
+                <span>
+                  <b>Trésorier-adjoint : </b>Alain Dargaud
+                </span>
+                <div className={styles.contactBodyAdministrators}>
+                  <span>
+                    <b>Administrateurs : </b>Jean-Bernard Boé
+                  </span>
+                  <span>Christian Debourg</span>
+                  <span>Vincenz Engesser</span>
+                  <span>Jean-Louis Tozzo</span>
+                </div>
+              </div>
+            </div>
+            <SimpleForm />
+          </div>
         </div>
       </div>
     </main>
