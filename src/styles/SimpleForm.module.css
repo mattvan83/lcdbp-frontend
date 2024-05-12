@@ -1,10 +1,45 @@
 .simpleForm {
   display: flex;
   flex-direction: column;
-  background-color: #eee0e0;
+  justify-content: center;
+  align-items: flex-start;
+  /* background-color: #eee0e0; */
   width: 50%;
+  min-width: 650px;
+  margin-top: 20px;
+  border: 1px solid red;
+}
+
+.formField {
+  width: 95%;
+  margin: 10px auto;
+  /* border: 1px solid red; */
+}
+
+.inputField {
+  width: 100%;
+  /* min-width: 525px; */
+  border: 2px solid #e2e8ed;
+  border-radius: 3px;
+  padding: 8px;
 }
 
 .pressButton {
-  margin-top: 20px;
+  /* margin-top: 20px; */
+}
+
+/* Media query for window width between 576px and 1167px */
+@media (min-width: 576px) and (max-width: 1167px) {
+  .simpleForm {
+    width: 75%;
+    min-width: 536px;
+  }
+}
+
+/* Media query for window width less than 575px */
+@media (max-width: 575px) {
+  .simpleForm {
+    width: 100%;
+    min-width: 0px;
+  }
 }

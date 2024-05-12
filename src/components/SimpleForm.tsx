@@ -21,21 +21,25 @@ export default function SimpleForm() {
         <input
           {...register("lastName", { required: true })}
           placeholder="Nom"
+          className={styles.inputField}
         />
-        {errors.lastName && <p>Last name is required.</p>}
+        {errors.lastName && <p>Le nom de famille est requis</p>}
       </div>
 
       <div className={styles.formField}>
         <input
           {...register("firstName", { required: true })}
           placeholder="Prénom"
+          className={styles.inputField}
         />
+        {errors.firstName && <p>Le prénom est requis</p>}
       </div>
 
       <div className={styles.formField}>
         <input
           {...register("mail", { required: true, pattern: /\d+/ })}
           placeholder="Email"
+          className={styles.inputField}
         />
         {errors.mail && <p>Merci de saisir un email valide</p>}
       </div>
@@ -44,6 +48,7 @@ export default function SimpleForm() {
         <input
           {...register("tel", { required: true, pattern: /\d+/ })}
           placeholder="Téléphone"
+          className={styles.inputField}
         />
         {errors.tel && <p>Merci de saisir un numéro de téléphone valide</p>}
       </div>
@@ -52,7 +57,8 @@ export default function SimpleForm() {
         <textarea
           {...register("message", { required: true })}
           placeholder="Laissez-nous un message"
-          rows={4}
+          rows={8}
+          className={styles.inputField}
         />
         {errors.message && <p>Merci de saisir un message</p>}
       </div>
