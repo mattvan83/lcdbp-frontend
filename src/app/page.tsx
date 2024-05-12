@@ -207,7 +207,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <SimpleForm />
+            <div className={styles.contactForm}>
+              <h5>Envie de nous rejoindre ou d'obtenir des renseignements ?</h5>
+              <SimpleForm />
+            </div>
           </div>
         </div>
       </div>

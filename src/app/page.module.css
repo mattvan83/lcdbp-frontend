@@ -64,7 +64,8 @@
   /* border: red solid 1px; */
 }
 
-.heroText > h4 {
+.heroText > h4,
+.contactText > h4 {
   font-weight: bold;
 }
 
@@ -87,6 +88,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactForm > h5 {
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .heroButton,

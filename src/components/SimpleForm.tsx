@@ -41,7 +41,10 @@ export default function SimpleForm() {
 
       <div className={styles.formField}>
         <input
-          {...register("mail", { required: true, pattern: /\d+/ })}
+          {...register("mail", {
+            required: true,
+            pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+          })}
           placeholder="Email"
           className={styles.inputField}
         />
@@ -54,7 +57,7 @@ export default function SimpleForm() {
 
       <div className={styles.formField}>
         <input
-          {...register("tel", { pattern: /\d+/ })}
+          {...register("tel", { pattern: /^\d{10}$/ })}
           placeholder="Téléphone"
           className={styles.inputField}
         />
@@ -67,7 +70,7 @@ export default function SimpleForm() {
 
       <div className={styles.formField}>
         <textarea
-          {...register("message", { required: true })}
+          {...register("message", { required: true, pattern: /^\s*\S.*$/ })}
           placeholder="Laissez-nous un message"
           rows={8}
           className={styles.inputField}
