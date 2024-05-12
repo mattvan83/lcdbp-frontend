@@ -23,7 +23,9 @@ export default function SimpleForm() {
           placeholder="Nom"
           className={styles.inputField}
         />
-        {errors.lastName && <p>Le nom de famille est requis</p>}
+        {errors.lastName && (
+          <p className={styles.inputFieldError}>Le nom de famille est requis</p>
+        )}
       </div>
 
       <div className={styles.formField}>
@@ -32,7 +34,9 @@ export default function SimpleForm() {
           placeholder="Prénom"
           className={styles.inputField}
         />
-        {errors.firstName && <p>Le prénom est requis</p>}
+        {errors.firstName && (
+          <p className={styles.inputFieldError}>Le prénom est requis</p>
+        )}
       </div>
 
       <div className={styles.formField}>
@@ -41,16 +45,24 @@ export default function SimpleForm() {
           placeholder="Email"
           className={styles.inputField}
         />
-        {errors.mail && <p>Merci de saisir un email valide</p>}
+        {errors.mail && (
+          <p className={styles.inputFieldError}>
+            Merci de saisir un email valide
+          </p>
+        )}
       </div>
 
       <div className={styles.formField}>
         <input
-          {...register("tel", { required: true, pattern: /\d+/ })}
+          {...register("tel", { pattern: /\d+/ })}
           placeholder="Téléphone"
           className={styles.inputField}
         />
-        {errors.tel && <p>Merci de saisir un numéro de téléphone valide</p>}
+        {errors.tel && (
+          <p className={styles.inputFieldError}>
+            Merci de saisir un numéro de téléphone valide
+          </p>
+        )}
       </div>
 
       <div className={styles.formField}>
@@ -60,10 +72,12 @@ export default function SimpleForm() {
           rows={8}
           className={styles.inputField}
         />
-        {errors.message && <p>Merci de saisir un message</p>}
+        {errors.message && (
+          <p className={styles.inputFieldError}>Merci de saisir un message</p>
+        )}
       </div>
 
-      <div className={styles.formField}>
+      <div className={styles.formButton}>
         <Button variant="primary" className={styles.pressButton} type="submit">
           Envoyer
         </Button>

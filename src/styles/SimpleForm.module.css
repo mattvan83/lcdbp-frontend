@@ -7,21 +7,39 @@
   width: 50%;
   min-width: 650px;
   margin-top: 20px;
-  border: 1px solid red;
+  /* border: 1px solid green; */
 }
 
 .formField {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   width: 95%;
-  margin: 10px auto;
-  /* border: 1px solid red; */
+  margin: 5px auto;
+}
+
+.formButton {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+  margin: 5px auto;
+  /* border: 1px solid green; */
 }
 
 .inputField {
   width: 100%;
-  /* min-width: 525px; */
   border: 2px solid #e2e8ed;
   border-radius: 3px;
   padding: 8px;
+}
+
+.inputField::placeholder {
+  color: #e2e8ed;
+}
+
+.inputFieldError {
+  color: red;
 }
 
 .pressButton {
@@ -31,7 +49,7 @@
 /* Media query for window width between 576px and 1167px */
 @media (min-width: 576px) and (max-width: 1167px) {
   .simpleForm {
-    width: 75%;
+    width: 50%;
     min-width: 536px;
   }
 }
