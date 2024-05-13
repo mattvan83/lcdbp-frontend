@@ -21,7 +21,9 @@
 
 .formButton {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   width: 95%;
   margin: 5px auto;
   /* border: 1px solid green; */
@@ -43,7 +45,12 @@
 }
 
 .pressButton {
-  /* margin-top: 20px; */
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.successMessage {
+  color: green;
 }
 
 /* Media query for window width between 576px and 1167px */
