@@ -15,7 +15,7 @@ export default function SimpleForm() {
   } = useForm();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  console.log("errors: ", errors);
+  //   console.log("errors: ", errors);
 
   const handleInputChange = () => {
     setIsSubmitted(false); // Set isSubmitted to false when any input changes
