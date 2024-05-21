@@ -15,20 +15,31 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { IconContext } from "react-icons";
 import Image from "next/image";
-import styles from "../styles/Header.module.css";
 import Container from "react-bootstrap/Container";
 import React, { useState } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import {
   HouseFill,
   EnvelopeFill,
   GearFill,
   PersonFill,
 } from "react-bootstrap-icons";
+import { Modal } from "antd";
+import styles from "../styles/Header.module.css";
 
 export default function Header() {
   const [activeKey, setActiveKey] = useState("");
   const [hoveredKey, setHoveredKey] = useState("");
+  const [userToken, setUserToken] = useState("");
+  const [username, setUsername] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSignInMode, setIsSignInMode] = useState(false);
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpUsername, setSignUpUsername] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signInUsername, setSignInUsername] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
 
   // console.log("activeKey: ", activeKey);
   // console.log("hoveredKey: ", hoveredKey);
@@ -46,19 +57,125 @@ export default function Header() {
       keys.includes(activeKey) || keys.includes(hoveredKey) ? "bold" : "500",
   });
 
+  const handleLogout = () => {
+    console.log("Logout done!");
+    // dispatch(logout());
+    // dispatch(removeAllBookmark());
+  };
+
+  const handleCancelModal = () => {
+    setIsModalVisible(!isModalVisible);
+    setIsSignInMode(false);
+  };
+
+  const handleCnxMode = () => {
+    setIsSignInMode(!isSignInMode);
+  };
+
+  const showModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  let userSection;
+  if (userToken) {
+    userSection = (
+      <>
+        <div className={styles.logoutSection}>
+          <p>Welcome {username} / </p>
+          <button onClick={() => handleLogout()}>Logout</button>
+        </div>
+        <p className={styles.userTitle}>Espace membres</p>
+      </>
+    );
+  } else {
+    if (isModalVisible) {
+      userSection = (
+        <div className={styles.userSection}>
+          <FontAwesomeIcon
+            icon={faXmark}
+            color={"white"}
+            className={styles.userIcon}
+            onClick={showModal}
+          />
+          <p className={styles.userTitle}>Espace membres</p>
+        </div>
+      );
+    } else {
+      userSection = (
+        <div className={styles.userSection}>
+          <FontAwesomeIcon
+            icon={faUser}
+            color={"white"}
+            className={styles.userIcon}
+            onClick={showModal}
+          />
+          <p className={styles.userTitle}>Espace membres</p>
+        </div>
+      );
+    }
+  }
+
+  let modalContent;
+  if (!userToken) {
+    if (!isSignInMode) {
+      modalContent = (
+        <div className={styles.registerSection}>
+          <p>Sign-up</p>
+          <input
+            type="text"
+            placeholder="Username"
+            id="signUpUsername"
+            onChange={(e) => setSignUpUsername(e.target.value)}
+            value={signUpUsername}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            id="signUpPassword"
+            onChange={(e) => setSignUpPassword(e.target.value)}
+            value={signUpPassword}
+          />
+          <Button
+            variant="primary"
+            className={styles.heroButton}
+            onClick={handleCnxMode}
+          >
+            Créer un compte
+          </Button>
+        </div>
+      );
+    } else {
+      modalContent = (
+        <div className={styles.registerSection}>
+          <p>Sign-in</p>
+          <input
+            type="text"
+            placeholder="Username"
+            id="signInUsername"
+            onChange={(e) => setSignInUsername(e.target.value)}
+            value={signInUsername}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            id="signInPassword"
+            onChange={(e) => setSignInPassword(e.target.value)}
+            value={signInPassword}
+          />
+          <button id="connection" onClick={() => handleConnection()}>
+            Connect
+          </button>
+        </div>
+      );
+    }
+  }
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.headerIcons}>
           <Image src="/Logo.jpg" alt="Logo" width={100} height={100} />
-          <div className={styles.userSection}>
-            <FontAwesomeIcon
-              icon={faUser}
-              color={"white"}
-              className={styles.userIcon}
-            />
-            <p className={styles.userTitle}>Espace membres</p>
-          </div>
+          {userSection}
         </div>
         <Navbar expand="lg" className={styles.navbarBootstrap}>
           <Container className={styles.navbarContainer}>
@@ -246,6 +363,17 @@ export default function Header() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
+        <Modal
+          className={styles.modal}
+          open={isModalVisible}
+          onCancel={handleCancelModal}
+          footer={null}
+          closable
+          centered
+        >
+          {modalContent}
+        </Modal>
       </header>
     </>
   );
