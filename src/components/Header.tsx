@@ -147,9 +147,9 @@ export default function Header() {
         </div>
         <Navbar expand="lg" className={styles.navbarBootstrap}>
           <Container className={styles.navbarContainer}>
-            <Navbar.Brand href="#home" className={styles.navbarBrand}>
+            {/* <Navbar.Brand href="#home" className={styles.navbarBrand}>
               LCDBP
-            </Navbar.Brand>
+            </Navbar.Brand> */}
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
               id="basic-navbar-nav"
@@ -222,6 +222,7 @@ export default function Header() {
                     Separated link
                   </NavDropdown.Item>
                 </NavDropdown>
+
                 <Nav.Link
                   as={Link}
                   href="#link"
@@ -243,6 +244,7 @@ export default function Header() {
                   />
                   Le Chœur
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   href="#link"
@@ -264,6 +266,7 @@ export default function Header() {
                   />
                   Évènements
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   href="#link"
@@ -285,6 +288,7 @@ export default function Header() {
                   />
                   Nous Écouter
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   href="#link"
@@ -306,6 +310,7 @@ export default function Header() {
                   />
                   Revue de Presse
                 </Nav.Link>
+
                 <Nav.Link
                   as={Link}
                   href="#link"
@@ -327,6 +332,30 @@ export default function Header() {
                   />
                   Nous contacter
                 </Nav.Link>
+
+                {userToken && (
+                  <Nav.Link
+                    as={Link}
+                    href="#link"
+                    className={styles.navbarLink}
+                    eventKey="membersSpace"
+                    style={getNavbarTitleStyle(["membersSpace"])}
+                    onMouseEnter={() => setHoveredKey("membersSpace")}
+                    onMouseLeave={() => setHoveredKey("")}
+                  >
+                    <FontAwesomeIcon
+                      icon={faAddressBook}
+                      color={
+                        ["membersSpace"].includes(activeKey) ||
+                        ["membersSpace"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Espace membres
+                  </Nav.Link>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
