@@ -314,7 +314,7 @@ export default function Header() {
 
                 <Nav.Link
                   as={Link}
-                  href="#link"
+                  href="/#contactUs"
                   className={styles.navbarLink}
                   eventKey="contactUS"
                   style={getNavbarTitleStyle(["contactUS"])}

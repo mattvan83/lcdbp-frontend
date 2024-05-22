@@ -166,7 +166,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.contactDivision}>
+      <div className={styles.contactDivision} id="contactUs">
         <div className={styles.contactSection}>
           <h3>Nous contacter</h3>
           <div className={styles.contactContent}>
