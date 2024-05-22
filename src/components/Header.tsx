@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
+  faUserGroup,
   faXmark,
   faEye,
   faHome,
@@ -344,7 +345,7 @@ export default function Header() {
                     onMouseLeave={() => setHoveredKey("")}
                   >
                     <FontAwesomeIcon
-                      icon={faAddressBook}
+                      icon={faUserGroup}
                       color={
                         ["membersSpace"].includes(activeKey) ||
                         ["membersSpace"].includes(hoveredKey)
