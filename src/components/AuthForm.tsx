@@ -5,28 +5,64 @@ import styles from "../styles/AuthForm.module.css";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 
-export default function AuthForm({ isSignInMode, handleCnxMode }) {
+export default function AuthForm({
+  showModal,
+  isSignInMode,
+  handleCnxMode,
+  fillCnxInfos,
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   //   console.log("errors: ", errors);
 
-  const handleInputChange = () => {
-    setIsSubmitted(false); // Set isSubmitted to false when any input changes
-  };
-
   const onSubmit = (data) => {
-    console.log(data);
-    // Handle form submission logic here
+    if (isSignInMode) {
+      console.log(data);
+      const { username, password } = data;
 
-    // Reset the form after submission
-    reset();
-    setIsSubmitted(true);
+      fetch("http://localhost:3000/users/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            fillCnxInfos(data.token, data.username);
+            reset();
+            setErrorMsg("");
+            showModal();
+          } else {
+            setErrorMsg(data.error);
+          }
+        });
+    } else {
+      console.log(data);
+      const { email, username, password } = data;
+
+      fetch("http://localhost:3000/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, username, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            fillCnxInfos(data.token, data.username);
+            reset();
+            setErrorMsg("");
+            showModal();
+          } else {
+            setErrorMsg(data.error);
+          }
+        });
+    }
   };
 
   return (
@@ -34,15 +70,14 @@ export default function AuthForm({ isSignInMode, handleCnxMode }) {
       {!isSignInMode && (
         <div className={styles.formField}>
           <input
-            {...register("mail", {
+            {...register("email", {
               required: true,
               pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             })}
             placeholder="Email"
             className={styles.inputField}
-            onChange={handleInputChange}
           />
-          {errors.mail && (
+          {errors.email && (
             <p className={styles.inputFieldError}>
               Merci de saisir un email valide
             </p>
@@ -55,7 +90,6 @@ export default function AuthForm({ isSignInMode, handleCnxMode }) {
           {...register("username", { required: true })}
           placeholder="Nom utilisateur"
           className={styles.inputField}
-          onChange={handleInputChange}
         />
         {errors.username && (
           <p className={styles.inputFieldError}>
@@ -69,7 +103,6 @@ export default function AuthForm({ isSignInMode, handleCnxMode }) {
           {...register("password", { required: true })}
           placeholder="Mot de passe"
           className={styles.inputField}
-          onChange={handleInputChange}
         />
         {errors.password && (
           <p className={styles.inputFieldError}>Le mot de passe est requis</p>
@@ -80,11 +113,7 @@ export default function AuthForm({ isSignInMode, handleCnxMode }) {
         <Button variant="primary" className={styles.pressButton} type="submit">
           {!isSignInMode ? "Créer un compte" : "Se connecter"}
         </Button>
-        {isSubmitted && Object.keys(errors).length === 0 && (
-          <p className={styles.successMessage}>
-            Formulaire transmis avec succès
-          </p>
-        )}
+        {errorMsg && <p className={styles.inputFieldError}>{errorMsg}</p>}
         <Button variant="link" onClick={handleCnxMode}>
           {!isSignInMode
             ? "Déjà inscrit ? Connectez-vous ici"

@@ -21,6 +21,13 @@
   background-repeat: no-repeat;
 }
 
+.logoutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .userSection {
   display: flex;
   flex-direction: column;
@@ -41,9 +48,9 @@
 .userTitle {
   color: white;
   font-size: 14px;
-  font-weight: bold;
-  margin-top: 4px;
-  margin-bottom: 0;
+  /* font-weight: bold; */
+  margin-top: 10px;
+  margin-bottom: 10px;
   /* border: red solid 1px; */
 }
 

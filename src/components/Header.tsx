@@ -36,14 +36,11 @@ export default function Header() {
   const [username, setUsername] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSignInMode, setIsSignInMode] = useState(false);
-  const [signUpEmail, setSignUpEmail] = useState("");
-  const [signUpUsername, setSignUpUsername] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
-  const [signInUsername, setSignInUsername] = useState("");
-  const [signInPassword, setSignInPassword] = useState("");
 
   // console.log("activeKey: ", activeKey);
   // console.log("hoveredKey: ", hoveredKey);
+  // console.log("userToken: ", userToken);
+  // console.log("username: ", username);
 
   const handleSelect = (eventKey) => {
     setActiveKey(eventKey);
@@ -60,17 +57,24 @@ export default function Header() {
 
   const handleLogout = () => {
     console.log("Logout done!");
+    setUserToken("");
+    setUsername("");
     // dispatch(logout());
     // dispatch(removeAllBookmark());
+  };
+
+  const fillCnxInfos = (apiToken, apiUsername) => {
+    setUserToken(apiToken);
+    setUsername(apiUsername);
+  };
+
+  const handleCnxMode = () => {
+    setIsSignInMode(!isSignInMode);
   };
 
   const handleCancelModal = () => {
     setIsModalVisible(!isModalVisible);
     setIsSignInMode(false);
-  };
-
-  const handleCnxMode = () => {
-    setIsSignInMode(!isSignInMode);
   };
 
   const showModal = () => {
@@ -80,13 +84,16 @@ export default function Header() {
   let userSection;
   if (userToken) {
     userSection = (
-      <>
-        <div className={styles.logoutSection}>
-          <p>Welcome {username} / </p>
-          <button onClick={() => handleLogout()}>Logout</button>
-        </div>
-        <p className={styles.userTitle}>Espace membres</p>
-      </>
+      <div className={styles.logoutSection}>
+        <p className={styles.userTitle}>Bienvenue {username}</p>
+        <Button
+          variant="primary"
+          onClick={() => handleLogout()}
+          style={{ fontSize: "14px" }}
+        >
+          Déconnexion
+        </Button>
+      </div>
     );
   } else {
     userSection = (
@@ -108,14 +115,24 @@ export default function Header() {
       modalContent = (
         <div className={styles.modalSection}>
           <p className={styles.modalTitle}>Création de compte</p>
-          <AuthForm isSignInMode={isSignInMode} handleCnxMode={handleCnxMode} />
+          <AuthForm
+            showModal={showModal}
+            isSignInMode={isSignInMode}
+            handleCnxMode={handleCnxMode}
+            fillCnxInfos={fillCnxInfos}
+          />
         </div>
       );
     } else {
       modalContent = (
         <div className={styles.modalSection}>
           <p className={styles.modalTitle}>Connexion</p>
-          <AuthForm isSignInMode={isSignInMode} handleCnxMode={handleCnxMode} />
+          <AuthForm
+            showModal={showModal}
+            isSignInMode={isSignInMode}
+            handleCnxMode={handleCnxMode}
+            fillCnxInfos={fillCnxInfos}
+          />
         </div>
       );
     }
