@@ -109,3 +109,15 @@
   cursor: pointer;
   margin-right: 5px;
 }
+
+.modalSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #eee0e0; */
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: bold;
+}

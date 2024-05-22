@@ -25,7 +25,8 @@ import {
   GearFill,
   PersonFill,
 } from "react-bootstrap-icons";
-import { Modal } from "antd";
+import { ConfigProvider, Modal } from "antd";
+import AuthForm from "./AuthForm";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
@@ -88,83 +89,33 @@ export default function Header() {
       </>
     );
   } else {
-    if (isModalVisible) {
-      userSection = (
-        <div className={styles.userSection}>
-          <FontAwesomeIcon
-            icon={faXmark}
-            color={"white"}
-            className={styles.userIcon}
-            onClick={showModal}
-          />
-          <p className={styles.userTitle}>Espace membres</p>
-        </div>
-      );
-    } else {
-      userSection = (
-        <div className={styles.userSection}>
-          <FontAwesomeIcon
-            icon={faUser}
-            color={"white"}
-            className={styles.userIcon}
-            onClick={showModal}
-          />
-          <p className={styles.userTitle}>Espace membres</p>
-        </div>
-      );
-    }
+    userSection = (
+      <div className={styles.userSection}>
+        <FontAwesomeIcon
+          icon={faUser}
+          color={"white"}
+          className={styles.userIcon}
+          onClick={showModal}
+        />
+        <p className={styles.userTitle}>Espace membres</p>
+      </div>
+    );
   }
 
   let modalContent;
   if (!userToken) {
     if (!isSignInMode) {
       modalContent = (
-        <div className={styles.registerSection}>
-          <p>Sign-up</p>
-          <input
-            type="text"
-            placeholder="Username"
-            id="signUpUsername"
-            onChange={(e) => setSignUpUsername(e.target.value)}
-            value={signUpUsername}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            id="signUpPassword"
-            onChange={(e) => setSignUpPassword(e.target.value)}
-            value={signUpPassword}
-          />
-          <Button
-            variant="primary"
-            className={styles.heroButton}
-            onClick={handleCnxMode}
-          >
-            Créer un compte
-          </Button>
+        <div className={styles.modalSection}>
+          <p className={styles.modalTitle}>Création de compte</p>
+          <AuthForm isSignInMode={isSignInMode} handleCnxMode={handleCnxMode} />
         </div>
       );
     } else {
       modalContent = (
-        <div className={styles.registerSection}>
-          <p>Sign-in</p>
-          <input
-            type="text"
-            placeholder="Username"
-            id="signInUsername"
-            onChange={(e) => setSignInUsername(e.target.value)}
-            value={signInUsername}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            id="signInPassword"
-            onChange={(e) => setSignInPassword(e.target.value)}
-            value={signInPassword}
-          />
-          <button id="connection" onClick={() => handleConnection()}>
-            Connect
-          </button>
+        <div className={styles.modalSection}>
+          <p className={styles.modalTitle}>Connexion</p>
+          <AuthForm isSignInMode={isSignInMode} handleCnxMode={handleCnxMode} />
         </div>
       );
     }
@@ -364,16 +315,26 @@ export default function Header() {
           </Container>
         </Navbar>
 
-        <Modal
-          className={styles.modal}
-          open={isModalVisible}
-          onCancel={handleCancelModal}
-          footer={null}
-          closable
-          centered
+        <ConfigProvider
+          theme={{
+            components: {
+              Modal: {
+                contentBg: "#eee0e0",
+              },
+            },
+          }}
         >
-          {modalContent}
-        </Modal>
+          <Modal
+            className={styles.modal}
+            open={isModalVisible}
+            onCancel={handleCancelModal}
+            footer={null}
+            closable
+            centered
+          >
+            {modalContent}
+          </Modal>
+        </ConfigProvider>
       </header>
     </>
   );

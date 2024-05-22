@@ -1,0 +1,53 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* background-color: #eee0e0; */
+  width: 100%;
+  margin-top: 20px;
+  /* border: 1px solid green; */
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 95%;
+  margin: 5px auto;
+}
+
+.formButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 95%;
+  margin: 5px auto;
+  /* border: 1px solid green; */
+}
+
+.inputField {
+  width: 100%;
+  border: 2px solid #e2e8ed;
+  border-radius: 3px;
+  padding: 8px;
+}
+
+.inputField::placeholder {
+  color: #e2e8ed;
+}
+
+.inputFieldError {
+  color: red;
+}
+
+.pressButton {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.successMessage {
+  color: green;
+}
