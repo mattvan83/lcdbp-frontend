@@ -10,10 +10,12 @@ export default function SimpleForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const isChecked = watch("ownCopy");
 
   //   console.log("errors: ", errors);
 
@@ -101,14 +103,30 @@ export default function SimpleForm() {
       </div>
 
       <div className={styles.formButton}>
-        <Button variant="primary" className={styles.pressButton} type="submit">
-          Envoyer
-        </Button>
-        {isSubmitted && Object.keys(errors).length === 0 && (
-          <p className={styles.successMessage}>
-            Formulaire transmis avec succès
-          </p>
-        )}
+        <label>
+          <input
+            type="checkbox"
+            className={styles.inputCheckBox}
+            {...register("ownCopy")}
+            onChange={handleInputChange}
+          />
+          M'adresser une copie
+        </label>
+
+        <div className={styles.formButtonRight}>
+          <Button
+            variant="primary"
+            className={styles.pressButton}
+            type="submit"
+          >
+            Envoyer
+          </Button>
+          {isSubmitted && Object.keys(errors).length === 0 && (
+            <p className={styles.successMessage}>
+              Formulaire transmis avec succès
+            </p>
+          )}
+        </div>
       </div>
     </form>
   );
