@@ -36,31 +36,31 @@ export default function SimpleForm() {
     <form className={styles.simpleForm} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.formField}>
         <input
-          {...register("lastName", { required: true })}
+          {...register("lastname", { required: true })}
           placeholder="Nom"
           className={styles.inputField}
           onChange={handleInputChange}
         />
-        {errors.lastName && (
+        {errors.lastname && (
           <p className={styles.inputFieldError}>Le nom de famille est requis</p>
         )}
       </div>
 
       <div className={styles.formField}>
         <input
-          {...register("firstName", { required: true })}
+          {...register("firstname", { required: true })}
           placeholder="Prénom"
           className={styles.inputField}
           onChange={handleInputChange}
         />
-        {errors.firstName && (
+        {errors.firstname && (
           <p className={styles.inputFieldError}>Le prénom est requis</p>
         )}
       </div>
 
       <div className={styles.formField}>
         <input
-          {...register("mail", {
+          {...register("email", {
             required: true,
             pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           })}
@@ -68,7 +68,7 @@ export default function SimpleForm() {
           className={styles.inputField}
           onChange={handleInputChange}
         />
-        {errors.mail && (
+        {errors.email && (
           <p className={styles.inputFieldError}>
             Merci de saisir un email valide
           </p>
@@ -77,12 +77,12 @@ export default function SimpleForm() {
 
       <div className={styles.formField}>
         <input
-          {...register("tel", { pattern: /^\d{10}$/ })}
+          {...register("phone", { pattern: /^\d{10}$/ })}
           placeholder="Téléphone"
           className={styles.inputField}
           onChange={handleInputChange}
         />
-        {errors.tel && (
+        {errors.phone && (
           <p className={styles.inputFieldError}>
             Merci de saisir un numéro de téléphone valide
           </p>
@@ -108,7 +108,8 @@ export default function SimpleForm() {
             type="checkbox"
             className={styles.inputCheckBox}
             {...register("ownCopy")}
-            onChange={handleInputChange}
+            // onChange={handleInputChange}
+            onClick={handleInputChange}
           />
           M'adresser une copie
         </label>
