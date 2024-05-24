@@ -6,7 +6,7 @@ import styles from "../styles/SimpleForm.module.css";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 
-export default function SimpleForm() {
+export default function SimpleForm({ backendAddress }) {
   const {
     register,
     handleSubmit,
@@ -15,9 +15,11 @@ export default function SimpleForm() {
     reset,
   } = useForm();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const isChecked = watch("ownCopy");
 
-  //   console.log("errors: ", errors);
+  // console.log("errors: ", errors);
+  console.log("errorMsg: ", errorMsg);
 
   const handleInputChange = () => {
     setIsSubmitted(false); // Set isSubmitted to false when any input changes
@@ -25,11 +27,33 @@ export default function SimpleForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-    // Handle form submission logic here
+    const { lastname, firstname, email, phone, message, ownCopy } = data;
 
-    // Reset the form after submission
-    reset();
-    setIsSubmitted(true);
+    console.log("backendAddress: ", backendAddress);
+
+    fetch(`${backendAddress}/contacts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lastname,
+        firstname,
+        email,
+        phone,
+        message,
+        ownCopy,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIsSubmitted(true);
+        if (data.result) {
+          // Reset the form after submission
+          reset();
+          setErrorMsg("");
+        } else {
+          setErrorMsg("Erreur durant l'envoi du mail");
+        }
+      });
   };
 
   return (
@@ -122,10 +146,13 @@ export default function SimpleForm() {
           >
             Envoyer
           </Button>
-          {isSubmitted && Object.keys(errors).length === 0 && (
+          {isSubmitted && Object.keys(errors).length === 0 && !errorMsg && (
             <p className={styles.successMessage}>
               Formulaire transmis avec succès
             </p>
+          )}
+          {isSubmitted && Object.keys(errors).length === 0 && errorMsg && (
+            <p className={styles.inputFieldError}>{errorMsg}</p>
           )}
         </div>
       </div>

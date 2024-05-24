@@ -79,6 +79,8 @@ const pressReviews = [
   },
 ];
 
+const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+
 export default function Home() {
   const audioPlayers = tracks.map((track, index) => (
     <AudioPlayer key={index} {...track} />
@@ -209,7 +211,7 @@ export default function Home() {
             </div>
             <div className={styles.contactForm}>
               <h5>Envie de nous rejoindre ou d'obtenir des renseignements ?</h5>
-              <SimpleForm />
+              <SimpleForm backendAddress={BACKEND_ADDRESS} />
             </div>
           </div>
         </div>
