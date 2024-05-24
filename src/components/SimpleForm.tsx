@@ -19,7 +19,7 @@ export default function SimpleForm({ backendAddress }) {
   const isChecked = watch("ownCopy");
 
   // console.log("errors: ", errors);
-  console.log("errorMsg: ", errorMsg);
+  // console.log("errorMsg: ", errorMsg);
 
   const handleInputChange = () => {
     setIsSubmitted(false); // Set isSubmitted to false when any input changes
@@ -29,7 +29,7 @@ export default function SimpleForm({ backendAddress }) {
     console.log(data);
     const { lastname, firstname, email, phone, message, ownCopy } = data;
 
-    console.log("backendAddress: ", backendAddress);
+    // console.log("backendAddress: ", backendAddress);
 
     fetch(`${backendAddress}/contacts`, {
       method: "POST",
