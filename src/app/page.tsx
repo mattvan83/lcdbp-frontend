@@ -88,7 +88,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className={styles.heroDivision}>
+      <div className={styles.heroDivision} id="chore">
         <div className={styles.heroSection}>
           <h3>Une passion</h3>
           <div className={styles.heroContent}>
@@ -121,7 +121,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.newsDivision}>
+      <div className={styles.newsDivision} id="events">
         <div className={styles.newsSection}>
           <h3>Actualités</h3>
           <div className={styles.newsContent}>
@@ -146,7 +146,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.listenDivision}>
+      <div className={styles.listenDivision} id="listenings">
         <div className={styles.listenSection}>
           <h3>Nos derniers chants</h3>
           <div className={styles.listenContent}>{audioPlayers}</div>
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.pressDivision}>
+      <div className={styles.pressDivision} id="pressReviews">
         <div className={styles.pressSection}>
           <h3>Nos dernières revues de presse</h3>
           <div className={styles.pressContent}>

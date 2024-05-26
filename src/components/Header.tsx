@@ -160,7 +160,7 @@ export default function Header() {
                 className={`ms-auto ${styles.navbarNav}`}
                 onSelect={handleSelect}
               >
-                <NavDropdown
+                {/* <NavDropdown
                   title={
                     <span
                       style={getNavbarTitleStyle([
@@ -222,11 +222,33 @@ export default function Header() {
                   >
                     Separated link
                   </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
 
                 <Nav.Link
                   as={Link}
-                  href="#link"
+                  href="/"
+                  className={styles.navbarLink}
+                  eventKey="home"
+                  style={getNavbarTitleStyle(["home"])}
+                  onMouseEnter={() => setHoveredKey("home")}
+                  onMouseLeave={() => setHoveredKey("")}
+                >
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    color={
+                      ["home"].includes(activeKey) ||
+                      ["home"].includes(hoveredKey)
+                        ? "purple"
+                        : "#4b5c6b"
+                    }
+                    className={styles.navbarIcon}
+                  />
+                  Accueil
+                </Nav.Link>
+
+                <Nav.Link
+                  as={Link}
+                  href="/#chore"
                   className={styles.navbarLink}
                   eventKey="chore"
                   style={getNavbarTitleStyle(["chore"])}
@@ -248,7 +270,7 @@ export default function Header() {
 
                 <Nav.Link
                   as={Link}
-                  href="#link"
+                  href="/#events"
                   className={styles.navbarLink}
                   eventKey="events"
                   style={getNavbarTitleStyle(["events"])}
@@ -270,7 +292,7 @@ export default function Header() {
 
                 <Nav.Link
                   as={Link}
-                  href="#link"
+                  href="/#listenings"
                   className={styles.navbarLink}
                   eventKey="listen"
                   style={getNavbarTitleStyle(["listen"])}
@@ -292,7 +314,7 @@ export default function Header() {
 
                 <Nav.Link
                   as={Link}
-                  href="#link"
+                  href="/#pressReviews"
                   className={styles.navbarLink}
                   eventKey="pressReview"
                   style={getNavbarTitleStyle(["pressReview"])}

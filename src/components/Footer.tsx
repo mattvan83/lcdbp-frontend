@@ -31,12 +31,24 @@ export default function Footer() {
             <span>
               <b>EXPLORER</b>
             </span>
-            <span>Accueil</span>
-            <span>Le Chœur</span>
-            <span>Évènements</span>
-            <span>Nous Écouter</span>
-            <span>Revue de Presse</span>
-            <span>Nous contacter</span>
+            <Link href="/" className={styles.explorerMenuLink}>
+              Accueil
+            </Link>
+            <Link href="/#chore" className={styles.explorerMenuLink}>
+              Le Chœur
+            </Link>
+            <Link href="/#events" className={styles.explorerMenuLink}>
+              Évènements
+            </Link>
+            <Link href="/#listenings" className={styles.explorerMenuLink}>
+              Nous Écouter
+            </Link>
+            <Link href="/#pressReviews" className={styles.explorerMenuLink}>
+              Revue de Presse
+            </Link>
+            <Link href="/#contactUs" className={styles.explorerMenuLink}>
+              Nous contacter
+            </Link>
           </div>
           <div className={styles.contactMenu}>
             <span>
@@ -56,41 +68,57 @@ export default function Footer() {
         </div>
 
         <div className={styles.logosFooter}>
-          <Image
-            src="/footer/200505_174217.png"
-            alt="Logo Cousance"
-            width={100}
-            height={100}
-            className={styles.logoFooter}
-          />
-          <Image
-            src="/footer/logo-PORTE-DU-JURA-couleur-officiel.png"
-            alt="Logo Portes du Jura"
-            width={100}
-            height={100}
-            className={styles.logoFooter}
-          />
-          <Image
-            src="/footer/Conseil_departemental_du_Jura_logo.png"
-            alt="Logo du Conseil département du Jura"
-            width={100}
-            height={100}
-            className={styles.logoFooter}
-          />
-          <Image
-            src="/footer/CA Franche-Comte.png"
-            alt="Logo Crédit Agricole Franche-Comté"
-            width={100}
-            height={100}
-            className={styles.logoFooter}
-          />
-          <Image
-            src="/footer/LOGO DEBRAND.jpg"
-            alt="Logo Debrand"
-            width={100}
-            height={100}
-            className={styles.logoFooter}
-          />
+          <a href="https://www.mairie-cousance.fr/" target="_blank">
+            <Image
+              src="/footer/200505_174217.png"
+              alt="Logo Cousance"
+              width={100}
+              height={100}
+              className={styles.logoFooter}
+            />
+          </a>
+          <a href="http://www.ccportedujura.fr/" target="_blank">
+            <Image
+              src="/footer/logo-PORTE-DU-JURA-couleur-officiel.png"
+              alt="Logo Portes du Jura"
+              width={100}
+              height={100}
+              className={styles.logoFooter}
+            />
+          </a>
+          <a href="https://www.jura.fr/" target="_blank">
+            <Image
+              src="/footer/Conseil_departemental_du_Jura_logo.png"
+              alt="Logo du Conseil département du Jura"
+              width={100}
+              height={100}
+              className={styles.logoFooter}
+            />
+          </a>
+          <a
+            href="https://www.credit-agricole.fr/particulier/agence/franche-comte.html"
+            target="_blank"
+          >
+            <Image
+              src="/footer/CA Franche-Comte.png"
+              alt="Logo Crédit Agricole Franche-Comté"
+              width={100}
+              height={100}
+              className={styles.logoFooter}
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/sarldebrand/?locale=fr_FR"
+            target="_blank"
+          >
+            <Image
+              src="/footer/LOGO DEBRAND.jpg"
+              alt="Logo Debrand"
+              width={100}
+              height={100}
+              className={styles.logoFooter}
+            />
+          </a>
         </div>
       </footer>
     </>

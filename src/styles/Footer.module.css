@@ -24,7 +24,13 @@
 .contactMenu {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  /* justify-content: space-between; */
+  /* margin: 20px; */
+}
+
+.explorerMenuLink {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logosFooter {
