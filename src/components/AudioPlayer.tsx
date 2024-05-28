@@ -28,11 +28,12 @@ export default function AudioPlayer({
           src={thumbnailUrl}
           alt={thumbnailDescription}
           layout="fill"
-          objectFit="cover"
+          // objectFit="cover"
           // layout="responsive"
           // width={200}
           // height={200}
           className={styles.audioPlayerImage}
+          // style={{ width: "200px", height: "200px" }}
         />
       </div>
 

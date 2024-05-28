@@ -21,16 +21,15 @@ export default function Carousel({ images, width, height }) {
     <>
       {images.map((item, index) => (
         <div
+          key={index}
           className={styles.pressReviewContainer}
           style={{ width: `${width}px`, height: `${height}px` }}
         >
           <Image
-            key={index}
             onClick={() => openZoomedImage(item)}
             src={item.thumbnail}
             alt={item.thumbnailDescription}
             layout="fill"
-            objectFit="contain"
             className={styles.pressReview}
           />
         </div>
