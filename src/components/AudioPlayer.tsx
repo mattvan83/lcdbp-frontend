@@ -5,13 +5,15 @@ import Image from "next/image";
 export default function AudioPlayer({
   title,
   artwork,
-  audioFile,
+  audioUrl,
   authorText,
   authorMusic,
   arrangement,
   harmonization,
-  thumbnail,
+  thumbnailUrl,
   thumbnailDescription,
+  recordingDate,
+  lastListening,
 }) {
   //   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -21,14 +23,19 @@ export default function AudioPlayer({
 
   return (
     <div className={styles.audioPlayer}>
-      <Image
-        src={thumbnail}
-        alt={thumbnailDescription}
-        // layout="responsive"
-        width={200}
-        height={200}
-        className={styles.audioPlayerImage}
-      />
+      <div className={styles.audioPlayerImageContainer}>
+        <Image
+          src={thumbnailUrl}
+          alt={thumbnailDescription}
+          layout="fill"
+          objectFit="cover"
+          // layout="responsive"
+          // width={200}
+          // height={200}
+          className={styles.audioPlayerImage}
+        />
+      </div>
+
       <div className={styles.audioPlayerRightSection}>
         <div className={styles.audioPlayerTextSection}>
           {title && artwork ? (
@@ -79,7 +86,7 @@ export default function AudioPlayer({
           )}
         </div>
         <audio
-          src={audioFile}
+          src={audioUrl}
           controls={true}
           className={styles.audioPlayerControls}
         >

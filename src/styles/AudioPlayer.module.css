@@ -9,6 +9,13 @@
   border-radius: 10px;
 }
 
+.audioPlayerImageContainer {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  /* overflow: hidden; */
+}
+
 .audioPlayerImage {
   /* border-radius: 10px; */
   border-top-left-radius: 10px;

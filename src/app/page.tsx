@@ -5,53 +5,6 @@ import AudioPlayer from "@/components/AudioPlayer";
 import Carousel from "@/components/Carousel";
 import SimpleForm from "@/components/SimpleForm";
 
-const tracks = [
-  {
-    title: "O Cher Jura",
-    artwork: "",
-    audioFile: "/data/O_cher_Jura_(extrait).mp3",
-    authorText: "Henri Cordier",
-    authorMusic: "Henri Cordier",
-    arrangement: "Jean Sarrazin",
-    harmonization: "",
-    thumbnail: "/data/Jura.jpg",
-    thumbnailDescription: "Photo du Jura",
-  },
-  {
-    title: "Still Ruht Der See",
-    artwork: "",
-    audioFile: "/data/Still_ruht_der_See_(extrait).mp3",
-    authorText: "Heinrich Pfeil",
-    authorMusic: "Heinrich Pfeil",
-    arrangement: "",
-    harmonization: "",
-    thumbnail: "/data/Heinrich_Pfeil.jpg",
-    thumbnailDescription: "Heinrich Pfeil",
-  },
-  {
-    title: "Tête En l'Air",
-    artwork: "",
-    audioFile: "/data/Tete_en_l'air_(extrait).mp3",
-    authorText: "Jacques Higelin",
-    authorMusic: "Jacques Higelin",
-    arrangement: "Roland Ménéguz",
-    harmonization: "",
-    thumbnail: "/data/JacquesHigelin.jpeg",
-    thumbnailDescription: "Jacques Higelin",
-  },
-  {
-    title: "Va Pensiero",
-    artwork: "Chœur des Hébreux",
-    audioFile: "/data/Va_pensiero_(extrait).mp3",
-    authorText: "",
-    authorMusic: "Guiseppe Verdi",
-    arrangement: "",
-    harmonization: "",
-    thumbnail: "/data/GuiseppeVerdi.jpg",
-    thumbnailDescription: "Guiseppe Verdi",
-  },
-];
-
 const pressReviews = [
   {
     title: "Le Chœur du Bon Pays a repris les répétitions",
@@ -81,10 +34,15 @@ const pressReviews = [
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
-export default function Home() {
-  const audioPlayers = tracks.map((track, index) => (
-    <AudioPlayer key={index} {...track} />
-  ));
+export default async function Home() {
+  const response = await fetch(`${BACKEND_ADDRESS}/listenings`);
+  const tracks = await response.json();
+
+  const audioPlayers = tracks.result
+    ? tracks.listenings
+        .filter((track) => track.lastListening === true)
+        .map((track, index) => <AudioPlayer key={index} {...track} />)
+    : tracks.error;
 
   return (
     <main>
@@ -176,37 +134,34 @@ export default function Home() {
               <h4>Notre conseil d'administration</h4>
               <div className={styles.contactBodyText}>
                 <span>
-                  <b>Président honoraire : </b>Edouard De Thoisy
+                  <b>Président : </b>Dominique Bon
                 </span>
                 <span>
-                  <b>Président : </b>Gérard Besançon
-                </span>
-                <span>
-                  <b>Vice-président : </b>Dominique Bon
+                  <b>Vice-président : </b>Daniel Moine
                 </span>
                 <span>
                   <b>Secrétaire : </b>Patrick Delizy
                 </span>
                 <span>
-                  <b>Secrétaire : </b>Patrick Delizy
+                  <b>Secrétaire-adjoint : </b>Sylvain Grandmaison
                 </span>
                 <span>
-                  <b>Secrétaire-adjoint : </b>Jean-Claude Chattot
+                  <b>Trésorier : </b>Alain Dargaud
                 </span>
                 <span>
-                  <b>Trésorier : </b>Jean-Paul Vanhoutte
-                </span>
-                <span>
-                  <b>Trésorier-adjoint : </b>Alain Dargaud
+                  <b>Trésorier-adjoint : </b>Christian Debourg
                 </span>
                 <div className={styles.contactBodyAdministrators}>
                   <span>
-                    <b>Administrateurs : </b>Jean-Bernard Boé
+                    <b>Administrateurs : </b>Vincenz Engesser
                   </span>
-                  <span>Christian Debourg</span>
-                  <span>Vincenz Engesser</span>
-                  <span>Jean-Louis Tozzo</span>
+                  <span>Guy Morel</span>
+                  <span>Eric Yessad</span>
                 </div>
+                <br></br>
+                <span>
+                  <b>Membre honoraire : </b>Gérard Besançon
+                </span>
               </div>
             </div>
             <div className={styles.contactForm}>
