@@ -20,15 +20,20 @@ export default function Carousel({ images, width, height }) {
   return (
     <>
       {images.map((item, index) => (
-        <Image
-          key={index}
-          onClick={() => openZoomedImage(item)}
-          src={item.thumbnail}
-          alt={item.thumbnailDescription}
-          width={width}
-          height={height}
-          className={styles.pressReview}
-        />
+        <div
+          className={styles.pressReviewContainer}
+          style={{ width: `${width}px`, height: `${height}px` }}
+        >
+          <Image
+            key={index}
+            onClick={() => openZoomedImage(item)}
+            src={item.thumbnail}
+            alt={item.thumbnailDescription}
+            layout="fill"
+            objectFit="contain"
+            className={styles.pressReview}
+          />
+        </div>
       ))}
 
       {Object.keys(zoomedImage).length > 0 && (

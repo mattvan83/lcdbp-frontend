@@ -1,7 +1,10 @@
-.imageContainer {
+/* .imageContainer {
   margin: 20px;
   border-radius: 5px;
   border: green solid 1px;
+} */
+.pressReviewContainer {
+  position: relative;
 }
 
 .zoomedImageContainer {
@@ -38,9 +41,9 @@
     object-fit: cover;
   }
 
-  .imageContainer {
+  /* .imageContainer {
     height: 100%;
     width: 100%;
     object-fit: cover;
-  }
+  } */
 }
