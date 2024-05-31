@@ -7,29 +7,78 @@ import SimpleForm from "@/components/SimpleForm";
 
 const pressReviews = [
   {
+    title: "Une église comble pour le concert (de Noël ?) du comité des fêtes",
+    journal: "Le Progrès",
+    date: new Date("2023-12-10"),
+    city: "Beaufort-Orbagna",
+    thumbnail: "/press/Concert_Beaufort-Orbagna_23-12-10.jpg",
+    thumbnailDescription: "Revue de presse du 10 Décembre 2023",
+  },
+  {
+    title:
+      "Le 'Chœur du Bon Pays' a produit son répertoire de gospel devant une centaine de spectateurs",
+    journal: "Le Progrès",
+    date: new Date("2023-4-15"),
+    city: "Saint-Etienne-Du-Bois",
+    thumbnail: "/press/Concert_St Etienne_du_Bois_23-04-15.jpg",
+    thumbnailDescription: "Revue de presse du 15 Avril 2023",
+  },
+  {
+    title: "La chorale conserve une trentaine de membres",
+    journal: "Le Progrès",
+    date: new Date("2023-1-24"),
+    city: "Cousance",
+    thumbnail: "/press/AG_21-01-23.jpg",
+    thumbnailDescription: "Revue de presse du 15 Janvier 2023",
+  },
+  {
     title: "Le Chœur du Bon Pays a repris les répétitions",
     journal: "Le Progrès",
-    date: new Date("2021-9-7T00:00:00"),
+    date: new Date("2022-9-11"),
     city: "Cousance",
-    thumbnail: "/press/210926_162048.jpg",
-    thumbnailDescription: "Revue de presse du 7 Septembre 2021",
+    thumbnail: "/press/Le_Progrès_22-09-11.jpg",
+    thumbnailDescription: "Revue de presse du 11 Septembre 2022",
   },
   {
-    title: "Commémoration en mémoire des Résistants du maquis de Lanézia",
-    journal: "La Voix du Jura",
-    date: new Date("2021-8-3T00:00:00"),
-    city: "Cuisia",
-    thumbnail: "/press/210828_193917.jpg",
-    thumbnailDescription: "Revue de presse du 3 Août 2021 ",
+    title: "Alain Dargaud, nouveau président du Chœur du Bon Pays",
+    journal: "Le Progrès",
+    date: new Date("2022-7-22"),
+    city: "Cousance",
+    thumbnail: "/press/Le_Progrès_22-07-22.jpg",
+    thumbnailDescription: "Revue de presse du 22 Juillet 2022",
   },
   {
-    title: "Le Chœur du Bon Pays prépare son avenir",
-    journal: "Actu Lons et Région",
-    date: new Date("2021-7-8T00:00:00"),
+    title: "Le Chœur du Bon Pays et la Perrina réunis pour la bonne cause",
+    journal: "Le Progrès",
+    date: new Date("2022-6-11"),
     city: "Cousance",
-    thumbnail: "/press/210727_165940.jpg",
-    thumbnailDescription: "Revue de presse du 8 Juillet 2021 ",
+    thumbnail: "/press/Concert_Perrigny_22-06-11.png",
+    thumbnailDescription: "Revue de presse du 11 Juin 2022",
   },
+  // {
+  //   title: "Le Chœur du Bon Pays a repris les répétitions",
+  //   journal: "Le Progrès",
+  //   date: new Date("2021-9-7"),
+  //   city: "Cousance",
+  //   thumbnail: "/press/210926_162048.jpg",
+  //   thumbnailDescription: "Revue de presse du 7 Septembre 2021",
+  // },
+  // {
+  //   title: "Commémoration en mémoire des Résistants du maquis de Lanézia",
+  //   journal: "La Voix du Jura",
+  //   date: new Date("2021-8-3"),
+  //   city: "Cuisia",
+  //   thumbnail: "/press/210828_193917.jpg",
+  //   thumbnailDescription: "Revue de presse du 3 Août 2021 ",
+  // },
+  // {
+  //   title: "Le Chœur du Bon Pays prépare son avenir",
+  //   journal: "Actu Lons et Région",
+  //   date: new Date("2021-7-8"),
+  //   city: "Cousance",
+  //   thumbnail: "/press/210727_165940.jpg",
+  //   thumbnailDescription: "Revue de presse du 8 Juillet 2021 ",
+  // },
 ];
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
@@ -37,6 +86,8 @@ const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 export default async function Home() {
   const response = await fetch(`${BACKEND_ADDRESS}/listenings`);
   const tracks = await response.json();
+
+  console.log("tracks.listenings: ", tracks.listenings);
 
   const audioPlayers = tracks.result
     ? tracks.listenings
@@ -63,9 +114,9 @@ export default async function Home() {
                 Tous. Notre devise : éprouver du plaisir à se retrouver pour
                 chanter et le transmettre.
               </p>
-              <Button variant="primary" className={styles.heroButton}>
+              {/* <Button variant="primary" className={styles.heroButton}>
                 Nous découvrir
-              </Button>
+              </Button> */}
             </div>
             <Image
               src="/heroSection.jpg"
@@ -98,9 +149,9 @@ export default async function Home() {
               className={styles.newsEvent}
             />
           </div>
-          <Button variant="primary" className={styles.newsButton}>
+          {/* <Button variant="primary" className={styles.newsButton}>
             Voir tous les évènements
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -108,9 +159,9 @@ export default async function Home() {
         <div className={styles.listenSection}>
           <h3>Nos derniers chants</h3>
           <div className={styles.listenContent}>{audioPlayers}</div>
-          <Button variant="primary" className={styles.listenButton}>
+          {/* <Button variant="primary" className={styles.listenButton}>
             Ecouter plus de chants
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -120,9 +171,9 @@ export default async function Home() {
           <div className={styles.pressContent}>
             <Carousel images={pressReviews} width={400} height={550} />
           </div>
-          <Button variant="primary" className={styles.pressButton}>
+          {/* <Button variant="primary" className={styles.pressButton}>
             Voir toutes les revues de presse
-          </Button>
+          </Button> */}
         </div>
       </div>
 
