@@ -102,7 +102,7 @@ export default async function Home() {
           <h3>Une passion</h3>
           <div className={styles.heroContent}>
             <div className={styles.heroText}>
-              <h4>&quot;Le Chœur, c'est l'affaire de tous&quot;</h4>
+              <h4>&quot;Le Chœur, c&apos;est l&apos;affaire de tous&quot;</h4>
               <p>
                 Notre effectif est d’une trentaine d’hommes, répartis en quatre
                 pupitres : deux de ténors, barytons, basses. <br />
