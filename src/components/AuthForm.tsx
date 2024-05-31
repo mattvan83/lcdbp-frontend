@@ -2,26 +2,39 @@
 
 import React, { useState } from "react";
 import styles from "../styles/AuthForm.module.css";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "react-bootstrap/Button";
+
+type AuthFormProps = {
+  showModal: () => void;
+  isSignInMode: boolean;
+  handleCnxMode: () => void;
+  fillCnxInfos: (token: string, username: string) => void;
+};
+
+interface FormValues {
+  email?: string;
+  username: string;
+  password: string;
+}
 
 export default function AuthForm({
   showModal,
   isSignInMode,
   handleCnxMode,
   fillCnxInfos,
-}) {
+}: AuthFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<FormValues>();
   const [errorMsg, setErrorMsg] = useState("");
 
   //   console.log("errors: ", errors);
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (isSignInMode) {
       console.log(data);
       const { username, password } = data;

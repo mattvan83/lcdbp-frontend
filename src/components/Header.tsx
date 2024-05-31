@@ -17,7 +17,7 @@ import {
 // import { IconContext } from "react-icons";
 import Image from "next/image";
 import Container from "react-bootstrap/Container";
-import React, { useState } from "react";
+import React, { useState, CSSProperties, ReactNode } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {
@@ -31,23 +31,25 @@ import AuthForm from "./AuthForm";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
-  const [activeKey, setActiveKey] = useState("");
-  const [hoveredKey, setHoveredKey] = useState("");
-  const [userToken, setUserToken] = useState("");
-  const [username, setUsername] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isSignInMode, setIsSignInMode] = useState(false);
+  const [activeKey, setActiveKey] = useState<string>("");
+  const [hoveredKey, setHoveredKey] = useState<string>("");
+  const [userToken, setUserToken] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
 
   // console.log("activeKey: ", activeKey);
   // console.log("hoveredKey: ", hoveredKey);
   // console.log("userToken: ", userToken);
   // console.log("username: ", username);
 
-  const handleSelect = (eventKey) => {
-    setActiveKey(eventKey);
+  const handleSelect = (eventKey: string | null): void => {
+    if (eventKey) {
+      setActiveKey(eventKey);
+    }
   };
 
-  const getNavbarTitleStyle = (keys) => ({
+  const getNavbarTitleStyle = (keys: string[]): CSSProperties => ({
     color:
       keys.includes(activeKey) || keys.includes(hoveredKey)
         ? "purple"
@@ -56,7 +58,7 @@ export default function Header() {
       keys.includes(activeKey) || keys.includes(hoveredKey) ? "bold" : "500",
   });
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     console.log("Logout done!");
     setUserToken("");
     setUsername("");
@@ -64,25 +66,25 @@ export default function Header() {
     // dispatch(removeAllBookmark());
   };
 
-  const fillCnxInfos = (apiToken, apiUsername) => {
+  const fillCnxInfos = (apiToken: string, apiUsername: string): void => {
     setUserToken(apiToken);
     setUsername(apiUsername);
   };
 
-  const handleCnxMode = () => {
+  const handleCnxMode = (): void => {
     setIsSignInMode(!isSignInMode);
   };
 
-  const handleCancelModal = () => {
+  const handleCancelModal = (): void => {
     setIsModalVisible(!isModalVisible);
     setIsSignInMode(false);
   };
 
-  const showModal = () => {
+  const showModal = (): void => {
     setIsModalVisible(!isModalVisible);
   };
 
-  let userSection;
+  let userSection: ReactNode;
   if (userToken) {
     userSection = (
       <div className={styles.logoutSection}>
@@ -110,7 +112,7 @@ export default function Header() {
     );
   }
 
-  let modalContent;
+  let modalContent: ReactNode;
   if (!userToken) {
     if (!isSignInMode) {
       modalContent = (

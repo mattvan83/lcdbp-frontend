@@ -4,22 +4,37 @@ import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Carousel({ images, width, height }) {
-  const [zoomedImage, setZoomedImage] = useState({});
+interface ImageFields {
+  title: string;
+  journal: string;
+  date: Date;
+  city: string;
+  thumbnail: string;
+  thumbnailDescription: string;
+}
+
+type CarouselProps = {
+  images: ImageFields[];
+  width: number;
+  height: number;
+};
+
+export default function Carousel({ images, width, height }: CarouselProps) {
+  const [zoomedImage, setZoomedImage] = useState<ImageFields | null>(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item) => {
+  const openZoomedImage = (item: ImageFields): void => {
     setZoomedImage(item);
   };
 
   // Function to close zoomed image
-  const closeZoomedImage = () => {
-    setZoomedImage({});
+  const closeZoomedImage = (): void => {
+    setZoomedImage(null);
   };
 
   return (
     <>
-      {images.map((item, index) => (
+      {images.map((item: ImageFields, index: number) => (
         <div
           key={index}
           className={styles.pressReviewContainer}
@@ -35,7 +50,7 @@ export default function Carousel({ images, width, height }) {
         </div>
       ))}
 
-      {Object.keys(zoomedImage).length > 0 && (
+      {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
             src={zoomedImage.thumbnail}

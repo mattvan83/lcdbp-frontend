@@ -6,26 +6,39 @@ import styles from "../styles/SimpleForm.module.css";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 
-export default function SimpleForm({ backendAddress }) {
+interface SimpleFormData {
+  lastname: string;
+  firstname: string;
+  email: string;
+  phone?: string;
+  message: string;
+  ownCopy: boolean;
+}
+
+type SimpleFormProps = {
+  backendAddress: string | undefined;
+};
+
+export default function SimpleForm({ backendAddress }: SimpleFormProps) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
     reset,
-  } = useForm();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  } = useForm<SimpleFormData>();
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const isChecked = watch("ownCopy");
 
   // console.log("errors: ", errors);
   // console.log("errorMsg: ", errorMsg);
 
-  const handleInputChange = () => {
+  const handleInputChange = (): void => {
     setIsSubmitted(false); // Set isSubmitted to false when any input changes
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: SimpleFormData): void => {
     console.log(data);
     const { lastname, firstname, email, phone, message, ownCopy } = data;
 
