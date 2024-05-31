@@ -102,7 +102,7 @@ export default async function Home() {
           <h3>Une passion</h3>
           <div className={styles.heroContent}>
             <div className={styles.heroText}>
-              <h4>"Le Chœur, c'est l'affaire de tous"</h4>
+              <h4>&quot;Le Chœur, c'est l'affaire de tous&quot;</h4>
               <p>
                 Notre effectif est d’une trentaine d’hommes, répartis en quatre
                 pupitres : deux de ténors, barytons, basses. <br />
@@ -182,7 +182,7 @@ export default async function Home() {
           <h3>Nous contacter</h3>
           <div className={styles.contactContent}>
             <div className={styles.contactText}>
-              <h4>Notre conseil d'administration</h4>
+              <h4>Notre conseil d&apos;administration</h4>
               <div className={styles.contactBodyText}>
                 <span>
                   <b>Président : </b>Dominique Bon
@@ -216,7 +216,9 @@ export default async function Home() {
               </div>
             </div>
             <div className={styles.contactForm}>
-              <h5>Envie de nous rejoindre ou d'obtenir des renseignements ?</h5>
+              <h5>
+                Envie de nous rejoindre ou d&apos;obtenir des renseignements ?
+              </h5>
               <SimpleForm backendAddress={BACKEND_ADDRESS} />
             </div>
           </div>

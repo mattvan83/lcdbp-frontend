@@ -135,7 +135,7 @@ export default function SimpleForm({ backendAddress }) {
             // onChange={handleInputChange}
             onClick={handleInputChange}
           />
-          M'adresser une copie
+          M&apos;adresser une copie
         </label>
 
         <div className={styles.formButtonRight}>
