@@ -11,6 +11,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Le Choeur du Bon Pays",
   description: "Site vitrine du choeur d'hommes de Cousance (Jura - 39)",
+  icons: [
+    {
+      rel: "icon",
+      type: "image/jpeg",
+      sizes: "16x16, 32x32, 64x64, 128x128",
+      url: "/favicon.jpg",
+    },
+  ],
 };
 
 export default function RootLayout({
