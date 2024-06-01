@@ -55,7 +55,7 @@ export default function Footer() {
               <b>CONTACTS</b>
             </span>
             <span>
-              <b>Adresse : </b>(Mairie) 87 Grande Rue, 39190 Cousances
+              <b>Adresse : </b>(Mairie) 87 Grande Rue, 39190 Cousance
             </span>
             <span>
               <b>Émail : </b>lechoeurdubonpays@outlook.fr
