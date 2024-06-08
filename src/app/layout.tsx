@@ -29,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
+        <div id="root">
+          <Header />
+          {children}
+          <Footer />
+        </div>
         <BootstrapClient />
       </body>
     </html>
