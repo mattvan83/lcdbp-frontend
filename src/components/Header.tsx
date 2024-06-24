@@ -303,7 +303,7 @@ export default function Header() {
 
                   <Nav.Link
                     as={Link}
-                    href="/#listenings"
+                    href="/listenings"
                     className={styles.navbarLink}
                     eventKey="listen"
                     style={getNavbarTitleStyle(["listen"])}

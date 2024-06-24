@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
@@ -175,9 +176,11 @@ export default async function Home() {
         <div className={styles.listenSection}>
           <h3>Nos derniers chants</h3>
           <div className={styles.listenContent}>{audioPlayers}</div>
-          <Button variant="primary" className={styles.listenButton}>
-            Ecouter plus de chants
-          </Button>
+          <Link href="/listenings">
+            <Button variant="primary" className={styles.listenButton}>
+              Ecouter plus de chants
+            </Button>
+          </Link>
         </div>
       </div>
 

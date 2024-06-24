@@ -34,7 +34,6 @@ export default async function Listenings() {
     <main>
       <div className={styles.listenDivision} id="listenings">
         <div className={styles.listenSection}>
-          <h3>Nos derniers chants</h3>
           <div className={styles.listenContent}>{audioPlayers}</div>
         </div>
       </div>
