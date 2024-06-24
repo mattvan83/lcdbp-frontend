@@ -5,6 +5,12 @@ import "./globals.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
+import ReduxProvider from "../reducers/provider";
+import { ReactNode } from "react";
+
+interface Props {
+  children: ReactNode;
+}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +27,17 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div id="root">
-          <Header />
-          {children}
-          <Footer />
-        </div>
+        <ReduxProvider>
+          <div id="root">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </ReduxProvider>
         <BootstrapClient />
       </body>
     </html>
