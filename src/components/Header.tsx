@@ -29,52 +29,50 @@ import {
 } from "react-bootstrap-icons";
 import { ConfigProvider, Modal } from "antd";
 import AuthForm from "./AuthForm";
+// Importing action creators from the UserSlice.
+import {
+  login,
+  logout,
+  updateActiveKey,
+} from "@/lib/features/UserState/UserSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
-  const [activeKey, setActiveKey] = useState<string>("");
   const [hoveredKey, setHoveredKey] = useState<string>("");
-  const [userToken, setUserToken] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
 
-  const user = useAppSelector((state) => state.user.value);
-  // const dispatch = useDispatch<AppDispatch>();
-
-  // console.log("activeKey: ", activeKey);
   // console.log("hoveredKey: ", hoveredKey);
-  // console.log("userToken: ", userToken);
-  // console.log("username: ", username);
+
+  const user = useAppSelector((state) => state.user.value);
+  const dispatch = useAppDispatch();
   console.log("user: ", user);
 
   const handleSelect = (eventKey: string | null): void => {
     if (eventKey) {
-      setActiveKey(eventKey);
+      dispatch(updateActiveKey(eventKey));
     }
   };
 
   const getNavbarTitleStyle = (keys: string[]): CSSProperties => ({
     color:
-      keys.includes(activeKey) || keys.includes(hoveredKey)
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
         ? "purple"
         : "#4b5c6b", // Change colors as needed
     fontWeight:
-      keys.includes(activeKey) || keys.includes(hoveredKey) ? "bold" : "500",
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
+        ? "bold"
+        : "500",
   });
 
   const handleLogout = (): void => {
     console.log("Logout done!");
-    setUserToken("");
-    setUsername("");
-    // dispatch(logout());
-    // dispatch(removeAllBookmark());
+    dispatch(logout());
   };
 
   const fillCnxInfos = (apiToken: string, apiUsername: string): void => {
-    setUserToken(apiToken);
-    setUsername(apiUsername);
+    dispatch(login({ token: apiToken, username: apiUsername }));
   };
 
   const handleCnxMode = (): void => {
@@ -91,10 +89,10 @@ export default function Header() {
   };
 
   let userSection: ReactNode;
-  if (userToken) {
+  if (user.token) {
     userSection = (
       <div className={styles.logoutSection}>
-        <p className={styles.userTitle}>Bienvenue {username}</p>
+        <p className={styles.userTitle}>Bienvenue {user.username}</p>
         <Button
           variant="primary"
           onClick={() => handleLogout()}
@@ -119,7 +117,7 @@ export default function Header() {
   }
 
   let modalContent: ReactNode;
-  if (!userToken) {
+  if (!user.token) {
     if (!isSignInMode) {
       modalContent = (
         <div className={styles.modalSection}>
@@ -191,7 +189,7 @@ export default function Header() {
                         icon={faHome}
                         color={
                           ["home", "home1", "home2", "home3", "home4"].includes(
-                            activeKey
+                            user.activeKey
                           ) ||
                           ["home", "home1", "home2", "home3", "home4"].includes(
                             hoveredKey
@@ -252,7 +250,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faHome}
                       color={
-                        ["home"].includes(activeKey) ||
+                        ["home"].includes(user.activeKey) ||
                         ["home"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -274,7 +272,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faCircleInfo}
                       color={
-                        ["chore"].includes(activeKey) ||
+                        ["chore"].includes(user.activeKey) ||
                         ["chore"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -296,7 +294,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faCalendar}
                       color={
-                        ["events"].includes(activeKey) ||
+                        ["events"].includes(user.activeKey) ||
                         ["events"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -318,7 +316,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faCirclePlay}
                       color={
-                        ["listen"].includes(activeKey) ||
+                        ["listen"].includes(user.activeKey) ||
                         ["listen"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -340,7 +338,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faNewspaper}
                       color={
-                        ["pressReview"].includes(activeKey) ||
+                        ["pressReview"].includes(user.activeKey) ||
                         ["pressReview"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -362,7 +360,7 @@ export default function Header() {
                     <FontAwesomeIcon
                       icon={faAddressBook}
                       color={
-                        ["contactUS"].includes(activeKey) ||
+                        ["contactUS"].includes(user.activeKey) ||
                         ["contactUS"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
@@ -372,7 +370,7 @@ export default function Header() {
                     Nous contacter
                   </Nav.Link>
 
-                  {userToken && (
+                  {user.token && (
                     <Nav.Link
                       as={Link}
                       href="#link"
@@ -385,7 +383,7 @@ export default function Header() {
                       <FontAwesomeIcon
                         icon={faUserGroup}
                         color={
-                          ["membersSpace"].includes(activeKey) ||
+                          ["membersSpace"].includes(user.activeKey) ||
                           ["membersSpace"].includes(hoveredKey)
                             ? "purple"
                             : "#4b5c6b"

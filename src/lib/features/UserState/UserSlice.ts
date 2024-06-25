@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { StringExpressionOperatorReturningString } from "mongoose";
 
 export type UserState = {
   value: {
     token: string | null;
     username: string | null;
-    activeKey: string | null;
+    activeKey: string;
   };
 };
 
@@ -14,7 +15,7 @@ export type LoginPayload = {
 };
 
 const initialState: UserState = {
-  value: { token: null, username: null, activeKey: null },
+  value: { token: null, username: null, activeKey: "" },
 };
 
 export const UserSlice = createSlice({
