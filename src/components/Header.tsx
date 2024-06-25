@@ -42,6 +42,7 @@ export default function Header() {
   const [hoveredKey, setHoveredKey] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   // console.log("hoveredKey: ", hoveredKey);
 
@@ -157,8 +158,13 @@ export default function Header() {
             {/* <Navbar.Brand href="#home" className={styles.navbarBrand}>
               LCDBP
             </Navbar.Brand> */}
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+            <Navbar.Toggle
+              aria-controls={`offcanvasNavbar-expand-lg`}
+              onClick={() => setShowOffcanvas(true)}
+            />
             <Navbar.Offcanvas
+              show={showOffcanvas}
+              onHide={() => setShowOffcanvas(false)}
               id={`offcanvasNavbar-expand-lg`}
               aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
               placement="start"
@@ -246,6 +252,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["home"])}
                     onMouseEnter={() => setHoveredKey("home")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faHome}
@@ -268,6 +275,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["chore"])}
                     onMouseEnter={() => setHoveredKey("chore")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faCircleInfo}
@@ -290,6 +298,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["events"])}
                     onMouseEnter={() => setHoveredKey("events")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faCalendar}
@@ -312,6 +321,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["listen"])}
                     onMouseEnter={() => setHoveredKey("listen")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faCirclePlay}
@@ -334,6 +344,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["pressReview"])}
                     onMouseEnter={() => setHoveredKey("pressReview")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faNewspaper}
@@ -356,6 +367,7 @@ export default function Header() {
                     style={getNavbarTitleStyle(["contactUS"])}
                     onMouseEnter={() => setHoveredKey("contactUS")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
                       icon={faAddressBook}
@@ -379,6 +391,7 @@ export default function Header() {
                       style={getNavbarTitleStyle(["membersSpace"])}
                       onMouseEnter={() => setHoveredKey("membersSpace")}
                       onMouseLeave={() => setHoveredKey("")}
+                      onClick={() => setShowOffcanvas(false)}
                     >
                       <FontAwesomeIcon
                         icon={faUserGroup}
