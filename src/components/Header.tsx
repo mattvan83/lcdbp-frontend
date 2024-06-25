@@ -29,9 +29,7 @@ import {
 } from "react-bootstrap-icons";
 import { ConfigProvider, Modal } from "antd";
 import AuthForm from "./AuthForm";
-import { useDispatch, useSelector } from "react-redux";
-import { UserState } from "../reducers/user";
-import { AppDispatch } from "../reducers/store";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
@@ -42,7 +40,7 @@ export default function Header() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
 
-  const user = useSelector((state: { user: UserState }) => state.user.value);
+  const user = useAppSelector((state) => state.user.value);
   // const dispatch = useDispatch<AppDispatch>();
 
   // console.log("activeKey: ", activeKey);
