@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
+import ListeningsContainer from "@/components/ListeningsContainer";
 import Carousel from "@/components/Carousel";
 import SimpleForm from "@/components/SimpleForm";
 
@@ -172,17 +173,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className={styles.listenDivision} id="listenings">
-        <div className={styles.listenSection}>
-          <h3>Nos derniers chants</h3>
-          <div className={styles.listenContent}>{audioPlayers}</div>
-          <Link href="/listenings">
-            <Button variant="primary" className={styles.listenButton}>
-              Ecouter plus de chants
-            </Button>
-          </Link>
-        </div>
-      </div>
+      <ListeningsContainer currentPage="Home" audioPlayers={audioPlayers} />
 
       <div className={styles.pressDivision} id="pressReviews">
         <div className={styles.pressSection}>

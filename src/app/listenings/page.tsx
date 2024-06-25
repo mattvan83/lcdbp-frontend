@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import AudioPlayer from "@/components/AudioPlayer";
+import ListeningsContainer from "@/components/ListeningsContainer";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
@@ -32,11 +33,10 @@ export default async function Listenings() {
 
   return (
     <main>
-      <div className={styles.listenDivision} id="listenings">
-        <div className={styles.listenSection}>
-          <div className={styles.listenContent}>{audioPlayers}</div>
-        </div>
-      </div>
+      <ListeningsContainer
+        currentPage="Listenings"
+        audioPlayers={audioPlayers}
+      />
     </main>
   );
 }

@@ -15,7 +15,7 @@ export type LoginPayload = {
 };
 
 const initialState: UserState = {
-  value: { token: null, username: null, activeKey: "" },
+  value: { token: null, username: null, activeKey: "home" },
 };
 
 export const UserSlice = createSlice({
