@@ -6,10 +6,16 @@ import { PressReview } from "@/app/page";
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
 export default async function PressReviews() {
-  const response = await fetch(`${BACKEND_ADDRESS}/pressReviews/list`);
+  const response = await fetch(`${BACKEND_ADDRESS}/pressReviews/grouped`);
   const reviews = await response.json();
 
-  const pressReviews = reviews.result ? reviews.pressReviews : reviews.error;
+  const pressReviews = reviews.result
+    ? reviews.pressReviewsGrouped.find(
+        (pressReviewGroup) => pressReviewGroup.year === 2023
+      ).pressReviews
+    : reviews.error;
+
+  const years = reviews.result ? reviews.years : [];
 
   return (
     <main>
