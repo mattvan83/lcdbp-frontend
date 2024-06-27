@@ -3,28 +3,19 @@
 import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
-
-interface ImageFields {
-  title: string;
-  journal: string;
-  city: string;
-  thumbnailUrl: string;
-  thumbnailDescription: string;
-  pressReviewDate: Date;
-  lastPressReview: boolean;
-}
+import { PressReview } from "@/app/page";
 
 type CarouselProps = {
-  images: ImageFields[];
+  images: PressReview[];
   width: number;
   height: number;
 };
 
 export default function Carousel({ images, width, height }: CarouselProps) {
-  const [zoomedImage, setZoomedImage] = useState<ImageFields | null>(null);
+  const [zoomedImage, setZoomedImage] = useState<PressReview | null>(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item: ImageFields): void => {
+  const openZoomedImage = (item: PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -35,7 +26,7 @@ export default function Carousel({ images, width, height }: CarouselProps) {
 
   return (
     <>
-      {images.map((item: ImageFields, index: number) => (
+      {images.map((item: PressReview, index: number) => (
         <div
           key={index}
           className={styles.pressReviewContainer}

@@ -1,0 +1,58 @@
+"use client";
+import React from "react";
+import Link from "next/link";
+import Button from "react-bootstrap/Button";
+import styles from "../styles/PressReviewsContainer.module.css";
+import { updateActiveKey } from "@/lib/features/UserState/UserSlice";
+import { useAppDispatch } from "@/lib/hooks";
+import Carousel from "@/components/Carousel";
+import { PressReview } from "@/app/page";
+
+interface PressReviewsContainerProps {
+  currentPage: string;
+  pressReviews: PressReview[];
+  width: number;
+  height: number;
+}
+
+const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
+  currentPage,
+  pressReviews,
+  width,
+  height,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const handleSelect = (eventKey: string | null): void => {
+    if (eventKey) {
+      dispatch(updateActiveKey(eventKey));
+    }
+  };
+
+  return (
+    <div className={styles.pressDivision}>
+      <div className={styles.pressSection}>
+        {currentPage !== "PressReviews" ? (
+          <h3>Nos dernières revues de presse</h3>
+        ) : (
+          <h3>Nos revues de presse</h3>
+        )}
+        <div className={styles.pressContent}>
+          <Carousel images={pressReviews} width={width} height={height} />
+        </div>
+        {currentPage !== "PressReviews" && (
+          <Link
+            href="/PressReviews"
+            onClick={() => handleSelect("pressReview")}
+          >
+            <Button variant="primary" className={styles.pressButton}>
+              Voir toutes les revues de presse
+            </Button>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PressReviewsContainer;

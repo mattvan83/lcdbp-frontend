@@ -4,12 +4,12 @@ import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
 import ListeningsContainer from "@/components/ListeningsContainer";
-import Carousel from "@/components/Carousel";
+import PressReviewsContainer from "@/components/PressReviewsContainer";
 import SimpleForm from "@/components/SimpleForm";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
-interface Track {
+export interface Track {
   _id: string;
   title: string;
   artwork: string;
@@ -24,7 +24,8 @@ interface Track {
   lastListening: boolean;
 }
 
-interface PressReview {
+export interface PressReview {
+  _id: string;
   title: string;
   journal: string;
   city: string;
@@ -41,7 +42,7 @@ export default async function Home() {
 
   // console.log("tracks.listenings: ", tracks.listenings);
 
-  const audioPlayers = tracks.result
+  const lastAudioPlayers = tracks.result
     ? tracks.listenings
         .filter((track: Track) => track.lastListening === true)
         .map((track: Track) => <AudioPlayer key={track._id} {...track} />)
@@ -117,19 +118,14 @@ export default async function Home() {
         </div>
       </div>
 
-      <ListeningsContainer currentPage="Home" audioPlayers={audioPlayers} />
+      <ListeningsContainer currentPage="Home" audioPlayers={lastAudioPlayers} />
 
-      <div className={styles.pressDivision} id="pressReviews">
-        <div className={styles.pressSection}>
-          <h3>Nos dernières revues de presse</h3>
-          <div className={styles.pressContent}>
-            <Carousel images={lastPressReviews} width={400} height={550} />
-          </div>
-          {/* <Button variant="primary" className={styles.pressButton}>
-            Voir toutes les revues de presse
-          </Button> */}
-        </div>
-      </div>
+      <PressReviewsContainer
+        currentPage="Home"
+        pressReviews={lastPressReviews}
+        width={400}
+        height={550}
+      />
 
       <div className={styles.contactDivision} id="contactUs">
         <div className={styles.contactSection}>

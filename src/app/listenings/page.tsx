@@ -2,22 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import AudioPlayer from "@/components/AudioPlayer";
 import ListeningsContainer from "@/components/ListeningsContainer";
+import { Track } from "@/app/page";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
-
-interface Track {
-  title: string;
-  artwork: string;
-  audioUrl: string;
-  authorText: string;
-  authorMusic: string;
-  arrangement: string;
-  harmonization: string;
-  thumbnailUrl: string;
-  thumbnailDescription: string;
-  recordingDate: Date;
-  lastListening: boolean;
-}
 
 export default async function Listenings() {
   const response = await fetch(`${BACKEND_ADDRESS}/listenings`);
