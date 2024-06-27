@@ -7,10 +7,11 @@ import Image from "next/image";
 interface ImageFields {
   title: string;
   journal: string;
-  date: Date;
   city: string;
-  thumbnail: string;
+  thumbnailUrl: string;
   thumbnailDescription: string;
+  pressReviewDate: Date;
+  lastPressReview: boolean;
 }
 
 type CarouselProps = {
@@ -42,7 +43,7 @@ export default function Carousel({ images, width, height }: CarouselProps) {
         >
           <Image
             onClick={() => openZoomedImage(item)}
-            src={item.thumbnail}
+            src={item.thumbnailUrl}
             alt={item.thumbnailDescription}
             layout="fill"
             className={styles.pressReview}
@@ -53,7 +54,7 @@ export default function Carousel({ images, width, height }: CarouselProps) {
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
-            src={zoomedImage.thumbnail}
+            src={zoomedImage.thumbnailUrl}
             alt={zoomedImage.thumbnailDescription}
             layout="fill"
             objectFit="contain"
