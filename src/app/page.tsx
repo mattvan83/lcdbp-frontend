@@ -10,6 +10,7 @@ import SimpleForm from "@/components/SimpleForm";
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
 interface Track {
+  _id: string;
   title: string;
   artwork: string;
   audioUrl: string;
@@ -43,9 +44,7 @@ export default async function Home() {
   const audioPlayers = tracks.result
     ? tracks.listenings
         .filter((track: Track) => track.lastListening === true)
-        .map((track: Track, index: number) => (
-          <AudioPlayer key={index} {...track} />
-        ))
+        .map((track: Track) => <AudioPlayer key={track._id} {...track} />)
     : tracks.error;
 
   // Get last press reviews
