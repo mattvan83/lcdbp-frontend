@@ -26,9 +26,9 @@ export default function Carousel({ images, width, height }: CarouselProps) {
 
   return (
     <>
-      {images.map((item: PressReview, index: number) => (
+      {images.map((item: PressReview) => (
         <div
-          key={index}
+          key={item._id}
           className={styles.pressReviewContainer}
           style={{ width: `${width}px`, height: `${height}px` }}
         >

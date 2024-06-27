@@ -3,6 +3,11 @@ import styles from "./page.module.css";
 import PressReviewsContainer from "@/components/PressReviewsContainer";
 import { PressReview } from "@/app/page";
 
+export interface PressReviewGroup {
+  year: number;
+  pressReviews: PressReview[];
+}
+
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
 export default async function PressReviews() {
@@ -11,7 +16,7 @@ export default async function PressReviews() {
 
   const pressReviews = reviews.result
     ? reviews.pressReviewsGrouped.find(
-        (pressReviewGroup) => pressReviewGroup.year === 2023
+        (pressReviewGroup: PressReviewGroup) => pressReviewGroup.year === 2023
       ).pressReviews
     : reviews.error;
 
