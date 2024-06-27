@@ -23,6 +23,13 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  let divisionStyle = {};
+  if (currentPage === "PressReviews") {
+    divisionStyle = {
+      backgroundColor: "#ffffff",
+    };
+  }
+
   const handleSelect = (eventKey: string | null): void => {
     if (eventKey) {
       dispatch(updateActiveKey(eventKey));
@@ -30,7 +37,7 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
   };
 
   return (
-    <div className={styles.pressDivision}>
+    <div className={styles.pressDivision} style={divisionStyle}>
       <div className={styles.pressSection}>
         {currentPage !== "PressReviews" ? (
           <h3>Nos dernières revues de presse</h3>
@@ -42,7 +49,7 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
         </div>
         {currentPage !== "PressReviews" && (
           <Link
-            href="/PressReviews"
+            href="/pressReviews"
             onClick={() => handleSelect("pressReview")}
           >
             <Button variant="primary" className={styles.pressButton}>

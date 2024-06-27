@@ -338,7 +338,7 @@ export default function Header() {
 
                   <Nav.Link
                     as={Link}
-                    href="/#pressReviews"
+                    href="/pressReviews"
                     className={styles.navbarLink}
                     eventKey="pressReview"
                     style={getNavbarTitleStyle(["pressReview"])}
