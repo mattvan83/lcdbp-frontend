@@ -26,7 +26,11 @@ const ListeningsContainer: React.FC<ListeningsContainerProps> = ({
   return (
     <div className={styles.listenDivision}>
       <div className={styles.listenSection}>
-        {currentPage !== "Listenings" && <h3>Nos derniers chants</h3>}
+        {currentPage !== "Listenings" ? (
+          <h3>Nos derniers chants</h3>
+        ) : (
+          <h3>Nos chants</h3>
+        )}
         <div className={styles.listenContent}>{audioPlayers}</div>
         {currentPage !== "Listenings" && (
           <Link href="/listenings" onClick={() => handleSelect("listen")}>
