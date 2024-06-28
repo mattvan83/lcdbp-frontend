@@ -1,0 +1,9 @@
+.pressReviewsDivision {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  padding: 40px 0px 0px;
+  background-color: #ddd9d9;
+}
