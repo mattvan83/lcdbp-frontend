@@ -20,32 +20,37 @@ const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
   const years = reviews.years;
   const [selectedYear, setSelectedYear] = useState<string>(years[0]);
 
+  const pressReviews = reviews.pressReviewsGrouped.find(
+    (pressReviewGroup: PressReviewGroup) =>
+      pressReviewGroup.year === Number(selectedYear)
+  )?.pressReviews;
+
   const handleSelectYear = (eventKey: string | null): void => {
     if (eventKey !== null) {
       setSelectedYear(eventKey);
     }
   };
 
-  const pressReviews = reviews.pressReviewsGrouped.find(
-    (pressReviewGroup: PressReviewGroup) =>
-      pressReviewGroup.year === Number(selectedYear)
-  )?.pressReviews;
-
   return (
     <div className={styles.pressReviewsDivision}>
       <h3>Nos revues de presse</h3>
-      <DropdownButton
-        id="dropdown-basic-button"
-        title={`Année : ${selectedYear}`}
-        onSelect={handleSelectYear}
-        className="mt-4"
-      >
-        {years.map((year) => (
-          <Dropdown.Item key={year} eventKey={year}>
-            {year}
-          </Dropdown.Item>
-        ))}
-      </DropdownButton>
+      <Dropdown onSelect={handleSelectYear} className={`mt-4`}>
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+          Année : {selectedYear}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu className={styles.dropdownMenu}>
+          {years.map((year) => (
+            <Dropdown.Item
+              key={year}
+              eventKey={year}
+              //   className={styles.dropdownItem}
+            >
+              {year}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
 
       {pressReviews && (
         <PressReviewsContainer

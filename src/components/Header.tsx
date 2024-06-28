@@ -48,7 +48,7 @@ export default function Header() {
 
   const user = useAppSelector((state) => state.user.value);
   const dispatch = useAppDispatch();
-  console.log("user: ", user);
+  // console.log("user: ", user);
 
   const handleSelect = (eventKey: string | null): void => {
     if (eventKey) {
