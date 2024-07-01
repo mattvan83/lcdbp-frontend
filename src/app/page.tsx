@@ -7,12 +7,55 @@ import SimpleForm from "@/components/SimpleForm";
 
 const pressReviews = [
   {
+    title:
+      "Inauguration et bénédiction de la chapelle restaurée Notre-Dame du Chêne",
+    journal: "L'Echo du Revermont",
+    date: new Date("2024-06-1"),
+    city: "Cousance",
+    thumbnail: "/press/2024-06_L_Echo_du_Revermont-min.jpg",
+    thumbnailDescription:
+      "Revue de presse du 1 Juin 2024 : Inauguration et bénédiction de la chapelle restaurée Notre-Dame du Chêne",
+    lastPressReview: true,
+  },
+  {
+    title: "Le Chœur du Bon Pays a un nouveau bureau",
+    journal: "Le Progrès",
+    date: new Date("2024-02-23"),
+    city: "Cousance",
+    thumbnail: "/press/2024-02-23_Le_Progres-min.png",
+    thumbnailDescription:
+      "Revue de presse du 23 Février 2024 : Le Chœur du Bon Pays a un nouveau bureau",
+    lastPressReview: true,
+  },
+  {
+    title: "Six concerts au programme du Chœur du Bon Pays",
+    journal: "L'Indépendant",
+    date: new Date("2024-01-30"),
+    city: "Cousance",
+    thumbnail: "/press/2024-01-24_L_independant-min.png",
+    thumbnailDescription:
+      "Revue de presse du 30 Janvier 2024 : Six concerts au programme du Chœur du Bon Pays",
+    lastPressReview: true,
+  },
+  {
     title: "Une église comble pour le concert (de Noël ?) du comité des fêtes",
     journal: "Le Progrès",
     date: new Date("2023-12-10"),
     city: "Beaufort-Orbagna",
-    thumbnail: "/press/Concert_Beaufort-Orbagna_23-12-10.jpg",
-    thumbnailDescription: "Revue de presse du 10 Décembre 2023",
+    thumbnail: "/press/Concert_Beaufort-Orbagna_23-12-10-min.jpg",
+    thumbnailDescription:
+      "Revue de presse du 10 Décembre 2023 : Une église comble pour le concert (de Noël ?) du comité des fêtes",
+    lastPressReview: true,
+  },
+  {
+    title: "Le 'Chœur du Bon Pays' en concert ce dimanche",
+    journal: "Le Progrès",
+    date: new Date("2023-12-6"),
+    city: "Saint-Etienne-Du-Bois",
+    thumbnail: "/press/2023-12-06_Le_Progres-min.png",
+    thumbnailDescription:
+      "Revue de presse du 6 Décembre 2023 : Le 'Chœur du Bon Pays' en concert ce dimanche",
+    lastPressReview: true,
   },
   {
     title:
@@ -20,65 +63,21 @@ const pressReviews = [
     journal: "Le Progrès",
     date: new Date("2023-4-15"),
     city: "Saint-Etienne-Du-Bois",
-    thumbnail: "/press/Concert_St Etienne_du_Bois_23-04-15.jpg",
-    thumbnailDescription: "Revue de presse du 15 Avril 2023",
+    thumbnail: "/press/Concert_St Etienne_du_Bois_23-04-15-min.jpg",
+    thumbnailDescription:
+      "Revue de presse du 15 Avril 2023 : Le 'Chœur du Bon Pays' a produit son répertoire de gospel devant une centaine de spectateurs",
+    lastPressReview: true,
   },
   {
     title: "La chorale conserve une trentaine de membres",
     journal: "Le Progrès",
     date: new Date("2023-1-24"),
     city: "Cousance",
-    thumbnail: "/press/AG_21-01-23.jpg",
-    thumbnailDescription: "Revue de presse du 15 Janvier 2023",
+    thumbnail: "/press/AG_21-01-23-min.jpg",
+    thumbnailDescription:
+      "Revue de presse du 24 Janvier 2023 : La chorale conserve une trentaine de membres",
+    lastPressReview: true,
   },
-  {
-    title: "Le Chœur du Bon Pays a repris les répétitions",
-    journal: "Le Progrès",
-    date: new Date("2022-9-11"),
-    city: "Cousance",
-    thumbnail: "/press/Le_Progrès_22-09-11.jpg",
-    thumbnailDescription: "Revue de presse du 11 Septembre 2022",
-  },
-  {
-    title: "Alain Dargaud, nouveau président du Chœur du Bon Pays",
-    journal: "Le Progrès",
-    date: new Date("2022-7-22"),
-    city: "Cousance",
-    thumbnail: "/press/Le_Progrès_22-07-22.jpg",
-    thumbnailDescription: "Revue de presse du 22 Juillet 2022",
-  },
-  {
-    title: "Le Chœur du Bon Pays et la Perrina réunis pour la bonne cause",
-    journal: "Le Progrès",
-    date: new Date("2022-6-11"),
-    city: "Cousance",
-    thumbnail: "/press/Concert_Perrigny_22-06-11.png",
-    thumbnailDescription: "Revue de presse du 11 Juin 2022",
-  },
-  // {
-  //   title: "Le Chœur du Bon Pays a repris les répétitions",
-  //   journal: "Le Progrès",
-  //   date: new Date("2021-9-7"),
-  //   city: "Cousance",
-  //   thumbnail: "/press/210926_162048.jpg",
-  //   thumbnailDescription: "Revue de presse du 7 Septembre 2021",
-  // },
-  // {
-  //   title: "Commémoration en mémoire des Résistants du maquis de Lanézia",
-  //   journal: "La Voix du Jura",
-  //   date: new Date("2021-8-3"),
-  //   city: "Cuisia",
-  //   thumbnail: "/press/210828_193917.jpg",
-  //   thumbnailDescription: "Revue de presse du 3 Août 2021 ",
-  // },
-  // {
-  //   title: "Le Chœur du Bon Pays prépare son avenir",
-  //   journal: "Actu Lons et Région",
-  //   date: new Date("2021-7-8"),
-  //   city: "Cousance",
-  //   thumbnail: "/press/210727_165940.jpg",
-  //   thumbnailDescription: "Revue de presse du 8 Juillet 2021 ",
-  // },
 ];
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
