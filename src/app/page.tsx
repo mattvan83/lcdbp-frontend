@@ -98,8 +98,15 @@ export default async function Home() {
           <h3>Actualités</h3>
           <div className={styles.newsContent}>
             <Image
-              src="/Evenement.jpg"
-              alt="Evenement à venir"
+              src="/Prochaines_prestations.jpg"
+              alt="Prochaines prestations"
+              width={400}
+              height={550}
+              className={styles.newsEvent}
+            />
+            <Image
+              src="/24-09-29_Concert_Château-Chalon.jpg"
+              alt="Concert Château-Chalon le 24 Septembre 2024"
               width={400}
               height={550}
               className={styles.newsEvent}
