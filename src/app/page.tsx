@@ -3,11 +3,18 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Button from "react-bootstrap/Button";
 import AudioPlayer from "@/components/AudioPlayer";
+import Carousel from "@/components/Carousel";
 import ListeningsContainer from "@/components/ListeningsContainer";
 import PressReviewsContainer from "@/components/PressReviewsContainer";
 import SimpleForm from "@/components/SimpleForm";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+
+export interface Event {
+  _id: string;
+  thumbnailUrl: string;
+  thumbnailDescription: string;
+}
 
 export interface Track {
   _id: string;
@@ -34,6 +41,24 @@ export interface PressReview {
   pressReviewDate: Date;
   lastPressReview: boolean;
 }
+
+const eventImages: Event[] = [
+  {
+    _id: "1",
+    thumbnailUrl: "/Prochaines_prestations.jpg",
+    thumbnailDescription: "Prochaines prestations",
+  },
+  {
+    _id: "2",
+    thumbnailUrl: "/24-09-29_Concert_Château-Chalon.jpg",
+    thumbnailDescription: "Concert Château-Chalon le 24 Septembre 2024",
+  },
+  {
+    _id: "3",
+    thumbnailUrl: "/nousRecrutons.jpg",
+    thumbnailDescription: "Recrutement choristes",
+  },
+];
 
 export default async function Home() {
   // Get last listenings
@@ -93,11 +118,11 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className={styles.newsDivision} id="events">
-        <div className={styles.newsSection}>
+      <div className={styles.pressDivision} id="events">
+        <div className={styles.pressSection}>
           <h3>Actualités</h3>
-          <div className={styles.newsContent}>
-            <Image
+          <div className={styles.pressContent}>
+            {/* <Image
               src="/Prochaines_prestations.jpg"
               alt="Prochaines prestations"
               width={400}
@@ -117,6 +142,12 @@ export default async function Home() {
               width={400}
               height={550}
               className={styles.newsEvent}
+            /> */}
+            <Carousel
+              images={eventImages}
+              width={400}
+              height={550}
+              category="events"
             />
           </div>
           {/* <Button variant="primary" className={styles.newsButton}>

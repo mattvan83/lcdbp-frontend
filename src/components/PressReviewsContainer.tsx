@@ -44,7 +44,12 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
           <h3>Nos dernières revues de presse</h3>
         )}
         <div className={styles.pressContent}>
-          <Carousel images={pressReviews} width={width} height={height} />
+          <Carousel
+            images={pressReviews}
+            width={width}
+            height={height}
+            category="pressReviews"
+          />
         </div>
         {currentPage !== "PressReviews" && (
           <Link

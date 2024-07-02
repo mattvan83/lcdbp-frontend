@@ -3,20 +3,29 @@
 import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
+import { Event } from "@/app/page";
 import { PressReview } from "@/app/page";
 import PressReviewCard from "./PressReviewCard";
 
 type CarouselProps = {
-  images: PressReview[];
+  images: Event[] | PressReview[];
   width: number;
   height: number;
+  category: string;
 };
 
-export default function Carousel({ images, width, height }: CarouselProps) {
-  const [zoomedImage, setZoomedImage] = useState<PressReview | null>(null);
+export default function Carousel({
+  images,
+  width,
+  height,
+  category,
+}: CarouselProps) {
+  const [zoomedImage, setZoomedImage] = useState<Event | PressReview | null>(
+    null
+  );
 
   // Function to open zoomed image
-  const openZoomedImage = (item: PressReview): void => {
+  const openZoomedImage = (item: Event | PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -27,29 +36,38 @@ export default function Carousel({ images, width, height }: CarouselProps) {
 
   return (
     <>
-      {images.map((item: PressReview) => (
-        // <div
-        //   key={item._id}
-        //   className={styles.pressReviewContainer}
-        //   style={{ width: `${width}px`, height: `${height}px` }}
-        // >
-        //   <Image
-        //     onClick={() => openZoomedImage(item)}
-        //     src={item.thumbnailUrl}
-        //     alt={item.thumbnailDescription}
-        //     layout="fill"
-        //     className={styles.pressReview}
-        //   />
-        // </div>
-        // <div onClick={() => openZoomedImage(item)}>
-        <PressReviewCard
-          key={item._id}
-          {...item}
-          openZoomedImage={openZoomedImage}
-        />
-        // </div>
-      ))}
-
+      {category === "events" &&
+        images.map((item: Event | PressReview) => {
+          if (!("journal" in item)) {
+            return (
+              <div
+                key={item._id}
+                className={styles.eventContainer}
+                style={{ width: `${width}px`, height: `${height}px` }}
+              >
+                <Image
+                  onClick={() => openZoomedImage(item)}
+                  src={item.thumbnailUrl}
+                  alt={item.thumbnailDescription}
+                  layout="fill"
+                  className={styles.event}
+                />
+              </div>
+            );
+          }
+        })}
+      {category === "pressReviews" &&
+        images.map((item: Event | PressReview) => {
+          if ("journal" in item) {
+            return (
+              <PressReviewCard
+                key={item._id}
+                {...item}
+                openZoomedImage={openZoomedImage}
+              />
+            );
+          }
+        })}
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
