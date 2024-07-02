@@ -4,6 +4,7 @@ import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
 import { PressReview } from "@/app/page";
+import PressReviewCard from "./PressReviewCard";
 
 type CarouselProps = {
   images: PressReview[];
@@ -27,19 +28,26 @@ export default function Carousel({ images, width, height }: CarouselProps) {
   return (
     <>
       {images.map((item: PressReview) => (
-        <div
+        // <div
+        //   key={item._id}
+        //   className={styles.pressReviewContainer}
+        //   style={{ width: `${width}px`, height: `${height}px` }}
+        // >
+        //   <Image
+        //     onClick={() => openZoomedImage(item)}
+        //     src={item.thumbnailUrl}
+        //     alt={item.thumbnailDescription}
+        //     layout="fill"
+        //     className={styles.pressReview}
+        //   />
+        // </div>
+        // <div onClick={() => openZoomedImage(item)}>
+        <PressReviewCard
           key={item._id}
-          className={styles.pressReviewContainer}
-          style={{ width: `${width}px`, height: `${height}px` }}
-        >
-          <Image
-            onClick={() => openZoomedImage(item)}
-            src={item.thumbnailUrl}
-            alt={item.thumbnailDescription}
-            layout="fill"
-            className={styles.pressReview}
-          />
-        </div>
+          {...item}
+          openZoomedImage={openZoomedImage}
+        />
+        // </div>
       ))}
 
       {zoomedImage && (

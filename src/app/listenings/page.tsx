@@ -13,8 +13,8 @@ export default async function Listenings() {
   // console.log("tracks.listenings: ", tracks.listenings);
 
   const audioPlayers = tracks.result
-    ? tracks.listenings.map((track: Track, index: number) => (
-        <AudioPlayer key={index} {...track} />
+    ? tracks.listenings.map((track: Track) => (
+        <AudioPlayer key={track._id} {...track} />
       ))
     : tracks.error;
 

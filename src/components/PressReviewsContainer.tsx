@@ -26,7 +26,8 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
   let divisionStyle = {};
   if (currentPage === "PressReviews") {
     divisionStyle = {
-      backgroundColor: "#ddd9d9",
+      //   backgroundColor: "#ddd9d9",
+      backgroundColor: "#ffffff",
     };
   }
 
