@@ -39,10 +39,10 @@
 }
 
 /* Media query for window width less than 575px */
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .event {
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
-}
+} */

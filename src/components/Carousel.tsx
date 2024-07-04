@@ -39,17 +39,26 @@ export default function Carousel({
       {category === "events" &&
         images.map((item: Event | PressReview) => {
           if (!("journal" in item)) {
+            const containerWidth = width;
+            const containerHeight = height;
+            const imageWidth = containerWidth;
+            const imageHeight = containerHeight;
             return (
               <div
                 key={item._id}
                 className={styles.eventContainer}
-                style={{ width: `${width}px`, height: `${height}px` }}
+                style={{
+                  width: `${containerWidth}px`,
+                  height: `${containerHeight}px`,
+                }}
               >
                 <Image
                   onClick={() => openZoomedImage(item)}
                   src={item.thumbnailUrl}
                   alt={item.thumbnailDescription}
-                  layout="fill"
+                  // layout="fill"
+                  width={imageWidth}
+                  height={imageHeight}
                   className={styles.event}
                 />
               </div>
