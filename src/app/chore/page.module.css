@@ -1,0 +1,30 @@
+.directionSection {
+  text-align: center;
+}
+
+.directionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.profilImage {
+  border-radius: 50%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 40px;
+  margin-right: 40px;
+  border: purple solid 4px;
+}
+
+.directionText {
+  font-style: italic;
+}
+
+/* Media query for window width less than 1167px */
+@media (max-width: 1167px) {
+  .directionHeader {
+    flex-direction: column;
+  }
+}

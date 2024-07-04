@@ -269,7 +269,7 @@ export default function Header() {
 
                   <Nav.Link
                     as={Link}
-                    href="/#chore"
+                    href="/chore"
                     className={styles.navbarLink}
                     eventKey="chore"
                     style={getNavbarTitleStyle(["chore"])}
