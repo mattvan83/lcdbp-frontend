@@ -1,12 +1,17 @@
-.directionSection {
+.tabDivision {
+  /* height: 50vh; */
+  margin-bottom: 150px;
+}
+
+.tabSection {
   text-align: center;
 }
 
 .directionHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .profilImage {
@@ -18,13 +23,65 @@
   border: purple solid 4px;
 }
 
+.passionHeader {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .directionText {
-  font-style: italic;
+  /* font-style: italic; */
+}
+
+.choreImage {
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.passionText {
+  width: 50%;
+  margin: 20px;
+}
+
+/* Media query for window width less than 1750px */
+@media (max-width: 1999px) {
+  .passionHeader {
+    flex-direction: column;
+  }
+
+  .passionText {
+    width: 80%;
+  }
 }
 
 /* Media query for window width less than 1167px */
 @media (max-width: 1167px) {
   .directionHeader {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1249px) {
+  .choreImage {
+    width: 536px;
+    height: 383px;
+  }
+
+  .passionText {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .choreImage {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .passionText {
+    width: 100%;
   }
 }

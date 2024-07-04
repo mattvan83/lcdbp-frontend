@@ -9,6 +9,7 @@ import Image from "next/image";
 
 export default function Chore() {
   return (
+    // <div className={styles.directionDivision}>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row className="mt-4 mb-4">
         <Col sm={3}>
@@ -31,15 +32,15 @@ export default function Chore() {
           </Nav>
         </Col>
         <Col sm={9}>
-          <Tab.Content className="mx-4">
-            <Tab.Pane eventKey="first" className={styles.directionSection}>
+          <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
+            <Tab.Pane eventKey="first" className={styles.tabSection}>
               <h3>Notre Chef</h3>
               <div className={styles.directionHeader}>
                 <Image
                   src="/JPV.jpg"
                   alt="Photo de profil de Jean-Paul Vanhoutte"
-                  width={125}
-                  height={150}
+                  width={200}
+                  height={240}
                   className={styles.profilImage}
                 />
                 <p className={styles.directionText}>
@@ -75,10 +76,39 @@ export default function Chore() {
                 confirmé et officialisé son poste de chef de chœur.
               </p>
             </Tab.Pane>
-            <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
+            <Tab.Pane eventKey="second" className={styles.tabSection}>
+              <h3>Une Passion</h3>
+              <div className={styles.passionHeader}>
+                <Image
+                  src="/Chore.jpg"
+                  alt="Photo du choeur d'hommes du Bon Pays"
+                  width={700}
+                  height={500}
+                  className={styles.choreImage}
+                />
+                <div className={styles.passionText}>
+                  <p className={styles.directionText}>
+                    Notre effectif est d’une trentaine d’hommes, répartis en
+                    quatre pupitres : deux de ténors, barytons, basses.
+                  </p>
+                  <p className={styles.directionText}>
+                    Notre volonté est de vous faire découvrir un répertoire
+                    polyphonique éclectique, negro-spiritual, sacré,
+                    contemporain, avec une place particulière pour le chant
+                    traditionnel du Jura.
+                  </p>
+                  <p className={styles.directionText}>
+                    Ensemble solidaire, respectueux, le chœur c’est l’affaire de
+                    Tous. Notre devise : éprouver du plaisir à se retrouver pour
+                    chanter et le transmettre.
+                  </p>
+                </div>
+              </div>
+            </Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
     </Tab.Container>
+    // </div>
   );
 }
