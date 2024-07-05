@@ -87,7 +87,7 @@ export default async function Home() {
     <main>
       <div className={styles.heroDivision} id="chore">
         <div className={styles.heroSection}>
-          <h3>Une passion</h3>
+          <h3>Une Passion</h3>
           <div className={styles.heroContent}>
             <div className={styles.heroText}>
               <h4>&quot;Le Chœur, c&apos;est l&apos;affaire de tous&quot;</h4>
@@ -167,7 +167,7 @@ export default async function Home() {
 
       <div className={styles.contactDivision} id="contactUs">
         <div className={styles.contactSection}>
-          <h3>Nous contacter</h3>
+          <h3>Nous Contacter</h3>
           <div className={styles.contactContent}>
             <div className={styles.contactText}>
               <h4>Notre conseil d&apos;administration</h4>

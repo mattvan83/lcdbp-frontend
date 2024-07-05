@@ -1,13 +1,15 @@
 .tabDivision {
   /* height: 50vh; */
-  margin-bottom: 150px;
+  /* margin-bottom: 150px; */
 }
 
 .tabSection {
   text-align: center;
 }
 
-.directionHeader {
+.directionHeader,
+.passionHeader,
+.cityHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,35 +25,31 @@
   border: purple solid 4px;
 }
 
-.passionHeader {
-  display: flex;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 .directionText {
   /* font-style: italic; */
 }
 
-.choreImage {
+.choreImage,
+.cityImage {
   border-radius: 5px;
   margin: 20px;
 }
 
-.passionText {
+.passionText,
+.cityText {
   width: 50%;
   margin: 20px;
 }
 
 /* Media query for window width less than 1750px */
 @media (max-width: 1999px) {
-  .passionHeader {
+  .passionHeader,
+  .cityHeader {
     flex-direction: column;
   }
 
-  .passionText {
+  .passionText,
+  .cityText {
     width: 80%;
   }
 }
@@ -64,24 +62,28 @@
 }
 
 @media (min-width: 576px) and (max-width: 1249px) {
-  .choreImage {
+  .choreImage,
+  .cityImage {
     width: 536px;
     height: 383px;
   }
 
-  .passionText {
+  .passionText,
+  .cityText {
     width: 100%;
   }
 }
 
 @media (max-width: 575px) {
-  .choreImage {
+  .choreImage,
+  .cityImage {
     width: 100%;
     object-fit: cover;
     object-position: center;
   }
 
-  .passionText {
+  .passionText,
+  .cityText {
     width: 100%;
   }
 }

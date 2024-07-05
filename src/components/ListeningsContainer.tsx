@@ -27,9 +27,9 @@ const ListeningsContainer: React.FC<ListeningsContainerProps> = ({
     <div className={styles.listenDivision}>
       <div className={styles.listenSection}>
         {currentPage !== "Listenings" ? (
-          <h3>Nos derniers chants</h3>
+          <h3>Nos Derniers Chants</h3>
         ) : (
-          <h3>Nos chants</h3>
+          <h3>Nos Chants</h3>
         )}
         <div className={styles.listenContent}>{audioPlayers}</div>
         {currentPage !== "Listenings" && (

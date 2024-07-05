@@ -33,7 +33,7 @@ const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
 
   return (
     <div className={styles.pressReviewsDivision}>
-      <h3>Nos revues de presse</h3>
+      <h3>Nos Revues De Presse</h3>
       <Dropdown onSelect={handleSelectYear} className={`mt-4`}>
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
           Année : {selectedYear}

@@ -76,6 +76,7 @@ export default function Chore() {
                 confirmé et officialisé son poste de chef de chœur.
               </p>
             </Tab.Pane>
+
             <Tab.Pane eventKey="second" className={styles.tabSection}>
               <h3>Une Passion</h3>
               <div className={styles.passionHeader}>
@@ -101,6 +102,32 @@ export default function Chore() {
                     Ensemble solidaire, respectueux, le chœur c’est l’affaire de
                     Tous. Notre devise : éprouver du plaisir à se retrouver pour
                     chanter et le transmettre.
+                  </p>
+                </div>
+              </div>
+            </Tab.Pane>
+
+            <Tab.Pane eventKey="third" className={styles.tabSection}>
+              <h3>Cousance, Notre Ville d'Accueil</h3>
+              <div className={styles.cityHeader}>
+                <Image
+                  src="/Cousance.png"
+                  alt="Photo du choeur d'hommes du Bon Pays"
+                  width={700}
+                  height={500}
+                  className={styles.cityImage}
+                />
+                <div className={styles.cityText}>
+                  <p className={styles.directionText}>
+                    Nous avons adopté le nom de "Chœur du Bon Pays" , en
+                    référence au Revermont, cette zone géographique des premiers
+                    contreforts du massif jurassien avec pour siège social la
+                    commune de Cousance, Porte du Jura.
+                  </p>
+                  <p className={styles.directionText}>
+                    Nous ne remercierons jamais assez Cousance et ses élus pour
+                    leur accueil, leur aide et la mise à disposition de moyens
+                    logistiques pour nos répétitions et nos concerts.
                   </p>
                 </div>
               </div>

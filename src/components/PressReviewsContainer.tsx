@@ -41,7 +41,7 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
     <div className={styles.pressDivision} style={divisionStyle}>
       <div className={styles.pressSection}>
         {currentPage !== "PressReviews" && (
-          <h3>Nos dernières revues de presse</h3>
+          <h3>Nos Dernières Revues De Presse</h3>
         )}
         <div className={styles.pressContent}>
           <Carousel
