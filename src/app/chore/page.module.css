@@ -7,9 +7,20 @@
   text-align: center;
 }
 
+.pastSection {
+  padding: 20px;
+  background-image: url("/Naissance_LCDBP.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  font-weight: bold;
+}
+
 .directionHeader,
 .passionHeader,
-.cityHeader {
+.cityHeader,
+.pastHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,13 +41,15 @@
 }
 
 .choreImage,
-.cityImage {
+.cityImage,
+.birthImage {
   border-radius: 5px;
   margin: 20px;
 }
 
 .passionText,
-.cityText {
+.cityText,
+.birthText {
   width: 50%;
   margin: 20px;
 }
@@ -44,12 +57,14 @@
 /* Media query for window width less than 1750px */
 @media (max-width: 1999px) {
   .passionHeader,
-  .cityHeader {
+  .cityHeader,
+  .pastHeader {
     flex-direction: column;
   }
 
   .passionText,
-  .cityText {
+  .cityText,
+  .birthText {
     width: 80%;
   }
 }
@@ -69,7 +84,8 @@
   }
 
   .passionText,
-  .cityText {
+  .cityText,
+  .birthText {
     width: 100%;
   }
 }

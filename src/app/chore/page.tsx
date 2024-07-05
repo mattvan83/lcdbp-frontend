@@ -12,7 +12,7 @@ export default function Chore() {
     // <div className={styles.directionDivision}>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row className="mt-4 mb-4">
-        <Col sm={3}>
+        <Col md={3}>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
               <Nav.Link eventKey="first">Une Direction</Nav.Link>
@@ -31,7 +31,7 @@ export default function Chore() {
             </Nav.Item>
           </Nav>
         </Col>
-        <Col sm={9}>
+        <Col md={9}>
           <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
             <Tab.Pane eventKey="first" className={styles.tabSection}>
               <h3>Notre Chef</h3>
@@ -112,14 +112,14 @@ export default function Chore() {
               <div className={styles.cityHeader}>
                 <Image
                   src="/Cousance.png"
-                  alt="Photo du choeur d'hommes du Bon Pays"
+                  alt="Photo de l'écusson de la ville de Cousance"
                   width={700}
                   height={500}
                   className={styles.cityImage}
                 />
                 <div className={styles.cityText}>
                   <p className={styles.directionText}>
-                    Nous avons adopté le nom de "Chœur du Bon Pays" , en
+                    Nous avons adopté le nom de "Chœur du Bon Pays", en
                     référence au Revermont, cette zone géographique des premiers
                     contreforts du massif jurassien avec pour siège social la
                     commune de Cousance, Porte du Jura.
@@ -128,6 +128,31 @@ export default function Chore() {
                     Nous ne remercierons jamais assez Cousance et ses élus pour
                     leur accueil, leur aide et la mise à disposition de moyens
                     logistiques pour nos répétitions et nos concerts.
+                  </p>
+                </div>
+              </div>
+            </Tab.Pane>
+
+            <Tab.Pane
+              eventKey="fourth"
+              className={`${styles.tabSection} ${styles.pastSection}`}
+            >
+              <h3>Notre Naissance</h3>
+              <div className={styles.pastHeader}>
+                <Image
+                  src="https://res.cloudinary.com/dp7dvsuvo/image/upload/v1719914112/lcdbp/pressReviews/images/sktwi22l4ly48ge1gundefined_szcese.jpg"
+                  alt="Première revue de presse du Choeur du Bon Pays"
+                  width={350}
+                  height={350}
+                  className={styles.birthImage}
+                />
+                <div className={styles.birthText}>
+                  <p className={styles.directionText}>
+                    Le 10 septembre 2010, par la volonté d’un petit groupe
+                    d’hommes de se retrouver pour chanter, a lieu la première
+                    répétition , à la salle des Sœurs de l’Alliance à
+                    Lons-le-Saunier sous la direction de Monique Gros, dix
+                    choristes sont présents.
                   </p>
                 </div>
               </div>
