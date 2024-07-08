@@ -124,12 +124,12 @@ function PressReviewCard({
           <span className={styles.pressReviewText}>{journal}</span>
         )}
 
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           //   onClick={() => handleBookmarkClick()}
           icon={faBookmark}
           //   style={iconStyle}
           className={styles.bookmarkIcon}
-        />
+        /> */}
       </div>
       <span
         className={styles.pressReviewTitle}
