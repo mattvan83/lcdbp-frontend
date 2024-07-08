@@ -379,7 +379,7 @@ export default function Header() {
                       }
                       className={styles.navbarIcon}
                     />
-                    Nous contacter
+                    Nous Contacter
                   </Nav.Link>
 
                   {user.token && (

@@ -16,19 +16,29 @@ export default function Chore() {
         <Col md={3}>
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              <Nav.Link eventKey="first">Une Direction</Nav.Link>
+              <Nav.Link eventKey="first" className={styles.navbarLink}>
+                Une Direction
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second">Une Passion</Nav.Link>
+              <Nav.Link eventKey="second" className={styles.navbarLink}>
+                Une Passion
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="third">Une Ville</Nav.Link>
+              <Nav.Link eventKey="third" className={styles.navbarLink}>
+                Une Ville
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="fourth">Un Passé</Nav.Link>
+              <Nav.Link eventKey="fourth" className={styles.navbarLink}>
+                Un Passé
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="fifth">Un Avenir</Nav.Link>
+              <Nav.Link eventKey="fifth" className={styles.navbarLink}>
+                Un Avenir
+              </Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
