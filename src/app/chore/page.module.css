@@ -1,6 +1,7 @@
 .tabDivision {
   /* height: 50vh; */
   /* margin-bottom: 150px; */
+  border: #eee0e0 solid 3px;
 }
 
 .tabSection {
@@ -8,13 +9,13 @@
 }
 
 .pastSection {
-  padding: 20px;
+  /* padding: 20px;
   background-image: url("/Naissance_LCDBP.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   color: white;
-  font-weight: bold;
+  font-weight: bold; */
 }
 
 .directionHeader,

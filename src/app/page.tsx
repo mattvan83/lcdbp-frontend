@@ -122,27 +122,6 @@ export default async function Home() {
         <div className={styles.pressSection}>
           <h3>Actualités</h3>
           <div className={styles.pressContent}>
-            {/* <Image
-              src="/Prochaines_prestations.jpg"
-              alt="Prochaines prestations"
-              width={400}
-              height={550}
-              className={styles.newsEvent}
-            />
-            <Image
-              src="/24-09-29_Concert_Château-Chalon.jpg"
-              alt="Concert Château-Chalon le 24 Septembre 2024"
-              width={400}
-              height={550}
-              className={styles.newsEvent}
-            />
-            <Image
-              src="/nousRecrutons.jpg"
-              alt="Recrutement choristes"
-              width={400}
-              height={550}
-              className={styles.newsEvent}
-            /> */}
             <Carousel
               images={eventImages}
               width={400}

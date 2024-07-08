@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 type ChoreDescriptionProps = {
+  index: number;
   headerTitle: string;
   thumbnailUrl1: string;
   width1: number;
@@ -16,6 +17,7 @@ type ChoreDescriptionProps = {
 };
 
 export default function ChoreDescription({
+  index,
   headerTitle,
   thumbnailUrl1,
   width1,
@@ -29,6 +31,12 @@ export default function ChoreDescription({
     thumbnailUrl: string;
     thumbnailDescription: string;
   } | null>(null);
+
+  let styleContainer = {};
+  if (index % 2 === 0) {
+    styleContainer = { backgroundColor: "#eee0e0" };
+    // console.log("backgroundColor: ", styleContainer);
+  }
 
   // Function to open zoomed image
   const openZoomedImage = ({
@@ -51,7 +59,7 @@ export default function ChoreDescription({
 
   return (
     <>
-      <div className={styles.choreDescriptionContainer}>
+      <div className={styles.choreDescriptionContainer} style={styleContainer}>
         <h3>{headerTitle}</h3>
         <div className={styles.choreDescriptionContent}>
           <div className={styles.choreDescriptionImages}>
@@ -82,7 +90,7 @@ export default function ChoreDescription({
               className={styles.choreDescriptionImage}
             />
           </div>
-          <p>{description}</p>
+          <p className={styles.choreDescriptionText}>{description}</p>
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import Image from "next/image";
+import ChoreDescription from "@/components/ChoreDescription";
 
 export default function Chore() {
   return (
@@ -137,25 +138,43 @@ export default function Chore() {
               eventKey="fourth"
               className={`${styles.tabSection} ${styles.pastSection}`}
             >
-              <h3>Notre Naissance</h3>
-              <div className={styles.pastHeader}>
-                <Image
-                  src="https://res.cloudinary.com/dp7dvsuvo/image/upload/v1719914112/lcdbp/pressReviews/images/sktwi22l4ly48ge1gundefined_szcese.jpg"
-                  alt="Première revue de presse du Choeur du Bon Pays"
-                  width={350}
-                  height={350}
-                  className={styles.birthImage}
-                />
-                <div className={styles.birthText}>
-                  <p className={styles.directionText}>
-                    Le 10 septembre 2010, par la volonté d’un petit groupe
+              <ChoreDescription
+                index={1}
+                headerTitle="Notre Naissance"
+                thumbnailUrl1="https://res.cloudinary.com/dp7dvsuvo/image/upload/v1719914112/lcdbp/pressReviews/images/sktwi22l4ly48ge1gundefined_szcese.jpg"
+                width1={350}
+                height1={350}
+                thumbnailUrl2="/Naissance_LCDBP.jpg"
+                width2={350}
+                height2={250}
+                description="Le 10 septembre 2010, par la volonté d’un petit groupe
                     d’hommes de se retrouver pour chanter, a lieu la première
-                    répétition , à la salle des Sœurs de l’Alliance à
+                    répétition, à la salle des Sœurs de l’Alliance à
                     Lons-le-Saunier sous la direction de Monique Gros, dix
-                    choristes sont présents.
-                  </p>
-                </div>
-              </div>
+                    choristes sont présents."
+              />
+              <ChoreDescription
+                index={2}
+                headerTitle="Notre Baptême"
+                thumbnailUrl1="/Bapteme1.jpg"
+                width1={350}
+                height1={250}
+                thumbnailUrl2="/Bapteme2.jpg"
+                width2={350}
+                height2={250}
+                description="Première prestation à Montciel, Lons-le-Saunier le 13 février 2011."
+              />
+              <ChoreDescription
+                index={3}
+                headerTitle="Notre Confirmation"
+                thumbnailUrl1="https://res.cloudinary.com/dp7dvsuvo/image/upload/v1719914108/lcdbp/pressReviews/images/sktwi22l4ly48gawgundefined_yaa1mb.jpg"
+                width1={350}
+                height1={250}
+                thumbnailUrl2="https://res.cloudinary.com/dp7dvsuvo/image/upload/v1719914107/lcdbp/pressReviews/images/sktwi22l4ly48gac7undefined_wegtmh.jpg"
+                width2={350}
+                height2={350}
+                description="Premier concert public et présentation officielle, le 3 juin 2011 en l’église de Gizia, petit village au fond d’une reculée, avec 19 choristes devant 250 personnes."
+              />
             </Tab.Pane>
           </Tab.Content>
         </Col>
