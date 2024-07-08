@@ -44,7 +44,7 @@ export default function Chore() {
                   height={240}
                   className={styles.profilImage}
                 />
-                <p className={styles.directionText}>
+                <p className={styles.directionFirstText}>
                   Jean-Paul Vanhoutte a commencé le piano au conservatoire de
                   Tourcoing à l’âge de 10 ans, puis s’est orienté vers le
                   hautbois. Il est rentré à l’âge de 17 ans chez les «
@@ -175,6 +175,62 @@ export default function Chore() {
                 height2={350}
                 description="Premier concert public et présentation officielle, le 3 juin 2011 en l’église de Gizia, petit village au fond d’une reculée, avec 19 choristes devant 250 personnes."
               />
+            </Tab.Pane>
+
+            <Tab.Pane eventKey="fifth" className={styles.tabSection}>
+              <h3>Notre Avenir</h3>
+              <div className={styles.futureHeader1}>
+                <Image
+                  src="/Future1.jpg"
+                  alt="Image d'une horloge"
+                  width={450}
+                  height={450}
+                  className={styles.futureImage}
+                />
+                <div className={styles.futureText}>
+                  <p className={styles.directionText}>
+                    Ouvrir notre chœur aux actifs, en adaptant nos horaires de
+                    répétition, c’est une opportunité qui s’offre à nous pour
+                    accueillir, recevoir, offrir notre enthousiasme, notre
+                    solidarité, notre humilité, la force d’être ensemble pour
+                    transmettre la beauté des chants, contemporains, sacrés,
+                    traditionnels de notre culture jurassienne, c’est cela notre
+                    avenir.
+                  </p>
+                  <p className={styles.directionText}>
+                    <b>
+                      Cet objectif est à l’étude : Si vous êtes intéressé par ce
+                      projet, dites-le nous dans le menu « Nous Contacter » !
+                    </b>
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.futureHeader2}>
+                <div className={styles.futureText}>
+                  <p className={styles.directionText}>
+                    <b>
+                      Notre Avenir : Consacrer un déplacement par an sur
+                      deux-trois jours, avec nos conjointes en alliant concert
+                      et tourisme.
+                    </b>
+                  </p>
+                  <p className={styles.directionText}>
+                    Nous sommes demandés en Haute-Garonne, en Normandie, en
+                    Savoie, en Alsace, dans le Nord, en Provence…, alors
+                    profitons de ces invitations pour passer un peu de temps
+                    ensemble, faire connaitre notre commune, canton, département
+                    du Jura, à travers nos chants.
+                  </p>
+                </div>
+                <Image
+                  src="/Future2.jpg"
+                  alt="Carte de France"
+                  width={450}
+                  height={450}
+                  className={styles.futureImage}
+                />
+              </div>
             </Tab.Pane>
           </Tab.Content>
         </Col>

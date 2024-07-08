@@ -55,21 +55,21 @@
   margin: auto;
 }
 
-/* Media query for window width less than 1750px */
+/* Media query for window width less than 1099px */
 @media (max-width: 1099px) {
   .choreDescriptionImages {
     flex-direction: column;
   }
 
   .choreDescriptionText {
-    width: 100%;
+    width: 95%;
   }
 }
 
-/* @media (max-width: 575px) {
+@media (max-width: 575px) {
   .choreDescriptionImage {
-    width: 100%;
+    width: 95%;
     object-fit: cover;
     object-position: center;
   }
-} */
+}
