@@ -67,12 +67,14 @@
 .heroText > h4,
 .contactText > h4 {
   font-weight: bold;
+  text-align: center;
 }
 
 .heroText > p {
   text-align: center;
   /* min-width: 390px; */
   margin-bottom: 18px;
+  font-size: 16px;
   /* font-style: italic; */
 }
 
@@ -98,7 +100,7 @@
   width: 50%;
 }
 
-.contactForm > h5 {
+.contactForm > h4 {
   margin-top: 20px;
   font-weight: bold;
   text-align: center;

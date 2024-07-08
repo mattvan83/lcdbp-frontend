@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import styles from "../styles/ListeningsContainer.module.css";
 import { updateActiveKey } from "@/lib/features/UserState/UserSlice";
 import { useAppDispatch } from "@/lib/hooks";
+import ButtonLink from "./ButtonLink";
 
 interface ListeningsContainerProps {
   currentPage: string;
@@ -33,11 +34,11 @@ const ListeningsContainer: React.FC<ListeningsContainerProps> = ({
         )}
         <div className={styles.listenContent}>{audioPlayers}</div>
         {currentPage !== "Listenings" && (
-          <Link href="/listenings" onClick={() => handleSelect("listen")}>
-            <Button variant="primary" className={styles.listenButton}>
-              Ecouter plus de chants
-            </Button>
-          </Link>
+          <ButtonLink
+            href="/listenings"
+            eKey="listen"
+            buttonTitle="Ecouter plus de chants"
+          />
         )}
       </div>
     </div>

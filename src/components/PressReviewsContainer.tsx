@@ -7,6 +7,7 @@ import { updateActiveKey } from "@/lib/features/UserState/UserSlice";
 import { useAppDispatch } from "@/lib/hooks";
 import Carousel from "@/components/Carousel";
 import { PressReview } from "@/app/page";
+import ButtonLink from "./ButtonLink";
 
 interface PressReviewsContainerProps {
   currentPage: string;
@@ -52,14 +53,11 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
           />
         </div>
         {currentPage !== "PressReviews" && (
-          <Link
+          <ButtonLink
             href="/pressReviews"
-            onClick={() => handleSelect("pressReview")}
-          >
-            <Button variant="primary" className={styles.pressButton}>
-              Voir toutes les revues de presse
-            </Button>
-          </Link>
+            eKey="pressReview"
+            buttonTitle="Voir toutes les revues de presse"
+          />
         )}
       </div>
     </div>

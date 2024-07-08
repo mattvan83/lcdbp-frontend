@@ -1,0 +1,97 @@
+.contactDivision {
+  width: 100vw;
+  padding: 40px 0px;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* height: 40vh; */
+  width: 95vw;
+  margin: 0px auto;
+  /* border: red solid 1px; */
+}
+
+.contactSection > h3 {
+  margin-bottom: 38px;
+}
+
+.contactSection > p {
+  text-align: center;
+  font-size: 16px;
+}
+
+.contactIntroTitle {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.contactContent {
+  display: flex;
+  /* flex-wrap: wrap-reverse; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* border: red solid 1px; */
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 20px;
+  /* border: red solid 1px; */
+}
+
+.contactText > h4 {
+  font-weight: bold;
+}
+
+.contactBodyText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contactBodyAdministrators {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.contactForm > h4 {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Media query for window width less than 1167px */
+@media (max-width: 1167px) {
+  .contactContent {
+    flex-direction: column-reverse;
+  }
+
+  .contactText {
+    width: 95vw;
+  }
+}
+
+/* Media query for window width less than 575px */
+@media (max-width: 575px) {
+  .contactForm {
+    width: 100%;
+  }
+}

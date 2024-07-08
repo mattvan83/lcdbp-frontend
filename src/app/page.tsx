@@ -7,6 +7,7 @@ import Carousel from "@/components/Carousel";
 import ListeningsContainer from "@/components/ListeningsContainer";
 import PressReviewsContainer from "@/components/PressReviewsContainer";
 import SimpleForm from "@/components/SimpleForm";
+import ButtonLink from "@/components/ButtonLink";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
@@ -93,18 +94,23 @@ export default async function Home() {
               <h4>&quot;Le Chœur, c&apos;est l&apos;affaire de tous&quot;</h4>
               <p>
                 Notre effectif est d’une trentaine d’hommes, répartis en quatre
-                pupitres : deux de ténors, barytons, basses. <br />
+                pupitres : deux de ténors, barytons, basses.
+              </p>
+              <p>
                 Notre volonté est de vous faire découvrir un répertoire
                 polyphonique éclectique, negro-spiritual, sacré, contemporain,
                 avec une place particulière pour le chant traditionnel du Jura.{" "}
-                <br />
+              </p>
+              <p>
                 Ensemble solidaire, respectueux, le chœur c’est l’affaire de
                 Tous. Notre devise : éprouver du plaisir à se retrouver pour
                 chanter et le transmettre.
               </p>
-              {/* <Button variant="primary" className={styles.heroButton}>
-                Nous découvrir
-              </Button> */}
+              <ButtonLink
+                href="/chore"
+                eKey="chore"
+                buttonTitle="Nous découvrir"
+              />
             </div>
             <Image
               src="/heroSection.jpg"
@@ -183,9 +189,9 @@ export default async function Home() {
               </div>
             </div>
             <div className={styles.contactForm}>
-              <h5>
+              <h4>
                 Envie de nous rejoindre ou d&apos;obtenir des renseignements ?
-              </h5>
+              </h4>
               <SimpleForm backendAddress={BACKEND_ADDRESS} />
             </div>
           </div>
