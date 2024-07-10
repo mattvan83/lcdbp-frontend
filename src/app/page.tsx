@@ -11,10 +11,23 @@ import ButtonLink from "@/components/ButtonLink";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
-export interface Event {
+export interface EventMainPage {
   _id: string;
   thumbnailUrl: string;
   thumbnailDescription: string;
+}
+
+export interface Event {
+  _id: string;
+  title: string;
+  postalCode: string;
+  city: string;
+  place: string;
+  chores: string[];
+  thumbnailUrl: string;
+  thumbnailDescription: string;
+  eventDate: Date;
+  price: string;
 }
 
 export interface Track {
@@ -43,7 +56,7 @@ export interface PressReview {
   lastPressReview: boolean;
 }
 
-const eventImages: Event[] = [
+const eventImages: EventMainPage[] = [
   {
     _id: "1",
     thumbnailUrl: "/Prochaines_prestations.jpg",

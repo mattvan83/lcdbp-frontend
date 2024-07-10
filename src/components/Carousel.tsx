@@ -3,12 +3,12 @@
 import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
-import { Event } from "@/app/page";
+import { EventMainPage } from "@/app/page";
 import { PressReview } from "@/app/page";
 import PressReviewCard from "./PressReviewCard";
 
 type CarouselProps = {
-  images: Event[] | PressReview[];
+  images: EventMainPage[] | PressReview[];
   width: number;
   height: number;
   category: string;
@@ -20,12 +20,12 @@ export default function Carousel({
   height,
   category,
 }: CarouselProps) {
-  const [zoomedImage, setZoomedImage] = useState<Event | PressReview | null>(
-    null
-  );
+  const [zoomedImage, setZoomedImage] = useState<
+    EventMainPage | PressReview | null
+  >(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item: Event | PressReview): void => {
+  const openZoomedImage = (item: EventMainPage | PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -37,7 +37,7 @@ export default function Carousel({
   return (
     <>
       {category === "events" &&
-        images.map((item: Event | PressReview) => {
+        images.map((item: EventMainPage | PressReview) => {
           if (!("journal" in item)) {
             const containerWidth = width;
             const containerHeight = height;
@@ -66,7 +66,7 @@ export default function Carousel({
           }
         })}
       {category === "pressReviews" &&
-        images.map((item: Event | PressReview) => {
+        images.map((item: EventMainPage | PressReview) => {
           if ("journal" in item) {
             return (
               <PressReviewCard
