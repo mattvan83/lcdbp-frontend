@@ -1,10 +1,7 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import styles from "../styles/PressReviewsContainer.module.css";
-import { updateActiveKey } from "@/lib/features/UserState/UserSlice";
-import { useAppDispatch } from "@/lib/hooks";
 import Carousel from "@/components/Carousel";
 import { PressReview } from "@/app/page";
 import ButtonLink from "./ButtonLink";
@@ -22,8 +19,6 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
   width,
   height,
 }) => {
-  const dispatch = useAppDispatch();
-
   let divisionStyle = {};
   if (currentPage === "PressReviews") {
     divisionStyle = {
@@ -31,12 +26,6 @@ const PressReviewsContainer: React.FC<PressReviewsContainerProps> = ({
       backgroundColor: "#ffffff",
     };
   }
-
-  const handleSelect = (eventKey: string | null): void => {
-    if (eventKey) {
-      dispatch(updateActiveKey(eventKey));
-    }
-  };
 
   return (
     <div className={styles.pressDivision} style={divisionStyle}>

@@ -292,7 +292,7 @@ export default function Header() {
 
                   <Nav.Link
                     as={Link}
-                    href="/#events"
+                    href="/events"
                     className={styles.navbarLink}
                     eventKey="events"
                     style={getNavbarTitleStyle(["events"])}

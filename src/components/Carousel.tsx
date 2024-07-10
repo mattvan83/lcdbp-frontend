@@ -3,12 +3,12 @@
 import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
-import { EventMainPage } from "@/app/page";
-import { PressReview } from "@/app/page";
+import { EventMainPage, Event, PressReview } from "@/app/page";
 import PressReviewCard from "./PressReviewCard";
+import EventCard from "./EventCard";
 
 type CarouselProps = {
-  images: EventMainPage[] | PressReview[];
+  images: EventMainPage[] | Event[] | PressReview[];
   width: number;
   height: number;
   category: string;
@@ -21,11 +21,11 @@ export default function Carousel({
   category,
 }: CarouselProps) {
   const [zoomedImage, setZoomedImage] = useState<
-    EventMainPage | PressReview | null
+    EventMainPage | Event | PressReview | null
   >(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item: EventMainPage | PressReview): void => {
+  const openZoomedImage = (item: EventMainPage | Event | PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -36,8 +36,8 @@ export default function Carousel({
 
   return (
     <>
-      {category === "events" &&
-        images.map((item: EventMainPage | PressReview) => {
+      {category === "eventsMainPage" &&
+        images.map((item: EventMainPage | Event | PressReview) => {
           if (!("journal" in item)) {
             const containerWidth = width;
             const containerHeight = height;
@@ -65,8 +65,22 @@ export default function Carousel({
             );
           }
         })}
+
+      {category === "events" &&
+        images.map((item: EventMainPage | Event | PressReview) => {
+          if ("chores" in item) {
+            return (
+              <EventCard
+                key={item._id}
+                {...item}
+                openZoomedImage={openZoomedImage}
+              />
+            );
+          }
+        })}
+
       {category === "pressReviews" &&
-        images.map((item: EventMainPage | PressReview) => {
+        images.map((item: EventMainPage | Event | PressReview) => {
           if ("journal" in item) {
             return (
               <PressReviewCard
@@ -77,6 +91,7 @@ export default function Carousel({
             );
           }
         })}
+
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image

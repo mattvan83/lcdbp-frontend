@@ -145,7 +145,7 @@ export default async function Home() {
               images={eventImages}
               width={400}
               height={550}
-              category="events"
+              category="eventsMainPage"
             />
           </div>
           {/* <Button variant="primary" className={styles.newsButton}>

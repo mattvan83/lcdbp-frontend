@@ -90,7 +90,7 @@ function EventCard({
           className={styles.eventImage}
           src={thumbnailUrl}
           alt={thumbnailDescription}
-          width={170}
+          width={160}
           height={180}
           onClick={() => openZoomedImage(event)}
         />

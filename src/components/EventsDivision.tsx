@@ -1,30 +1,25 @@
 "use client";
-
 import React, { useState } from "react";
 import { Dropdown, DropdownButton, Row, Col, Container } from "react-bootstrap";
-import PressReviewsContainer from "@/components/PressReviewsContainer";
-import { PressReview } from "@/app/page";
-import { PressReviewGroup } from "@/app/pressReviews/page";
-import styles from "../styles/PressReviewsDivision.module.css";
+import EventContainer from "@/components/EventsContainer";
+import { EventGroup } from "@/app/events/page";
+import styles from "../styles/EventsDivision.module.css";
 
-interface PressReviewsDivisionProps {
-  reviews: {
+interface EventsDivisionProps {
+  events: {
     result: boolean;
     years: string[];
-    pressReviewsGrouped: PressReviewGroup[];
+    eventsGrouped: EventGroup[];
   };
 }
 
-const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
-  reviews,
-}) => {
-  const years = reviews.years;
+const EventsDivision: React.FC<EventsDivisionProps> = ({ events }) => {
+  const years = events.years;
   const [selectedYear, setSelectedYear] = useState<string>(years[0]);
 
-  const pressReviews = reviews.pressReviewsGrouped.find(
-    (pressReviewGroup: PressReviewGroup) =>
-      pressReviewGroup.year === Number(selectedYear)
-  )?.pressReviews;
+  const selectedEvents = events.eventsGrouped.find(
+    (eventGroup: EventGroup) => eventGroup.year === Number(selectedYear)
+  )?.events;
 
   const handleSelectYear = (eventKey: string | null): void => {
     if (eventKey !== null) {
@@ -33,8 +28,8 @@ const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
   };
 
   return (
-    <div className={styles.pressReviewsDivision}>
-      <h3>Nos Revues De Presse</h3>
+    <div className={styles.eventsDivision}>
+      <h3>Nos Evènements</h3>
       <Dropdown onSelect={handleSelectYear} className={`mt-4`}>
         <Dropdown.Toggle variant="primary" id="dropdown-basic">
           Année : {selectedYear}
@@ -53,10 +48,10 @@ const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
         </Dropdown.Menu>
       </Dropdown>
 
-      {pressReviews && (
-        <PressReviewsContainer
-          currentPage="PressReviews"
-          pressReviews={pressReviews}
+      {selectedEvents && (
+        <EventContainer
+          currentPage="Events"
+          events={selectedEvents}
           width={400}
           height={550}
         />
@@ -65,4 +60,4 @@ const PressReviewsDivision: React.FC<PressReviewsDivisionProps> = ({
   );
 };
 
-export default PressReviewsDivision;
+export default EventsDivision;
