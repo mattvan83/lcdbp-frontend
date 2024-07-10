@@ -24,17 +24,16 @@
 
 .eventImage {
   border-radius: 10px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* flex: 1; */
   gap: 4px;
   height: 180px;
 }
