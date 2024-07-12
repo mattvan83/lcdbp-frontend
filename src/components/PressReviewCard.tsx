@@ -61,6 +61,7 @@ function PressReviewCard({
   // if (props.isBookmarked) {
   //   iconStyle = { color: "#E9BE59" };
   // }
+
   const pressReview: PressReview = {
     _id,
     title,

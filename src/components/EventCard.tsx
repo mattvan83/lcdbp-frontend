@@ -6,6 +6,7 @@ import styles from "../styles/EventCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Event } from "@/app/page";
+import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 interface EventCard {
   _id: string;
@@ -19,6 +20,13 @@ interface EventCard {
   eventDate: Date;
   price: string;
   openZoomedImage: (event: Event) => void;
+}
+
+interface OptimizedImageProps {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
 }
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
@@ -67,6 +75,8 @@ function EventCard({
     price,
   };
 
+  const optimizedUrl = getOptimizedCloudinaryUrl(thumbnailUrl);
+
   const inputDate = new Date(eventDate);
 
   const options: Intl.DateTimeFormatOptions = {
@@ -88,7 +98,7 @@ function EventCard({
       <div className={styles.eventCard}>
         <Image
           className={styles.eventImage}
-          src={thumbnailUrl}
+          src={optimizedUrl}
           alt={thumbnailDescription}
           width={160}
           height={180}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { EventMainPage, Event, PressReview } from "@/app/page";
 import PressReviewCard from "./PressReviewCard";
 import EventCard from "./EventCard";
+import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 type CarouselProps = {
   images: EventMainPage[] | Event[] | PressReview[];
@@ -95,7 +96,7 @@ export default function Carousel({
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
-            src={zoomedImage.thumbnailUrl}
+            src={getOptimizedCloudinaryUrl(zoomedImage.thumbnailUrl)}
             alt={zoomedImage.thumbnailDescription}
             layout="fill"
             objectFit="contain"
