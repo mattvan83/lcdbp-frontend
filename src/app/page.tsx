@@ -99,7 +99,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className={styles.heroDivision} id="chore">
+      <div className={styles.heroDivision}>
         <div className={styles.heroSection}>
           <h3>Une Passion</h3>
           <div className={styles.heroContent}>
@@ -137,7 +137,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className={styles.pressDivision} id="events">
+      <div className={styles.pressDivision}>
         <div className={styles.pressSection}>
           <h3>Actualités</h3>
           <div className={styles.pressContent}>
@@ -151,6 +151,11 @@ export default async function Home() {
           {/* <Button variant="primary" className={styles.newsButton}>
             Voir tous les évènements
           </Button> */}
+          <ButtonLink
+            href="/events"
+            eKey="events"
+            buttonTitle="Voir tous les évènements"
+          />
         </div>
       </div>
 
