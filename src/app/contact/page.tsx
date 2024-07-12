@@ -18,8 +18,8 @@ export default async function ContactUs() {
             Rejoignez nous et soyez les bienvenus !
           </p>
           <p>
-            Répétition à Cousance le vendredi de 18h00 à 20h00 à compter du 3
-            septembre 2024 à la Salle des Frères, 8 rue de Bresse.
+            Répétition à Cousance le vendredi de 18h00 à 20h00 à compter du 23
+            Août 2024 à la Salle des Frères, 8 rue de Bresse.
           </p>
           <p className={styles.contactIntroTitle}>
             N'hésitez pas à nous contacter !

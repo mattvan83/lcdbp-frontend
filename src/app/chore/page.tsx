@@ -89,8 +89,10 @@ export default function Chore() {
                 </p>
               </div>
 
-              <div style={{ backgroundColor: "#eee0e0" }}>
-                <h3 style={{ paddingTop: "18px" }}>Notre Chef-Adjoint</h3>
+              <div className={styles.directionSubHeaderContainer}>
+                <h3 className={styles.directionSubHeaderTitle}>
+                  Notre Chef-Adjoint
+                </h3>
                 <div className={styles.directionSubHeader}>
                   <p className={styles.directionFirstText}>
                     Vincenz Engesser nous arrive de Suisse. Après avoir étudié

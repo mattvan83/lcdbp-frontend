@@ -22,6 +22,15 @@
   font-weight: bold; */
 }
 
+.directionSubHeaderContainer {
+  background-color: #eee0e0;
+  padding-bottom: 18px;
+}
+
+.directionSubHeaderTitle {
+  padding-top: 18px;
+}
+
 .directionHeader,
 .directionSubHeader,
 .passionHeader,
