@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import Image from "next/image";
 import ChoreDescription from "@/components/ChoreDescription";
+import { Back } from "react-bootstrap-icons";
 
 export default function Chore() {
   return (
@@ -45,47 +46,85 @@ export default function Chore() {
         <Col md={9}>
           <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
             <Tab.Pane eventKey="first" className={styles.tabSection}>
-              <h3>Notre Chef</h3>
-              <div className={styles.directionHeader}>
-                <Image
-                  src="/JPV.jpg"
-                  alt="Photo de profil de Jean-Paul Vanhoutte"
-                  width={200}
-                  height={240}
-                  className={styles.profilImage}
-                />
-                <p className={styles.directionFirstText}>
-                  Jean-Paul Vanhoutte a commencé le piano au conservatoire de
-                  Tourcoing à l’âge de 10 ans, puis s’est orienté vers le
-                  hautbois. Il est rentré à l’âge de 17 ans chez les «
-                  Crick-Sicks », chœur d’hommes réputé de Tourcoing. Il fait son
-                  service militaire dans la musique du 8ème RCS d’Amiens. A 30
-                  ans, la mobilité de son métier d’hôtelier lui fait cesser
-                  toute activité musicale.
+              <div>
+                <h3>Notre Chef</h3>
+                <div className={styles.directionHeader}>
+                  <Image
+                    src="/JPV.jpg"
+                    alt="Photo de profil de Jean-Paul Vanhoutte"
+                    width={200}
+                    height={240}
+                    className={styles.profilImage}
+                  />
+                  <p className={styles.directionFirstText}>
+                    Jean-Paul Vanhoutte a commencé le piano au conservatoire de
+                    Tourcoing à l’âge de 10 ans, puis s’est orienté vers le
+                    hautbois. Il est rentré à l’âge de 17 ans chez les «
+                    Crick-Sicks », chœur d’hommes réputé de Tourcoing. Il fait
+                    son service militaire dans la musique du 8ème RCS d’Amiens.
+                    A 30 ans, la mobilité de son métier d’hôtelier lui fait
+                    cesser toute activité musicale.
+                  </p>
+                </div>
+                <p className={styles.directionText}>
+                  Sa carrière l’amène en 2005 en Bourgogne-Franche-Comté, il
+                  fera un bref passage à l’harmonie Revermontaise de
+                  Savigny-en-Revermont. Puis retour dans le nord pour la fin de
+                  sa carrière professionnelle pendant laquelle il retrouvera le
+                  chœur d’hommes de Tourcoing.
+                </p>
+                <p className={styles.directionText}>
+                  Une fois en retraite, de retour à Savigny-en-Revermont, le
+                  besoin de chanter reste présent, sa recherche de chœur
+                  d’hommes le mène à rentrer en 2019 au « Chœur du Bon Pays » de
+                  Cousance. Il a été très vite intégré dans le pupitre des
+                  basses, sous la baguette de Roland Ménéguz.
+                </p>
+                <p className={styles.directionText}>
+                  Ce dernier ayant quitté ses fonctions en juin 2022, c’est
+                  d’abord en tant qu’intérim que Jean-Paul Vanhoutte a pris la
+                  direction du Chœur du Bon Pays. Puis, après le Concert de
+                  Château-Chalon en octobre 2022, le conseil d’administration a
+                  confirmé et officialisé son poste de chef de chœur.
                 </p>
               </div>
 
-              <p className={styles.directionText}>
-                Sa carrière l’amène en 2005 en Bourgogne-Franche-Comté, il fera
-                un bref passage à l’harmonie Revermontaise de
-                Savigny-en-Revermont. Puis retour dans le nord pour la fin de sa
-                carrière professionnelle pendant laquelle il retrouvera le chœur
-                d’hommes de Tourcoing.
-              </p>
-              <p className={styles.directionText}>
-                Une fois en retraite, de retour à Savigny-en-Revermont, le
-                besoin de chanter reste présent, sa recherche de chœur d’hommes
-                le mène à rentrer en 2019 au « Chœur du Bon Pays » de Cousance.
-                Il a été très vite intégré dans le pupitre des basses, sous la
-                baguette de Roland Ménéguz.
-              </p>
-              <p className={styles.directionText}>
-                Ce dernier ayant quitté ses fonctions en juin 2022, c’est
-                d’abord en tant qu’intérim que Jean-Paul Vanhoutte a pris la
-                direction du Chœur du Bon Pays. Puis, après le Concert de
-                Château-Chalon en octobre 2022, le conseil d’administration a
-                confirmé et officialisé son poste de chef de chœur.
-              </p>
+              <div style={{ backgroundColor: "#eee0e0" }}>
+                <h3 style={{ paddingTop: "18px" }}>Notre Chef-Adjoint</h3>
+                <div className={styles.directionSubHeader}>
+                  <p className={styles.directionFirstText}>
+                    Vincenz Engesser nous arrive de Suisse. Après avoir étudié
+                    le piano et la clarinette au conservatoire de Zürich, il a
+                    fait partie de l'Harmonie de cette même ville. Il a ensuite
+                    suivi des cours de direction de choeur. Il a dirigé
+                    plusieurs choeurs d'hommes, puis de femmes. Il a également
+                    été face à la baguette en chantant dans un choeur à Bâle.
+                  </p>
+                  <Image
+                    src="/VE.jpg"
+                    alt="Photo de profil de Vincenz Engesser"
+                    width={200}
+                    height={240}
+                    className={styles.profilImage}
+                  />
+                </div>
+                <p className={styles.directionText}>
+                  En 2009, il s'installe en France à Romenay (Saône-et-Loire).
+                  Il intègre l'Ensemble Vocal de cette commune sous la direction
+                  de Jean-Claude Legros.
+                </p>
+                <p className={styles.directionText}>
+                  Puis en 2013, il entre à la Sarrasine (Pont de Vaux), où il
+                  effectue un intérim de direction.
+                </p>
+                <p className={styles.directionText}>
+                  C'est en 2014 qu'il rejoint Buxtehude en Bourgogne (Macôn) et
+                  Le Choeur du Bon Pays. C'est dans ce dernier qu'il partage ses
+                  connaissances en assurant le poste de Chef-adjoint, rôle qu'il
+                  assume avec beaucoup de modestie et de disponibilité. Il est
+                  très apprécié par son Chef et l'ensemble des choristes.
+                </p>
+              </div>
             </Tab.Pane>
 
             <Tab.Pane eventKey="second" className={styles.tabSection}>

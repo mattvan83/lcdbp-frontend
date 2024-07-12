@@ -23,6 +23,7 @@
 }
 
 .directionHeader,
+.directionSubHeader,
 .passionHeader,
 .cityHeader,
 .pastHeader,
@@ -97,6 +98,10 @@
 @media (max-width: 1167px) {
   .directionHeader {
     flex-direction: column;
+  }
+
+  .directionSubHeader {
+    flex-direction: column-reverse;
   }
 
   .directionFirstText {
