@@ -1,0 +1,44 @@
+.pressReviewCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 200px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f1f3f4;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.pressReviewLogoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-top: 20px;
+  padding-bottom: 20px; */
+}
+
+.pressReviewTitle {
+  font-size: 14px;
+  font-weight: bold;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.bookmarkIcon {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.pressReviewDateCityContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pressReviewText {
+  font-size: 12px;
+  font-style: italic;
+}

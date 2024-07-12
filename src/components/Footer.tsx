@@ -34,19 +34,19 @@ export default function Footer() {
             <Link href="/" className={styles.explorerMenuLink}>
               Accueil
             </Link>
-            <Link href="/#chore" className={styles.explorerMenuLink}>
+            <Link href="/chore" className={styles.explorerMenuLink}>
               Le Chœur
             </Link>
             <Link href="/#events" className={styles.explorerMenuLink}>
               Évènements
             </Link>
-            <Link href="/#listenings" className={styles.explorerMenuLink}>
+            <Link href="/listenings" className={styles.explorerMenuLink}>
               Nous Écouter
             </Link>
-            <Link href="/#pressReviews" className={styles.explorerMenuLink}>
+            <Link href="/pressReviews" className={styles.explorerMenuLink}>
               Revue de Presse
             </Link>
-            <Link href="/#contactUs" className={styles.explorerMenuLink}>
+            <Link href="/contact" className={styles.explorerMenuLink}>
               Nous contacter
             </Link>
           </div>

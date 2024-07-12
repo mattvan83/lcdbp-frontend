@@ -3,27 +3,30 @@
 import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
-
-interface ImageFields {
-  title: string;
-  journal: string;
-  date: Date;
-  city: string;
-  thumbnail: string;
-  thumbnailDescription: string;
-}
+import { EventMainPage, Event, PressReview } from "@/app/page";
+import PressReviewCard from "./PressReviewCard";
+import EventCard from "./EventCard";
+import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 type CarouselProps = {
-  images: ImageFields[];
+  images: EventMainPage[] | Event[] | PressReview[];
   width: number;
   height: number;
+  category: string;
 };
 
-export default function Carousel({ images, width, height }: CarouselProps) {
-  const [zoomedImage, setZoomedImage] = useState<ImageFields | null>(null);
+export default function Carousel({
+  images,
+  width,
+  height,
+  category,
+}: CarouselProps) {
+  const [zoomedImage, setZoomedImage] = useState<
+    EventMainPage | Event | PressReview | null
+  >(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item: ImageFields): void => {
+  const openZoomedImage = (item: EventMainPage | Event | PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -34,26 +37,66 @@ export default function Carousel({ images, width, height }: CarouselProps) {
 
   return (
     <>
-      {images.map((item: ImageFields, index: number) => (
-        <div
-          key={index}
-          className={styles.pressReviewContainer}
-          style={{ width: `${width}px`, height: `${height}px` }}
-        >
-          <Image
-            onClick={() => openZoomedImage(item)}
-            src={item.thumbnail}
-            alt={item.thumbnailDescription}
-            layout="fill"
-            className={styles.pressReview}
-          />
-        </div>
-      ))}
+      {category === "eventsMainPage" &&
+        images.map((item: EventMainPage | Event | PressReview) => {
+          if (!("journal" in item)) {
+            const containerWidth = width;
+            const containerHeight = height;
+            const imageWidth = containerWidth;
+            const imageHeight = containerHeight;
+            return (
+              <div
+                key={item._id}
+                className={styles.eventContainer}
+                style={{
+                  width: `${containerWidth}px`,
+                  height: `${containerHeight}px`,
+                }}
+              >
+                <Image
+                  onClick={() => openZoomedImage(item)}
+                  src={item.thumbnailUrl}
+                  alt={item.thumbnailDescription}
+                  // layout="fill"
+                  width={imageWidth}
+                  height={imageHeight}
+                  className={styles.event}
+                />
+              </div>
+            );
+          }
+        })}
+
+      {category === "events" &&
+        images.map((item: EventMainPage | Event | PressReview) => {
+          if ("chores" in item) {
+            return (
+              <EventCard
+                key={item._id}
+                {...item}
+                openZoomedImage={openZoomedImage}
+              />
+            );
+          }
+        })}
+
+      {category === "pressReviews" &&
+        images.map((item: EventMainPage | Event | PressReview) => {
+          if ("journal" in item) {
+            return (
+              <PressReviewCard
+                key={item._id}
+                {...item}
+                openZoomedImage={openZoomedImage}
+              />
+            );
+          }
+        })}
 
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
           <Image
-            src={zoomedImage.thumbnail}
+            src={getOptimizedCloudinaryUrl(zoomedImage.thumbnailUrl)}
             alt={zoomedImage.thumbnailDescription}
             layout="fill"
             objectFit="contain"

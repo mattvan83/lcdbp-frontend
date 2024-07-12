@@ -19,6 +19,7 @@ import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import React, { useState, CSSProperties, ReactNode } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import {
   HouseFill,
@@ -28,47 +29,51 @@ import {
 } from "react-bootstrap-icons";
 import { ConfigProvider, Modal } from "antd";
 import AuthForm from "./AuthForm";
+// Importing action creators from the UserSlice.
+import {
+  login,
+  logout,
+  updateActiveKey,
+} from "@/lib/features/UserState/UserSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
-  const [activeKey, setActiveKey] = useState<string>("");
   const [hoveredKey, setHoveredKey] = useState<string>("");
-  const [userToken, setUserToken] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-  // console.log("activeKey: ", activeKey);
   // console.log("hoveredKey: ", hoveredKey);
-  // console.log("userToken: ", userToken);
-  // console.log("username: ", username);
+
+  const user = useAppSelector((state) => state.user.value);
+  const dispatch = useAppDispatch();
+  // console.log("user: ", user);
 
   const handleSelect = (eventKey: string | null): void => {
     if (eventKey) {
-      setActiveKey(eventKey);
+      dispatch(updateActiveKey(eventKey));
     }
   };
 
   const getNavbarTitleStyle = (keys: string[]): CSSProperties => ({
     color:
-      keys.includes(activeKey) || keys.includes(hoveredKey)
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
         ? "purple"
         : "#4b5c6b", // Change colors as needed
     fontWeight:
-      keys.includes(activeKey) || keys.includes(hoveredKey) ? "bold" : "500",
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
+        ? "bold"
+        : "500",
   });
 
   const handleLogout = (): void => {
     console.log("Logout done!");
-    setUserToken("");
-    setUsername("");
-    // dispatch(logout());
-    // dispatch(removeAllBookmark());
+    dispatch(logout());
   };
 
   const fillCnxInfos = (apiToken: string, apiUsername: string): void => {
-    setUserToken(apiToken);
-    setUsername(apiUsername);
+    dispatch(login({ token: apiToken, username: apiUsername }));
   };
 
   const handleCnxMode = (): void => {
@@ -85,10 +90,10 @@ export default function Header() {
   };
 
   let userSection: ReactNode;
-  if (userToken) {
+  if (user.token) {
     userSection = (
       <div className={styles.logoutSection}>
-        <p className={styles.userTitle}>Bienvenue {username}</p>
+        <p className={styles.userTitle}>Bienvenue {user.username}</p>
         <Button
           variant="primary"
           onClick={() => handleLogout()}
@@ -113,7 +118,7 @@ export default function Header() {
   }
 
   let modalContent: ReactNode;
-  if (!userToken) {
+  if (!user.token) {
     if (!isSignInMode) {
       modalContent = (
         <div className={styles.modalSection}>
@@ -153,16 +158,29 @@ export default function Header() {
             {/* <Navbar.Brand href="#home" className={styles.navbarBrand}>
               LCDBP
             </Navbar.Brand> */}
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse
-              id="basic-navbar-nav"
-              className={styles.navbarCollapse}
+            <Navbar.Toggle
+              aria-controls={`offcanvasNavbar-expand-lg`}
+              onClick={() => setShowOffcanvas(true)}
+            />
+            <Navbar.Offcanvas
+              show={showOffcanvas}
+              onHide={() => setShowOffcanvas(false)}
+              id={`offcanvasNavbar-expand-lg`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
+              placement="start"
+              className={styles.navbarOffcanvas}
             >
-              <Nav
-                className={`ms-auto ${styles.navbarNav}`}
-                onSelect={handleSelect}
-              >
-                {/* <NavDropdown
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+                  Le Chœur Du Bon Pays
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav
+                  className={`ms-auto ${styles.navbarNav}`}
+                  onSelect={handleSelect}
+                >
+                  {/* <NavDropdown
                   title={
                     <span
                       style={getNavbarTitleStyle([
@@ -177,7 +195,7 @@ export default function Header() {
                         icon={faHome}
                         color={
                           ["home", "home1", "home2", "home3", "home4"].includes(
-                            activeKey
+                            user.activeKey
                           ) ||
                           ["home", "home1", "home2", "home3", "home4"].includes(
                             hoveredKey
@@ -226,163 +244,171 @@ export default function Header() {
                   </NavDropdown.Item>
                 </NavDropdown> */}
 
-                <Nav.Link
-                  as={Link}
-                  href="/"
-                  className={styles.navbarLink}
-                  eventKey="home"
-                  style={getNavbarTitleStyle(["home"])}
-                  onMouseEnter={() => setHoveredKey("home")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faHome}
-                    color={
-                      ["home"].includes(activeKey) ||
-                      ["home"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Accueil
-                </Nav.Link>
-
-                <Nav.Link
-                  as={Link}
-                  href="/#chore"
-                  className={styles.navbarLink}
-                  eventKey="chore"
-                  style={getNavbarTitleStyle(["chore"])}
-                  onMouseEnter={() => setHoveredKey("chore")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faCircleInfo}
-                    color={
-                      ["chore"].includes(activeKey) ||
-                      ["chore"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Le Chœur
-                </Nav.Link>
-
-                <Nav.Link
-                  as={Link}
-                  href="/#events"
-                  className={styles.navbarLink}
-                  eventKey="events"
-                  style={getNavbarTitleStyle(["events"])}
-                  onMouseEnter={() => setHoveredKey("events")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faCalendar}
-                    color={
-                      ["events"].includes(activeKey) ||
-                      ["events"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Évènements
-                </Nav.Link>
-
-                <Nav.Link
-                  as={Link}
-                  href="/#listenings"
-                  className={styles.navbarLink}
-                  eventKey="listen"
-                  style={getNavbarTitleStyle(["listen"])}
-                  onMouseEnter={() => setHoveredKey("listen")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faCirclePlay}
-                    color={
-                      ["listen"].includes(activeKey) ||
-                      ["listen"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Nous Écouter
-                </Nav.Link>
-
-                <Nav.Link
-                  as={Link}
-                  href="/#pressReviews"
-                  className={styles.navbarLink}
-                  eventKey="pressReview"
-                  style={getNavbarTitleStyle(["pressReview"])}
-                  onMouseEnter={() => setHoveredKey("pressReview")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faNewspaper}
-                    color={
-                      ["pressReview"].includes(activeKey) ||
-                      ["pressReview"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Revue de Presse
-                </Nav.Link>
-
-                <Nav.Link
-                  as={Link}
-                  href="/#contactUs"
-                  className={styles.navbarLink}
-                  eventKey="contactUS"
-                  style={getNavbarTitleStyle(["contactUS"])}
-                  onMouseEnter={() => setHoveredKey("contactUS")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <FontAwesomeIcon
-                    icon={faAddressBook}
-                    color={
-                      ["contactUS"].includes(activeKey) ||
-                      ["contactUS"].includes(hoveredKey)
-                        ? "purple"
-                        : "#4b5c6b"
-                    }
-                    className={styles.navbarIcon}
-                  />
-                  Nous contacter
-                </Nav.Link>
-
-                {userToken && (
                   <Nav.Link
                     as={Link}
-                    href="#link"
+                    href="/"
                     className={styles.navbarLink}
-                    eventKey="membersSpace"
-                    style={getNavbarTitleStyle(["membersSpace"])}
-                    onMouseEnter={() => setHoveredKey("membersSpace")}
+                    eventKey="home"
+                    style={getNavbarTitleStyle(["home"])}
+                    onMouseEnter={() => setHoveredKey("home")}
                     onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
                   >
                     <FontAwesomeIcon
-                      icon={faUserGroup}
+                      icon={faHome}
                       color={
-                        ["membersSpace"].includes(activeKey) ||
-                        ["membersSpace"].includes(hoveredKey)
+                        ["home"].includes(user.activeKey) ||
+                        ["home"].includes(hoveredKey)
                           ? "purple"
                           : "#4b5c6b"
                       }
                       className={styles.navbarIcon}
                     />
-                    Espace membres
+                    Accueil
                   </Nav.Link>
-                )}
-              </Nav>
-            </Navbar.Collapse>
+
+                  <Nav.Link
+                    as={Link}
+                    href="/chore"
+                    className={styles.navbarLink}
+                    eventKey="chore"
+                    style={getNavbarTitleStyle(["chore"])}
+                    onMouseEnter={() => setHoveredKey("chore")}
+                    onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCircleInfo}
+                      color={
+                        ["chore"].includes(user.activeKey) ||
+                        ["chore"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Le Chœur
+                  </Nav.Link>
+
+                  <Nav.Link
+                    as={Link}
+                    href="/events"
+                    className={styles.navbarLink}
+                    eventKey="events"
+                    style={getNavbarTitleStyle(["events"])}
+                    onMouseEnter={() => setHoveredKey("events")}
+                    onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCalendar}
+                      color={
+                        ["events"].includes(user.activeKey) ||
+                        ["events"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Évènements
+                  </Nav.Link>
+
+                  <Nav.Link
+                    as={Link}
+                    href="/listenings"
+                    className={styles.navbarLink}
+                    eventKey="listen"
+                    style={getNavbarTitleStyle(["listen"])}
+                    onMouseEnter={() => setHoveredKey("listen")}
+                    onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      color={
+                        ["listen"].includes(user.activeKey) ||
+                        ["listen"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Nous Écouter
+                  </Nav.Link>
+
+                  <Nav.Link
+                    as={Link}
+                    href="/pressReviews"
+                    className={styles.navbarLink}
+                    eventKey="pressReview"
+                    style={getNavbarTitleStyle(["pressReview"])}
+                    onMouseEnter={() => setHoveredKey("pressReview")}
+                    onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faNewspaper}
+                      color={
+                        ["pressReview"].includes(user.activeKey) ||
+                        ["pressReview"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Revue de Presse
+                  </Nav.Link>
+
+                  <Nav.Link
+                    as={Link}
+                    href="/contact"
+                    className={styles.navbarLink}
+                    eventKey="contactUS"
+                    style={getNavbarTitleStyle(["contactUS"])}
+                    onMouseEnter={() => setHoveredKey("contactUS")}
+                    onMouseLeave={() => setHoveredKey("")}
+                    onClick={() => setShowOffcanvas(false)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faAddressBook}
+                      color={
+                        ["contactUS"].includes(user.activeKey) ||
+                        ["contactUS"].includes(hoveredKey)
+                          ? "purple"
+                          : "#4b5c6b"
+                      }
+                      className={styles.navbarIcon}
+                    />
+                    Nous Contacter
+                  </Nav.Link>
+
+                  {user.token && (
+                    <Nav.Link
+                      as={Link}
+                      href="#link"
+                      className={styles.navbarLink}
+                      eventKey="membersSpace"
+                      style={getNavbarTitleStyle(["membersSpace"])}
+                      onMouseEnter={() => setHoveredKey("membersSpace")}
+                      onMouseLeave={() => setHoveredKey("")}
+                      onClick={() => setShowOffcanvas(false)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faUserGroup}
+                        color={
+                          ["membersSpace"].includes(user.activeKey) ||
+                          ["membersSpace"].includes(hoveredKey)
+                            ? "purple"
+                            : "#4b5c6b"
+                        }
+                        className={styles.navbarIcon}
+                      />
+                      Espace membres
+                    </Nav.Link>
+                  )}
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
           </Container>
         </Navbar>
 

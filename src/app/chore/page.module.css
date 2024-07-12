@@ -1,0 +1,147 @@
+.navbarLink {
+  font-size: 14px;
+}
+
+.tabDivision {
+  /* height: 50vh; */
+  /* margin-bottom: 150px; */
+  border: #eee0e0 solid 3px;
+}
+
+.tabSection {
+  text-align: center;
+}
+
+.pastSection {
+  /* padding: 20px;
+  background-image: url("/Naissance_LCDBP.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  font-weight: bold; */
+}
+
+.directionHeader,
+.passionHeader,
+.cityHeader,
+.pastHeader,
+.futureHeader1,
+.futureHeader2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+}
+
+.futureHeader2 {
+  background-color: #eee0e0;
+}
+
+.profilImage {
+  border-radius: 50%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 40px;
+  margin-right: 40px;
+  border: purple solid 4px;
+}
+
+.directionFirstText {
+  margin: 20px;
+}
+
+.directionText {
+  width: 95%;
+  margin: 10px auto;
+}
+
+.choreImage,
+.cityImage,
+.birthImage,
+.futureImage {
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.passionText,
+.cityText,
+.birthText,
+.futureText {
+  width: 50%;
+  margin: 20px;
+}
+
+/* Media query for window width less than 1750px */
+@media (max-width: 1999px) {
+  .passionHeader,
+  .cityHeader,
+  .pastHeader,
+  .futureHeader1 {
+    flex-direction: column;
+  }
+
+  .futureHeader2 {
+    flex-direction: column-reverse;
+  }
+
+  .passionText,
+  .cityText,
+  .birthText,
+  .futureText {
+    width: 80%;
+  }
+}
+
+/* Media query for window width less than 1167px */
+@media (max-width: 1167px) {
+  .directionHeader {
+    flex-direction: column;
+  }
+
+  .directionFirstText {
+    width: 95%;
+    margin: 10px auto;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1249px) {
+  .choreImage,
+  .cityImage {
+    width: 536px;
+    height: 383px;
+  }
+
+  .futureImage {
+    width: 350px;
+    height: 350px;
+  }
+
+  .passionText,
+  .cityText,
+  .birthText,
+  .futureText {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .choreImage,
+  .cityImage,
+  .futureImage {
+    width: 95%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* .futureImage {
+    width: 400px;
+    height: 400px;
+  } */
+
+  .passionText,
+  .cityText,
+  .futureText {
+    width: 100%;
+  }
+}

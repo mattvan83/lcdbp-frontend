@@ -1,0 +1,75 @@
+.choreDescriptionContainer {
+  width: 100%;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.choreDescriptionContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 95%; */
+}
+
+.choreDescriptionImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choreDescriptionImage {
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.choreDescriptionText {
+  width: 80%;
+  margin: 20px;
+}
+
+.zoomedImageContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.zoomedImage {
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: auto;
+}
+
+/* Media query for window width less than 1099px */
+@media (max-width: 1099px) {
+  .choreDescriptionImages {
+    flex-direction: column;
+  }
+
+  .choreDescriptionText {
+    width: 95%;
+  }
+}
+
+@media (max-width: 575px) {
+  .choreDescriptionImage {
+    width: 95%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

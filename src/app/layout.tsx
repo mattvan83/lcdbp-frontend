@@ -5,6 +5,7 @@ import "./globals.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,12 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
-        <BootstrapClient />
-      </body>
+      <StoreProvider>
+        <body className={inter.className}>
+          <div id="root">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+          <BootstrapClient />
+        </body>
+      </StoreProvider>
     </html>
   );
 }

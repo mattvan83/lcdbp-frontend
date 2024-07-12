@@ -1,20 +1,6 @@
 import styles from "../styles/AudioPlayer.module.css";
 import Image from "next/image";
-// import React, { useState } from "react";
-
-type AudioPlayerProps = {
-  title: string;
-  artwork: string;
-  audioUrl: string;
-  authorText: string;
-  authorMusic: string;
-  arrangement: string;
-  harmonization: string;
-  thumbnailUrl: string;
-  thumbnailDescription: string;
-  recordingDate: Date;
-  lastListening: boolean;
-};
+import { Track } from "@/app/page";
 
 export default function AudioPlayer({
   title,
@@ -28,7 +14,7 @@ export default function AudioPlayer({
   thumbnailDescription,
   recordingDate,
   lastListening,
-}: AudioPlayerProps) {
+}: Track) {
   //   const [isPlaying, setIsPlaying] = useState(false);
 
   //   const togglePlay = () => {

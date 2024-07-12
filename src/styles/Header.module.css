@@ -57,7 +57,7 @@
 
 .navbarBootstrap {
   background: #eee0e0;
-  font-size: 14px;
+  /* font-size: 14px; */
   /* border: green solid 1px; */
 }
 
@@ -72,6 +72,10 @@
   max-height: 200px;
   overflow-y: auto;
 } */
+
+.navbarOffcanvas {
+  background: #eee0e0;
+}
 
 .navbarBrand,
 .navbarNav {
@@ -90,6 +94,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-size: 14px;
 }
 
 /* .navbarBrand:hover,
