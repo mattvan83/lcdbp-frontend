@@ -385,7 +385,7 @@ export default function Header() {
                   {user.token && (
                     <Nav.Link
                       as={Link}
-                      href="#link"
+                      href="/membersSpace/partitions"
                       className={styles.navbarLink}
                       eventKey="membersSpace"
                       style={getNavbarTitleStyle(["membersSpace"])}
