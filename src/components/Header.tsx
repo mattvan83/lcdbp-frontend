@@ -67,6 +67,17 @@ export default function Header() {
         : "500",
   });
 
+  const getNavbarDropdownItemStyle = (keys: string[]): CSSProperties => ({
+    color:
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
+        ? "purple"
+        : "#4b5c6b", // Change colors as needed
+    fontWeight:
+      keys.includes(user.activeKey) || keys.includes(hoveredKey)
+        ? "bold"
+        : "normal",
+  });
+
   const handleLogout = (): void => {
     console.log("Logout done!");
     dispatch(logout());
@@ -180,70 +191,6 @@ export default function Header() {
                   className={`ms-auto ${styles.navbarNav}`}
                   onSelect={handleSelect}
                 >
-                  {/* <NavDropdown
-                  title={
-                    <span
-                      style={getNavbarTitleStyle([
-                        "home",
-                        "home1",
-                        "home2",
-                        "home3",
-                        "home4",
-                      ])}
-                    >
-                      <FontAwesomeIcon
-                        icon={faHome}
-                        color={
-                          ["home", "home1", "home2", "home3", "home4"].includes(
-                            user.activeKey
-                          ) ||
-                          ["home", "home1", "home2", "home3", "home4"].includes(
-                            hoveredKey
-                          )
-                            ? "purple"
-                            : "#4b5c6b"
-                        }
-                        className={styles.navbarIcon}
-                      />
-                      Accueil
-                    </span>
-                  }
-                  id="basic-nav-dropdown"
-                  className={styles.navbarDropdown}
-                  onMouseEnter={() => setHoveredKey("home")}
-                  onMouseLeave={() => setHoveredKey("")}
-                >
-                  <NavDropdown.Item
-                    as={Link}
-                    href="#action/3.1"
-                    eventKey="home1"
-                  >
-                    Action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    href="#action/3.2"
-                    eventKey="home2"
-                  >
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    href="#action/3.3"
-                    eventKey="home3"
-                  >
-                    Something
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    as={Link}
-                    href="#action/3.4"
-                    eventKey="home4"
-                  >
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown> */}
-
                   <Nav.Link
                     as={Link}
                     href="/"
@@ -383,28 +330,66 @@ export default function Header() {
                   </Nav.Link>
 
                   {user.token && (
-                    <Nav.Link
-                      as={Link}
-                      href="/membersSpace/partitions"
-                      className={styles.navbarLink}
-                      eventKey="membersSpace"
-                      style={getNavbarTitleStyle(["membersSpace"])}
+                    <NavDropdown
+                      title={
+                        <span
+                          style={getNavbarTitleStyle([
+                            "membersSpace",
+                            "partitions",
+                            "workRecordings",
+                          ])}
+                        >
+                          <FontAwesomeIcon
+                            icon={faUserGroup}
+                            color={
+                              [
+                                "membersSpace",
+                                "partitions",
+                                "workRecordings",
+                              ].includes(user.activeKey) ||
+                              [
+                                "membersSpace",
+                                "partitions",
+                                "workRecordings",
+                              ].includes(hoveredKey)
+                                ? "purple"
+                                : "#4b5c6b"
+                            }
+                            className={styles.navbarIcon}
+                          />
+                          Espace Membres
+                        </span>
+                      }
+                      id="basic-nav-dropdown"
+                      className={styles.navbarDropdown}
                       onMouseEnter={() => setHoveredKey("membersSpace")}
                       onMouseLeave={() => setHoveredKey("")}
-                      onClick={() => setShowOffcanvas(false)}
                     >
-                      <FontAwesomeIcon
-                        icon={faUserGroup}
-                        color={
-                          ["membersSpace"].includes(user.activeKey) ||
-                          ["membersSpace"].includes(hoveredKey)
-                            ? "purple"
-                            : "#4b5c6b"
-                        }
-                        className={styles.navbarIcon}
-                      />
-                      Espace membres
-                    </Nav.Link>
+                      <NavDropdown.Item
+                        as={Link}
+                        href="/membersSpace/partitions"
+                        eventKey="partitions"
+                        className={styles.navbarLink}
+                        style={getNavbarDropdownItemStyle(["partitions"])}
+                        onMouseEnter={() => setHoveredKey("partitions")}
+                        onMouseLeave={() => setHoveredKey("")}
+                        onClick={() => setShowOffcanvas(false)}
+                      >
+                        Nos Partitions
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        as={Link}
+                        href="/membersSpace/workRecordings"
+                        eventKey="workRecordings"
+                        className={styles.navbarLink}
+                        style={getNavbarDropdownItemStyle(["workRecordings"])}
+                        onMouseEnter={() => setHoveredKey("workRecordings")}
+                        onMouseLeave={() => setHoveredKey("")}
+                        onClick={() => setShowOffcanvas(false)}
+                      >
+                        Nos Enregistrements de Travail
+                      </NavDropdown.Item>
+                    </NavDropdown>
                   )}
                 </Nav>
               </Offcanvas.Body>

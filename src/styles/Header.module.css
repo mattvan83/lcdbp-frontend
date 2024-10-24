@@ -77,10 +77,14 @@
   background: #eee0e0;
 }
 
-.navbarBrand,
+/* .navbarBrand,
 .navbarNav {
   color: #4b5c6b;
   font-weight: 500;
+} */
+
+.navbarDropdown {
+  font-size: 14px;
 }
 
 /* Flexbox styles for the span wrapping the icon and title */
@@ -110,11 +114,11 @@
   font-weight: bold;
 } */
 
-.navbarBrand:hover,
+/* .navbarBrand:hover,
 .navbarDropdown a:hover {
   color: purple;
   font-weight: bold;
-}
+} */
 
 .navbarIcon {
   width: 20px;
