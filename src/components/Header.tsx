@@ -36,13 +36,15 @@ import {
   updateActiveKey,
 } from "@/lib/features/UserState/UserSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
   const [hoveredKey, setHoveredKey] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isSignInMode, setIsSignInMode] = useState<boolean>(false);
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [showOffcanvas, setShowOffcanvas] = useState<boolean>(false);
+  const router = useRouter();
 
   // console.log("hoveredKey: ", hoveredKey);
 
@@ -81,6 +83,7 @@ export default function Header() {
   const handleLogout = (): void => {
     console.log("Logout done!");
     dispatch(logout());
+    router.push("/");
   };
 
   const fillCnxInfos = (apiToken: string, apiUsername: string): void => {
