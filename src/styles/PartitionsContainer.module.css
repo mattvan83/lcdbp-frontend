@@ -1,0 +1,13 @@
+.partitionDivision {
+  /* width: 100vw; */
+  padding: 40px 10px;
+  background-color: "#ffffff";
+}
+
+.partitionContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

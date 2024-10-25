@@ -1,27 +1,28 @@
-"use client";
-
 import { useState } from "react";
 import React from "react";
+import PartitionsDivision from "@/components/PartitionsDivision";
 import styles from "./page.module.css";
 
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
-export default function Partitions() {
-  //   const response = await fetch(`${BACKEND_ADDRESS}/events/grouped`);
-  //   const events = await response.json();
+export default async function Partitions() {
+  const response = await fetch(
+    `${BACKEND_ADDRESS}/studiedWorks/groupedPartitions`
+  );
+  const partitions = await response.json();
 
-  const [showPdf, setShowPdf] = useState(false); // State to control visibility of iframe
+  // const [showPdf, setShowPdf] = useState(false); // State to control visibility of iframe
 
-  const togglePdfViewer = () => {
-    setShowPdf(!showPdf); // Toggle showPdf state
-  };
+  // const togglePdfViewer = () => {
+  //   setShowPdf(!showPdf); // Toggle showPdf state
+  // };
 
   return (
     <main>
-      {/* {events.result && <EventsDivision events={events} />}
-      {!events.result && <p>{events.error}</p>} */}
+      {partitions.result && <PartitionsDivision partitions={partitions} />}
+      {!partitions.result && <p>{partitions.error}</p>}
 
-      <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+      {/* <div style={{ width: "100%", height: "100vh", position: "relative" }}>
         {showPdf && (
           <iframe
             src="/sample.pdf"
@@ -45,7 +46,7 @@ export default function Partitions() {
         >
           Close PDF
         </button>
-      </div>
+      </div> */}
     </main>
   );
 }

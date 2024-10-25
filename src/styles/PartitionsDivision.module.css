@@ -1,0 +1,19 @@
+.partitionsDivision {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px 0px;
+}
+
+.navbarLink {
+  font-size: 14px;
+}
+
+.tabDivision {
+  border: #eee0e0 solid 3px;
+}
+
+.tabSection {
+  text-align: center;
+}

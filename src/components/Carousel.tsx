@@ -4,12 +4,14 @@ import styles from "../styles/Carousel.module.css";
 import { useState } from "react";
 import Image from "next/image";
 import { EventMainPage, Event, PressReview } from "@/app/page";
+import { Partition } from "@/components/PartitionsDivision";
 import PressReviewCard from "./PressReviewCard";
 import EventCard from "./EventCard";
+import PartitionCard from "./PartitionCard";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 type CarouselProps = {
-  images: EventMainPage[] | Event[] | PressReview[];
+  images: EventMainPage[] | Event[] | PressReview[] | Partition[];
   width: number;
   height: number;
   category: string;
@@ -38,7 +40,7 @@ export default function Carousel({
   return (
     <>
       {category === "eventsMainPage" &&
-        images.map((item: EventMainPage | Event | PressReview) => {
+        images.map((item: EventMainPage | Event | PressReview | Partition) => {
           if (!("journal" in item)) {
             const containerWidth = width;
             const containerHeight = height;
@@ -53,22 +55,28 @@ export default function Carousel({
                   height: `${containerHeight}px`,
                 }}
               >
-                <Image
-                  onClick={() => openZoomedImage(item)}
-                  src={item.thumbnailUrl}
-                  alt={item.thumbnailDescription}
-                  // layout="fill"
-                  width={imageWidth}
-                  height={imageHeight}
-                  className={styles.event}
-                />
+                {"thumbnailUrl" in item && "thumbnailDescription" in item ? (
+                  <Image
+                    onClick={() =>
+                      openZoomedImage(
+                        item as EventMainPage | Event | PressReview
+                      )
+                    }
+                    src={item.thumbnailUrl}
+                    alt={item.thumbnailDescription}
+                    // layout="fill"
+                    width={imageWidth}
+                    height={imageHeight}
+                    className={styles.event}
+                  />
+                ) : null}
               </div>
             );
           }
         })}
 
       {category === "events" &&
-        images.map((item: EventMainPage | Event | PressReview) => {
+        images.map((item: EventMainPage | Event | PressReview | Partition) => {
           if ("chores" in item) {
             return (
               <EventCard
@@ -81,7 +89,7 @@ export default function Carousel({
         })}
 
       {category === "pressReviews" &&
-        images.map((item: EventMainPage | Event | PressReview) => {
+        images.map((item: EventMainPage | Event | PressReview | Partition) => {
           if ("journal" in item) {
             return (
               <PressReviewCard
@@ -90,6 +98,13 @@ export default function Carousel({
                 openZoomedImage={openZoomedImage}
               />
             );
+          }
+        })}
+
+      {category === "partitions" &&
+        images.map((item: EventMainPage | Event | PressReview | Partition) => {
+          if ("partitionUrl" in item) {
+            return <PartitionCard key={item._id} {...item} />;
           }
         })}
 
