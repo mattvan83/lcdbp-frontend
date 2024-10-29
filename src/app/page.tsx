@@ -64,8 +64,8 @@ const eventImages: EventMainPage[] = [
   },
   {
     _id: "2",
-    thumbnailUrl: "/24-09-29_Concert_Château-Chalon.jpg",
-    thumbnailDescription: "Concert Château-Chalon le 24 Septembre 2024",
+    thumbnailUrl: "/2024-11-24_Concert_Cousance.jpg",
+    thumbnailDescription: "Concert Cousance le 24 Novembre 2024",
   },
   {
     _id: "3",
