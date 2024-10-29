@@ -65,7 +65,7 @@ const eventImages: EventMainPage[] = [
   {
     _id: "2",
     thumbnailUrl: "/2024-11-24_Concert_Cousance.jpg",
-    thumbnailDescription: "Concert Cousance le 24 Novembre 2024",
+    thumbnailDescription: "Concert à Cousance le 24 Novembre 2024",
   },
   {
     _id: "3",
