@@ -43,6 +43,7 @@
 
 .partitionImage {
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .details {

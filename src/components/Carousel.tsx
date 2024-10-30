@@ -9,6 +9,7 @@ import PressReviewCard from "./PressReviewCard";
 import EventCard from "./EventCard";
 import PartitionCard from "./PartitionCard";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
+import Button from "react-bootstrap/Button";
 
 type CarouselProps = {
   images: EventMainPage[] | Event[] | PressReview[] | Partition[];
@@ -26,6 +27,7 @@ export default function Carousel({
   const [zoomedImage, setZoomedImage] = useState<
     EventMainPage | Event | PressReview | null
   >(null);
+  const [partitionPdf, setPartitionPdf] = useState<Partition | null>(null);
 
   // Function to open zoomed image
   const openZoomedImage = (item: EventMainPage | Event | PressReview): void => {
@@ -36,6 +38,16 @@ export default function Carousel({
   const closeZoomedImage = (): void => {
     setZoomedImage(null);
   };
+
+  const openPartitionPdf = (item: Partition): void => {
+    setPartitionPdf(item);
+  };
+
+  const closePartitionPdf = (): void => {
+    setPartitionPdf(null);
+  };
+
+  console.log("partitionPdf: ", partitionPdf);
 
   return (
     <>
@@ -102,11 +114,35 @@ export default function Carousel({
         })}
 
       {category === "partitions" &&
+        !partitionPdf &&
         images.map((item: EventMainPage | Event | PressReview | Partition) => {
           if ("partitionUrl" in item) {
-            return <PartitionCard key={item._id} {...item} />;
+            return (
+              <PartitionCard
+                key={item._id}
+                {...item}
+                openPartitionPdf={openPartitionPdf}
+              />
+            );
           }
         })}
+
+      {partitionPdf && (
+        <div className={styles.pdfViewerContainer}>
+          <Button
+            variant="primary"
+            onClick={closePartitionPdf}
+            className={styles.pdfViewerButton}
+          >
+            Fermer
+          </Button>
+          <iframe
+            src={getOptimizedCloudinaryUrl(partitionPdf.partitionUrl)}
+            className={styles.pdfViewerIFrame}
+            title="PDF Viewer"
+          />
+        </div>
+      )}
 
       {zoomedImage && (
         <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>

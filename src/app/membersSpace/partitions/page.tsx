@@ -11,12 +11,6 @@ export default async function Partitions() {
   );
   const partitions = await response.json();
 
-  // const [showPdf, setShowPdf] = useState(false); // State to control visibility of iframe
-
-  // const togglePdfViewer = () => {
-  //   setShowPdf(!showPdf); // Toggle showPdf state
-  // };
-
   return (
     <main>
       {partitions.result && <PartitionsDivision partitions={partitions} />}

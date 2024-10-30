@@ -3,6 +3,18 @@ import styles from "../styles/PartitionCard.module.css";
 import { Partition } from "@/components/PartitionsDivision";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
+interface PartitionCard {
+  _id: string;
+  code: string;
+  title: string;
+  artwork: string;
+  partitionUrl: string;
+  partitionThumbnailUrl: string;
+  authorMusic: string;
+  isAtWork: boolean;
+  openPartitionPdf: (event: Partition) => void;
+}
+
 function PartitionCard({
   _id,
   code,
@@ -12,7 +24,8 @@ function PartitionCard({
   partitionThumbnailUrl,
   authorMusic,
   isAtWork,
-}: Partition) {
+  openPartitionPdf,
+}: PartitionCard) {
   const partition: Partition = {
     _id,
     code,
@@ -41,7 +54,7 @@ function PartitionCard({
             layout="fill"
             // width={160}
             // height={180}
-            //   onClick={() => openZoomedImage(event)}
+            onClick={() => openPartitionPdf(partition)}
           />
         </div>
 
