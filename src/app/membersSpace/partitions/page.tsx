@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React from "react";
 import PartitionsDivision from "@/components/PartitionsDivision";
 import styles from "./page.module.css";
@@ -15,32 +14,6 @@ export default async function Partitions() {
     <main>
       {partitions.result && <PartitionsDivision partitions={partitions} />}
       {!partitions.result && <p>{partitions.error}</p>}
-
-      {/* <div style={{ width: "100%", height: "100vh", position: "relative" }}>
-        {showPdf && (
-          <iframe
-            src="/sample.pdf"
-            style={{ width: "100%", height: "100%", border: "none" }}
-            title="PDF Viewer"
-          />
-        )}
-        <button
-          className={styles.closeButton}
-          onClick={togglePdfViewer}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            padding: "10px",
-            cursor: "pointer",
-            backgroundColor: "#ffffff",
-            border: "1px solid #cccccc",
-            borderRadius: "5px",
-          }}
-        >
-          Close PDF
-        </button>
-      </div> */}
     </main>
   );
 }

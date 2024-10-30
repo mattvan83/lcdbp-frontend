@@ -21,12 +21,6 @@ export default async function Events() {
     <main>
       {events.result && <EventsDivision events={events} />}
       {!events.result && <p>{events.error}</p>}
-      {/* <Carousel
-        images={events.eventsGrouped[1].events}
-        width={400}
-        height={550}
-        category="events"
-      /> */}
     </main>
   );
 }

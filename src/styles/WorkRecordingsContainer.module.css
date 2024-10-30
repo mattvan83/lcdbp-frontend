@@ -1,0 +1,14 @@
+.workRecordingsDivision {
+  /* width: 100vw; */
+  padding: 40px 10px;
+  background-color: "#ffffff";
+}
+
+.workRecordingsContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

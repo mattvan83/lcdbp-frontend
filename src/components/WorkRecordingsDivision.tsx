@@ -2,97 +2,95 @@
 
 import React, { useState } from "react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
-import PartitionsContainer from "@/components/PartitionsContainer";
-import styles from "../styles/PartitionsDivision.module.css";
+import WorkRecordingsContainer from "@/components/WorkRecordingsContainer";
+import styles from "../styles/WorkRecordingsDivision.module.css";
 
-export interface Partition {
+export interface WorkRecording {
   _id: string;
-  code: string;
   title: string;
   artwork: string;
   partitionUrl: string;
   partitionThumbnailUrl: string;
   authorMusic: string;
-  isAtWork: boolean;
+  recordingUrl: string;
+  recordingDescription: string;
 }
 
-interface PartitionGroup {
-  category: string;
-  partitions: Partition[];
+interface WorkRecordingGroup {
+  voice: string;
+  workRecordings: WorkRecording[];
 }
 
-interface PartitionsDivisionProps {
-  partitions: {
+interface WorkRecordingsDivisionProps {
+  workRecordings: {
     result: boolean;
-    categories: string[];
-    partitionsGrouped: PartitionGroup[];
+    voices: string[];
+    workRecordingsGrouped: WorkRecordingGroup[];
   };
 }
 
-const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
-  partitions,
+const WorkRecordingsDivision: React.FC<WorkRecordingsDivisionProps> = ({
+  workRecordings,
 }) => {
-  const { categories } = partitions;
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    categories[0]
-  );
+  const { voices } = workRecordings;
+  const [selectedVoice, setSelectedVoice] = useState<string>(voices[0]);
 
-  const selectedPartitions = partitions.partitionsGrouped.find(
-    (partitionGroup: PartitionGroup) =>
-      partitionGroup.category === selectedCategory
-  )?.partitions;
+  const selectedWorkRecordings = workRecordings.workRecordingsGrouped.find(
+    (workRecordingsGroup: WorkRecordingGroup) =>
+      workRecordingsGroup.voice === selectedVoice
+  )?.workRecordings;
 
-  const handleSelectCategory = (eventKey: string | null): void => {
+  const handleSelectVoice = (eventKey: string | null): void => {
     if (eventKey !== null) {
       if (eventKey === "first") {
-        setSelectedCategory("A");
+        setSelectedVoice("baryton");
       } else if (eventKey === "second") {
-        setSelectedCategory("B");
+        setSelectedVoice("bass");
       } else if (eventKey === "third") {
-        setSelectedCategory("C");
+        setSelectedVoice("tenor1");
       } else if (eventKey === "fourth") {
-        setSelectedCategory("D");
+        setSelectedVoice("tenor2");
       } else if (eventKey === "fifth") {
-        setSelectedCategory("E");
+        setSelectedVoice("tutti");
       }
     }
   };
 
   return (
-    <div className={styles.partitionsDivision}>
-      <h3>Nos Partitions</h3>
+    <div className={styles.workRecordingsDivision}>
+      <h3>Nos Enregistrements de Travail</h3>
 
       <Tab.Container
         id="left-tabs-example"
         defaultActiveKey="first"
-        onSelect={handleSelectCategory}
+        onSelect={handleSelectVoice}
       >
         <Row className="mt-4 mb-4">
           <Col md={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
                 <Nav.Link eventKey="first" className={styles.navbarLink}>
-                  Profanes
+                  Barytons
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="second" className={styles.navbarLink}>
-                  Religieux
+                  Basses
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="third" className={styles.navbarLink}>
-                  Classique
+                  Ténors 1
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="fourth" className={styles.navbarLink}>
-                  Traditionnel
+                  Ténors 2
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="fifth" className={styles.navbarLink}>
-                  Noël
+                  Tutti
                 </Nav.Link>
               </Nav.Item>
             </Nav>
@@ -100,32 +98,42 @@ const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
           <Col md={9}>
             <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
               <Tab.Pane eventKey="first" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
+                {selectedWorkRecordings && (
+                  <WorkRecordingsContainer
+                    workRecordings={selectedWorkRecordings}
+                  />
                 )}
               </Tab.Pane>
 
               <Tab.Pane eventKey="second" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
+                {selectedWorkRecordings && (
+                  <WorkRecordingsContainer
+                    workRecordings={selectedWorkRecordings}
+                  />
                 )}
               </Tab.Pane>
 
               <Tab.Pane eventKey="third" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
+                {selectedWorkRecordings && (
+                  <WorkRecordingsContainer
+                    workRecordings={selectedWorkRecordings}
+                  />
                 )}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fourth" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
+                {selectedWorkRecordings && (
+                  <WorkRecordingsContainer
+                    workRecordings={selectedWorkRecordings}
+                  />
                 )}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fifth" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
+                {selectedWorkRecordings && (
+                  <WorkRecordingsContainer
+                    workRecordings={selectedWorkRecordings}
+                  />
                 )}
               </Tab.Pane>
             </Tab.Content>
@@ -136,4 +144,4 @@ const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
   );
 };
 
-export default PartitionsDivision;
+export default WorkRecordingsDivision;
