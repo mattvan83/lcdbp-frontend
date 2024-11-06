@@ -113,7 +113,9 @@ export default function Header() {
   if (user.token) {
     userSection = (
       <div className={styles.logoutSection}>
-        <p className={styles.userTitle}>Bienvenue {user.firstname}</p>
+        <p className={styles.userTitle} style={{ fontSize: "16px" }}>
+          Bienvenue {user.firstname}
+        </p>
         <Button
           variant="primary"
           onClick={() => handleLogout()}
