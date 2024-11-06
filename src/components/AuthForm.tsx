@@ -5,6 +5,9 @@ import styles from "../styles/AuthForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 
+const backendAddress = process.env.NEXT_PUBLIC_BACKEND_ADDRESS;
+// console.log("backendAddress: ", backendAddress);
+
 type AuthFormProps = {
   showModal: () => void;
   isSignInMode: boolean;
@@ -32,14 +35,16 @@ export default function AuthForm({
   } = useForm<FormValues>();
   const [errorMsg, setErrorMsg] = useState("");
 
-  //   console.log("errors: ", errors);
+  // console.log("NEXT_PUBLIC_BACKEND_ADDRESS: ", backendAddress);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (isSignInMode) {
       console.log(data);
       const { username, password } = data;
 
-      fetch("http://localhost:3000/users/signin", {
+      // console.log("NEXT_PUBLIC_BACKEND_ADDRESS: ", backendAddress);
+
+      fetch(`${backendAddress}/users/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -59,7 +64,9 @@ export default function AuthForm({
       console.log(data);
       const { email, username, password } = data;
 
-      fetch("http://localhost:3000/users/signup", {
+      // console.log("NEXT_PUBLIC_BACKEND_ADDRESS: ", backendAddress);
+
+      fetch(`${backendAddress}/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, username, password }),
