@@ -86,8 +86,14 @@ export default function Header() {
     router.push("/");
   };
 
-  const fillCnxInfos = (apiToken: string, apiUsername: string): void => {
-    dispatch(login({ token: apiToken, username: apiUsername }));
+  const fillCnxInfos = (
+    apiToken: string,
+    apiUsername: string,
+    apiFirstname: string
+  ): void => {
+    dispatch(
+      login({ token: apiToken, username: apiUsername, firstname: apiFirstname })
+    );
   };
 
   const handleCnxMode = (): void => {
@@ -107,7 +113,7 @@ export default function Header() {
   if (user.token) {
     userSection = (
       <div className={styles.logoutSection}>
-        <p className={styles.userTitle}>Bienvenue {user.username}</p>
+        <p className={styles.userTitle}>Bienvenue {user.firstname}</p>
         <Button
           variant="primary"
           onClick={() => handleLogout()}

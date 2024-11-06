@@ -9,7 +9,7 @@ type AuthFormProps = {
   showModal: () => void;
   isSignInMode: boolean;
   handleCnxMode: () => void;
-  fillCnxInfos: (token: string, username: string) => void;
+  fillCnxInfos: (token: string, username: string, firstname: string) => void;
 };
 
 interface FormValues {
@@ -47,7 +47,7 @@ export default function AuthForm({
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            fillCnxInfos(data.token, data.username);
+            fillCnxInfos(data.token, data.username, data.firstname);
             reset();
             setErrorMsg("");
             showModal();
@@ -67,7 +67,7 @@ export default function AuthForm({
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            fillCnxInfos(data.token, data.username);
+            fillCnxInfos(data.token, data.username, data.firstname);
             reset();
             setErrorMsg("");
             showModal();
