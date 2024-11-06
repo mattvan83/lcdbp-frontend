@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "@/components/Footer";
 // import StoreProvider from "./StoreProvider";
 
-const ReduxProvider = dynamic(() => import("@/app/ReduxProvider"), {
+const ReduxProvider = dynamic(() => import("@/lib/ReduxProvider"), {
   ssr: false,
 });
 
