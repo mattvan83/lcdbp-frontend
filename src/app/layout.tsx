@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.css";
 import "./globals.css";
+import dynamic from "next/dynamic";
 import BootstrapClient from "@/components/BootstrapClient";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
-import StoreProvider from "./StoreProvider";
+// import StoreProvider from "./StoreProvider";
+
+const ReduxProvider = dynamic(() => import("@/app/ReduxProvider"), {
+  ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,16 +34,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <StoreProvider>
-        <body className={inter.className}>
+      <body className={inter.className}>
+        <ReduxProvider>
           <div id="root">
             <Header />
             {children}
             <Footer />
           </div>
           <BootstrapClient />
-        </body>
-      </StoreProvider>
+        </ReduxProvider>
+      </body>
     </html>
   );
 }

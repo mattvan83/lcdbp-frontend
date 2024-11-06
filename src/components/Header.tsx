@@ -83,6 +83,7 @@ export default function Header() {
   const handleLogout = (): void => {
     console.log("Logout done!");
     dispatch(logout());
+    dispatch(updateActiveKey("home"));
     router.push("/");
   };
 

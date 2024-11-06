@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { StringExpressionOperatorReturningString } from "mongoose";
 
 export type UserState = {
   value: {
@@ -42,4 +41,4 @@ export const UserSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { login, logout, updateActiveKey } = UserSlice.actions;
-export default UserSlice.reducer;
+export const userReducer = UserSlice.reducer;
