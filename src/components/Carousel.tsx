@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../styles/Carousel.module.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { EventMainPage, Event, PressReview } from "@/app/page";
 import { Partition } from "@/components/PartitionsDivision";
@@ -37,6 +37,27 @@ export default function Carousel({
   const [partitionPdf, setPartitionPdf] = useState<Partition | null>(null);
   const [workRecordingPdf, setworkRecordingPdf] =
     useState<WorkRecording | null>(null);
+
+  // const [visibleItems, setVisibleItems] = useState(new Set<string>());
+  // const observer = useRef<IntersectionObserver | null>(null);
+
+  // useEffect(() => {
+  //   observer.current = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           const id = entry.target.getAttribute("data-id");
+  //           if (id) {
+  //             setVisibleItems((prevVisibleItems) =>
+  //               new Set(prevVisibleItems).add(id)
+  //             );
+  //           }
+  //         }
+  //       });
+  //     },
+  //     { threshold: 0.1 }
+  //   );
+  // }, []);
 
   // Function to open zoomed image
   const openZoomedImage = (item: EventMainPage | Event | PressReview): void => {
@@ -198,7 +219,6 @@ export default function Carousel({
       )}
 
       {category === "workRecordings" &&
-        !workRecordingPdf &&
         images.map(
           (
             item:
@@ -210,11 +230,21 @@ export default function Carousel({
           ) => {
             if ("recordingUrl" in item) {
               return (
+                // <div
+                //   key={item._id}
+                //   data-id={item._id}
+                //   ref={(el) => {
+                //     if (el && observer.current) observer.current.observe(el);
+                //   }}
+                // >
+                // {visibleItems.has(item._id) && (
                 <WorkRecordingCard
                   key={item._id}
                   {...item}
                   openWorkRecordingPdf={openWorkRecordingPdf}
                 />
+                // )}
+                // </div>
               );
             }
           }
