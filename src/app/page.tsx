@@ -9,7 +9,7 @@ import PressReviewsContainer from "@/components/PressReviewsContainer";
 import SimpleForm from "@/components/SimpleForm";
 import ButtonLink from "@/components/ButtonLink";
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 export interface EventMainPage {
   _id: string;
