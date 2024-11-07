@@ -13,32 +13,6 @@ interface PartitionsDivisionProps {
 const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
   partitionsContainers,
 }) => {
-  // const { categories } = partitions;
-  // const [selectedCategory, setSelectedCategory] = useState<string>(
-  //   categories[0]
-  // );
-
-  // const selectedPartitions = partitions.partitionsGrouped.find(
-  //   (partitionGroup: PartitionGroup) =>
-  //     partitionGroup.category === selectedCategory
-  // )?.partitions;
-
-  // const handleSelectCategory = (eventKey: string | null): void => {
-  //   if (eventKey !== null) {
-  //     if (eventKey === "first") {
-  //       setSelectedCategory("A");
-  //     } else if (eventKey === "second") {
-  //       setSelectedCategory("B");
-  //     } else if (eventKey === "third") {
-  //       setSelectedCategory("C");
-  //     } else if (eventKey === "fourth") {
-  //       setSelectedCategory("D");
-  //     } else if (eventKey === "fifth") {
-  //       setSelectedCategory("E");
-  //     }
-  //   }
-  // };
-
   return (
     <div className={styles.partitionsDivision}>
       <h3>Nos Partitions</h3>

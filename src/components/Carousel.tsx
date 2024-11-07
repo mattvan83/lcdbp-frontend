@@ -4,7 +4,7 @@ import styles from "../styles/Carousel.module.css";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { EventMainPage, Event, PressReview } from "@/app/page";
-import { Partition } from "@/components/PartitionsDivision";
+import { Partition } from "@/app/membersSpace/partitions/page";
 import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
 import PressReviewCard from "./PressReviewCard";
 import EventCard from "./EventCard";

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "../styles/WorkRecordingCard.module.css";
-import { WorkRecording } from "@/components/WorkRecordingsDivision";
+import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 interface WorkRecordingCard {
