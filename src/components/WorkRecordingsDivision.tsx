@@ -2,19 +2,8 @@
 
 import React, { useState } from "react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
-import WorkRecordingsContainer from "@/components/WorkRecordingsContainer";
+import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
 import styles from "../styles/WorkRecordingsDivision.module.css";
-
-export interface WorkRecording {
-  _id: string;
-  title: string;
-  artwork: string;
-  partitionUrl: string;
-  partitionThumbnailUrl: string;
-  authorMusic: string;
-  recordingUrl: string;
-  recordingDescription: string;
-}
 
 interface WorkRecordingGroup {
   voice: string;
@@ -22,49 +11,17 @@ interface WorkRecordingGroup {
 }
 
 interface WorkRecordingsDivisionProps {
-  workRecordings: {
-    result: boolean;
-    voices: string[];
-    workRecordingsGrouped: WorkRecordingGroup[];
-  };
+  workRecordingsContainers: React.ReactNode[];
 }
 
 const WorkRecordingsDivision: React.FC<WorkRecordingsDivisionProps> = ({
-  workRecordings,
+  workRecordingsContainers,
 }) => {
-  const { voices } = workRecordings;
-  const [selectedVoice, setSelectedVoice] = useState<string>(voices[0]);
-
-  const selectedWorkRecordings = workRecordings.workRecordingsGrouped.find(
-    (workRecordingsGroup: WorkRecordingGroup) =>
-      workRecordingsGroup.voice === selectedVoice
-  )?.workRecordings;
-
-  const handleSelectVoice = (eventKey: string | null): void => {
-    if (eventKey !== null) {
-      if (eventKey === "first") {
-        setSelectedVoice("baryton");
-      } else if (eventKey === "second") {
-        setSelectedVoice("bass");
-      } else if (eventKey === "third") {
-        setSelectedVoice("tenor1");
-      } else if (eventKey === "fourth") {
-        setSelectedVoice("tenor2");
-      } else if (eventKey === "fifth") {
-        setSelectedVoice("tutti");
-      }
-    }
-  };
-
   return (
     <div className={styles.workRecordingsDivision}>
       <h3>Nos Enregistrements de Travail</h3>
 
-      <Tab.Container
-        id="left-tabs-example"
-        defaultActiveKey="first"
-        onSelect={handleSelectVoice}
-      >
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row className="mt-4 mb-4">
           <Col md={3}>
             <Nav variant="pills" className="flex-column">
@@ -98,43 +55,23 @@ const WorkRecordingsDivision: React.FC<WorkRecordingsDivisionProps> = ({
           <Col md={9}>
             <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
               <Tab.Pane eventKey="first" className={styles.tabSection}>
-                {selectedWorkRecordings && (
-                  <WorkRecordingsContainer
-                    workRecordings={selectedWorkRecordings}
-                  />
-                )}
+                {workRecordingsContainers && workRecordingsContainers[0]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="second" className={styles.tabSection}>
-                {selectedWorkRecordings && (
-                  <WorkRecordingsContainer
-                    workRecordings={selectedWorkRecordings}
-                  />
-                )}
+                {workRecordingsContainers && workRecordingsContainers[1]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="third" className={styles.tabSection}>
-                {selectedWorkRecordings && (
-                  <WorkRecordingsContainer
-                    workRecordings={selectedWorkRecordings}
-                  />
-                )}
+                {workRecordingsContainers && workRecordingsContainers[2]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fourth" className={styles.tabSection}>
-                {selectedWorkRecordings && (
-                  <WorkRecordingsContainer
-                    workRecordings={selectedWorkRecordings}
-                  />
-                )}
+                {workRecordingsContainers && workRecordingsContainers[3]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fifth" className={styles.tabSection}>
-                {selectedWorkRecordings && (
-                  <WorkRecordingsContainer
-                    workRecordings={selectedWorkRecordings}
-                  />
-                )}
+                {workRecordingsContainers && workRecordingsContainers[4]}
               </Tab.Pane>
             </Tab.Content>
           </Col>

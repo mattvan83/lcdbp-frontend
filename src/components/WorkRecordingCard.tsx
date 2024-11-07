@@ -86,7 +86,7 @@ function WorkRecordingCard({
           src={recordingUrl}
           controls={true}
           className={styles.audioPlayerControls}
-          preload="auto"
+          // preload="auto"
         >
           Your browser does not support the audio element.
         </audio>
