@@ -2,61 +2,42 @@
 
 import React, { useState } from "react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
+import { Partition } from "@/app/membersSpace/partitions/page";
 import PartitionsContainer from "@/components/PartitionsContainer";
 import styles from "../styles/PartitionsDivision.module.css";
 
-export interface Partition {
-  _id: string;
-  code: string;
-  title: string;
-  artwork: string;
-  partitionUrl: string;
-  partitionThumbnailUrl: string;
-  authorMusic: string;
-  isAtWork: boolean;
-}
-
-interface PartitionGroup {
-  category: string;
-  partitions: Partition[];
-}
-
 interface PartitionsDivisionProps {
-  partitions: {
-    result: boolean;
-    categories: string[];
-    partitionsGrouped: PartitionGroup[];
-  };
+  partitionsContainers: React.ReactNode[];
 }
 
 const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
-  partitions,
+  partitionsContainers,
 }) => {
-  const { categories } = partitions;
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    categories[0]
-  );
+  // const { categories } = partitions;
+  // const [selectedCategory, setSelectedCategory] = useState<string>(
+  //   categories[0]
+  // );
 
-  const selectedPartitions = partitions.partitionsGrouped.find(
-    (partitionGroup: PartitionGroup) =>
-      partitionGroup.category === selectedCategory
-  )?.partitions;
+  // const selectedPartitions = partitions.partitionsGrouped.find(
+  //   (partitionGroup: PartitionGroup) =>
+  //     partitionGroup.category === selectedCategory
+  // )?.partitions;
 
-  const handleSelectCategory = (eventKey: string | null): void => {
-    if (eventKey !== null) {
-      if (eventKey === "first") {
-        setSelectedCategory("A");
-      } else if (eventKey === "second") {
-        setSelectedCategory("B");
-      } else if (eventKey === "third") {
-        setSelectedCategory("C");
-      } else if (eventKey === "fourth") {
-        setSelectedCategory("D");
-      } else if (eventKey === "fifth") {
-        setSelectedCategory("E");
-      }
-    }
-  };
+  // const handleSelectCategory = (eventKey: string | null): void => {
+  //   if (eventKey !== null) {
+  //     if (eventKey === "first") {
+  //       setSelectedCategory("A");
+  //     } else if (eventKey === "second") {
+  //       setSelectedCategory("B");
+  //     } else if (eventKey === "third") {
+  //       setSelectedCategory("C");
+  //     } else if (eventKey === "fourth") {
+  //       setSelectedCategory("D");
+  //     } else if (eventKey === "fifth") {
+  //       setSelectedCategory("E");
+  //     }
+  //   }
+  // };
 
   return (
     <div className={styles.partitionsDivision}>
@@ -65,7 +46,7 @@ const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
       <Tab.Container
         id="left-tabs-example"
         defaultActiveKey="first"
-        onSelect={handleSelectCategory}
+        // onSelect={handleSelectCategory}
       >
         <Row className="mt-4 mb-4">
           <Col md={3}>
@@ -100,33 +81,23 @@ const PartitionsDivision: React.FC<PartitionsDivisionProps> = ({
           <Col md={9}>
             <Tab.Content className={`mx-4 ${styles.tabDivision}`}>
               <Tab.Pane eventKey="first" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
-                )}
+                {partitionsContainers && partitionsContainers[0]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="second" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
-                )}
+                {partitionsContainers && partitionsContainers[1]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="third" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
-                )}
+                {partitionsContainers && partitionsContainers[2]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fourth" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
-                )}
+                {partitionsContainers && partitionsContainers[3]}
               </Tab.Pane>
 
               <Tab.Pane eventKey="fifth" className={styles.tabSection}>
-                {selectedPartitions && (
-                  <PartitionsContainer partitions={selectedPartitions} />
-                )}
+                {partitionsContainers && partitionsContainers[4]}
               </Tab.Pane>
             </Tab.Content>
           </Col>

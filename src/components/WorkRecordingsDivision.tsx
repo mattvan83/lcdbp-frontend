@@ -5,11 +5,6 @@ import { Tab, Row, Col, Nav } from "react-bootstrap";
 import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
 import styles from "../styles/WorkRecordingsDivision.module.css";
 
-interface WorkRecordingGroup {
-  voice: string;
-  workRecordings: WorkRecording[];
-}
-
 interface WorkRecordingsDivisionProps {
   workRecordingsContainers: React.ReactNode[];
 }
