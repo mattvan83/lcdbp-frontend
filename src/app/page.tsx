@@ -59,13 +59,14 @@ export interface PressReview {
 const eventImages: EventMainPage[] = [
   {
     _id: "1",
-    thumbnailUrl: "/Prochaines_prestations.jpg",
-    thumbnailDescription: "Prochaines prestations",
+    thumbnailUrl: "/2024-12-14_Concert_de_Noël.jpg",
+    thumbnailDescription:
+      "Concert de Noël à Saint Nizier-le-Bouchoux le 14 Décembre 2024",
   },
   {
     _id: "2",
-    thumbnailUrl: "/2024-11-24_Concert_Cousance.jpg",
-    thumbnailDescription: "Concert à Cousance le 24 Novembre 2024",
+    thumbnailUrl: "/2025-04-26_Concert_de_Printemps.jpg",
+    thumbnailDescription: "Concert de Printemps à Marboz le 26 Avril 2025",
   },
   {
     _id: "3",
