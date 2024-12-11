@@ -4,7 +4,7 @@ import AudioPlayer from "@/components/AudioPlayer";
 import ListeningsContainer from "@/components/ListeningsContainer";
 import { Track } from "@/app/page";
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 export default async function Listenings() {
   const response = await fetch(`${BACKEND_ADDRESS}/listenings`);
