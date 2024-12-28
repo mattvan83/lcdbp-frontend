@@ -59,9 +59,8 @@ export interface PressReview {
 const eventImages: EventMainPage[] = [
   {
     _id: "1",
-    thumbnailUrl: "/2024-12-14_Concert_de_Noël.jpg",
-    thumbnailDescription:
-      "Concert de Noël à Saint Nizier-le-Bouchoux le 14 Décembre 2024",
+    thumbnailUrl: "/NewYear_2025.jpeg",
+    thumbnailDescription: "Souhaits de Nouvelle Année 2025",
   },
   {
     _id: "2",
