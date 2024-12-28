@@ -9,7 +9,7 @@ export interface EventGroup {
   events: Event[];
 }
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 export default async function Events() {
   const response = await fetch(`${BACKEND_ADDRESS}/events/grouped`);
