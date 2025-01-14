@@ -1,0 +1,144 @@
+generator nextAdmin {
+  provider = "next-admin-generator-prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type StudiedworksWorkRecordings {
+  id      String                              @map("_id") @db.ObjectId
+  baryton StudiedworksWorkRecordingsBaryton[]
+  bass    StudiedworksWorkRecordingsBass[]
+  tenor1  StudiedworksWorkRecordingsTenor1[]
+  tenor2  StudiedworksWorkRecordingsTenor2[]
+  tutti   StudiedworksWorkRecordingsTutti[]
+}
+
+type StudiedworksWorkRecordingsBaryton {
+  id                   String @map("_id") @db.ObjectId
+  recordingDescription String
+  recordingUrl         String
+}
+
+type StudiedworksWorkRecordingsBass {
+  id                   String @map("_id") @db.ObjectId
+  recordingDescription String
+  recordingUrl         String
+}
+
+type StudiedworksWorkRecordingsTenor1 {
+  id                   String @map("_id") @db.ObjectId
+  recordingDescription String
+  recordingUrl         String
+}
+
+type StudiedworksWorkRecordingsTenor2 {
+  id                   String @map("_id") @db.ObjectId
+  recordingDescription String
+  recordingUrl         String
+}
+
+type StudiedworksWorkRecordingsTutti {
+  id                   String @map("_id") @db.ObjectId
+  recordingDescription String
+  recordingUrl         String
+}
+
+model contacts {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int      @map("__v")
+  createdAt DateTime @db.Date
+  email     String
+  firstname String
+  lastname  String
+  message   String
+  ownCopy   Boolean
+  phone     String
+  updatedAt DateTime @db.Date
+}
+
+model events {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  v                    Int      @map("__v")
+  chores               String[]
+  city                 String
+  createdAt            DateTime @db.Date
+  eventDate            DateTime @db.Date
+  place                String
+  postalCode           String
+  price                String
+  thumbnailDescription String
+  thumbnailUrl         String
+  title                String
+  updatedAt            DateTime @db.Date
+}
+
+model listenings {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  v                    Int      @map("__v")
+  arrangement          String?
+  artwork              String?
+  audioUrl             String
+  authorMusic          String
+  authorText           String?
+  createdAt            DateTime @db.Date
+  lastListening        Boolean
+  recordingDate        DateTime @db.Date
+  thumbnailDescription String
+  thumbnailUrl         String
+  title                String
+  updatedAt            DateTime @db.Date
+}
+
+model pressreviews {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  v                    Int      @map("__v")
+  city                 String
+  createdAt            DateTime @db.Date
+  journal              String
+  lastPressReview      Boolean
+  pressReviewDate      DateTime @db.Date
+  thumbnailDescription String
+  thumbnailUrl         String
+  title                String
+  updatedAt            DateTime @db.Date
+}
+
+model studiedworks {
+  id                    String                     @id @default(auto()) @map("_id") @db.ObjectId
+  v                     Int                        @map("__v")
+  artwork               String?
+  authorMusic           String?
+  code                  String
+  createdAt             DateTime                   @db.Date
+  isAtWork              Boolean
+  partitionThumbnailUrl String
+  partitionUrl          String
+  title                 String
+  updatedAt             DateTime                   @db.Date
+  workRecordings        StudiedworksWorkRecordings
+}
+
+model users {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  v            Int      @map("__v")
+  address      String
+  birthDate    DateTime @db.Date
+  city         String
+  createdAt    DateTime @db.Date
+  email        String
+  firstname    String
+  incomingDate DateTime @db.Date
+  lastname     String
+  mobile       String?
+  password     String?
+  phone        String?
+  postalCode   String
+  token        String?
+  type         String
+  updatedAt    DateTime @db.Date
+  username     String?
+  voice        String
+}
