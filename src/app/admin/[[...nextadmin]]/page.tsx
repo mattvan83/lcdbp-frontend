@@ -1,6 +1,6 @@
 import { NextAdmin, PageProps } from "@premieroctet/next-admin";
 import { getNextAdminProps } from "@premieroctet/next-admin/appRouter";
-import { prisma } from "@/prisma";
+import { prisma } from "@/lib/prisma";
 import "@/app/globals.css"; // .css file containing tailiwnd rules
 
 export default async function AdminPage({ params, searchParams }: PageProps) {

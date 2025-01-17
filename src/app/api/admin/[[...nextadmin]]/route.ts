@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from "@/lib/prisma";
 import { createHandler } from "@premieroctet/next-admin/appHandler";
 
 const { run } = createHandler({
