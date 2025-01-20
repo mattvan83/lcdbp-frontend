@@ -7,24 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  v            Int      @map("__v")
-  address      String
-  birthDate    DateTime @db.Date
-  city         String
-  createdAt    DateTime @db.Date
-  email        String
-  firstname    String
-  incomingDate DateTime @db.Date
-  lastname     String
-  mobile       String?
-  password     String?
-  phone        String?
-  postalCode   String
-  token        String?
-  type         String
-  updatedAt    DateTime @db.Date
-  username     String?
-  voice        String
+model contacts {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int      @map("__v")
+  createdAt DateTime @db.Date
+  email     String
+  firstname String
+  lastname  String
+  message   String
+  ownCopy   Boolean
+  phone     String
+  updatedAt DateTime @db.Date
 }
