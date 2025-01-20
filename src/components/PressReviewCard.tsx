@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "../styles/PressReviewCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { PressReview } from "@/app/page";
+import { PressReview } from "@/app/(public)/page";
 
 interface PressReviewCard {
   _id: string;

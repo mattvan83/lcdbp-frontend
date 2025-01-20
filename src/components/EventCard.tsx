@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "../styles/EventCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Event } from "@/app/page";
+import { Event } from "@/app/(public)/page";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 interface EventCard {

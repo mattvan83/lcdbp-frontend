@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import styles from "../styles/EventsContainer.module.css";
 import Carousel from "@/components/Carousel";
-import { Event } from "@/app/page";
+import { Event } from "@/app/(public)/page";
 import ButtonLink from "./ButtonLink";
 
 interface EventsContainerProps {

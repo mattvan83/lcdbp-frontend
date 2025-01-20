@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/PartitionsContainer.module.css";
 import Carousel from "@/components/Carousel";
-import { Partition } from "@/app/membersSpace/partitions/page";
+import { Partition } from "@/app/(public)/membersSpace/partitions/page";
 
 interface PartitionsContainerProps {
   partitions: Partition[];

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "react-bootstrap/Button";
 import styles from "../styles/PressReviewsContainer.module.css";
 import Carousel from "@/components/Carousel";
-import { PressReview } from "@/app/page";
+import { PressReview } from "@/app/(public)/page";
 import ButtonLink from "./ButtonLink";
 
 interface PressReviewsContainerProps {

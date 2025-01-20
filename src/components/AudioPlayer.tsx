@@ -1,6 +1,6 @@
 import styles from "../styles/AudioPlayer.module.css";
 import Image from "next/image";
-import { Track } from "@/app/page";
+import { Track } from "@/app/(public)/page";
 
 export default function AudioPlayer({
   title,

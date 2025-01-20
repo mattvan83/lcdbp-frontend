@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import AudioPlayer from "@/components/AudioPlayer";
 import ListeningsContainer from "@/components/ListeningsContainer";
-import { Track } from "@/app/page";
+import { Track } from "@/app/(public)/page";
 
 const { BACKEND_ADDRESS } = process.env;
 

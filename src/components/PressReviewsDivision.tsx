@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { Dropdown, DropdownButton, Row, Col, Container } from "react-bootstrap";
 import PressReviewsContainer from "@/components/PressReviewsContainer";
-import { PressReview } from "@/app/page";
-import { PressReviewGroup } from "@/app/pressReviews/page";
+import { PressReview } from "@/app/(public)/page";
+import { PressReviewGroup } from "@/app/(public)/pressReviews/page";
 import styles from "../styles/PressReviewsDivision.module.css";
 
 interface PressReviewsDivisionProps {

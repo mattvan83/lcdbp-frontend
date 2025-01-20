@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/WorkRecordingsContainer.module.css";
 import Carousel from "@/components/Carousel";
-import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
+import { WorkRecording } from "@/app/(public)/membersSpace/workRecordings/page";
 
 interface WorkRecordingsContainerProps {
   workRecordings: WorkRecording[];

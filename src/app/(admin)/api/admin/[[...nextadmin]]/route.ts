@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { createHandler } from "@premieroctet/next-admin/appHandler";
 
+console.log("Prisma instance:", prisma);
+
 const { run } = createHandler({
   apiBasePath: "/api/admin",
   prisma,

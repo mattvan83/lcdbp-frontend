@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Dropdown, DropdownButton, Row, Col, Container } from "react-bootstrap";
 import EventContainer from "@/components/EventsContainer";
-import { EventGroup } from "@/app/events/page";
+import { EventGroup } from "@/app/(public)/events/page";
 import styles from "../styles/EventsDivision.module.css";
 
 interface EventsDivisionProps {

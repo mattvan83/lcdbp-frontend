@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "../styles/PartitionCard.module.css";
-import { Partition } from "@/app/membersSpace/partitions/page";
+import { Partition } from "@/app/(public)/membersSpace/partitions/page";
 import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 
 interface PartitionCard {

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
-import { WorkRecording } from "@/app/membersSpace/workRecordings/page";
+import { WorkRecording } from "@/app/(public)/membersSpace/workRecordings/page";
 import styles from "../styles/WorkRecordingsDivision.module.css";
 
 interface WorkRecordingsDivisionProps {

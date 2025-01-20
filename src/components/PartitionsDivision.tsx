@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Tab, Row, Col, Nav } from "react-bootstrap";
-import { Partition } from "@/app/membersSpace/partitions/page";
+import { Partition } from "@/app/(public)/membersSpace/partitions/page";
 import PartitionsContainer from "@/components/PartitionsContainer";
 import styles from "../styles/PartitionsDivision.module.css";
 

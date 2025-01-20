@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Event } from "@/app/page";
+import { Event } from "@/app/(public)/page";
 import Carousel from "@/components/Carousel";
 import EventsDivision from "@/components/EventsDivision";
 

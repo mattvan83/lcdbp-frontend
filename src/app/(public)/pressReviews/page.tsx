@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { PressReview } from "@/app/page";
+import { PressReview } from "@/app/(public)/page";
 import PressReviewsDivision from "@/components/PressReviewsDivision";
 
 export interface PressReviewGroup {
