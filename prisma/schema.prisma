@@ -11,6 +11,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Voice {
+  B1
+  B2
+  T1
+  T2
+}
+
+enum Type {
+  admin
+  user
+}
+
 type StudiedworksWorkRecordings {
   id      String                              @map("_id") @db.ObjectId
   baryton StudiedworksWorkRecordingsBaryton[]
@@ -141,8 +153,8 @@ model users {
   phone        String?
   postalCode   String
   token        String?
-  type         String
+  type         Type     @default(user)
   updatedAt    DateTime @db.Date
   username     String?
-  voice        String
+  voice        Voice
 }
