@@ -139,11 +139,11 @@ model studiedworks {
 
 model users {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  v            Int      @map("__v")
+  v            Int      @map("__v") @default(0)
   address      String
   birthDate    DateTime @db.Date
   city         String
-  createdAt    DateTime @db.Date
+  createdAt    DateTime @db.Date @default(now())
   email        String
   firstname    String
   incomingDate DateTime @db.Date
@@ -154,7 +154,7 @@ model users {
   postalCode   String
   token        String?
   type         Type     @default(user)
-  updatedAt    DateTime @db.Date
+  updatedAt    DateTime @db.Date @updatedAt
   username     String?
   voice        Voice
 }
