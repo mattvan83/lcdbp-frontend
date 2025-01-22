@@ -101,11 +101,11 @@ export const options: NextAdminOptions = {
           "mobile",
           "type",
         ],
-        fields: {
-          voice: {
-            format: "textarea",
-          },
-        },
+        // fields: {
+        //   voice: {
+        //     format: "textarea",
+        //   },
+        // },
       },
     },
     listenings: {

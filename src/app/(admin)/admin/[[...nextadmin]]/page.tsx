@@ -20,7 +20,3 @@ export default async function AdminPage({ params, searchParams }: PageProps) {
 
   return <NextAdmin {...props} />;
 }
-
-// export default function AdminDashboard() {
-//   return <h1>Admin Dashboard</h1>;
-// }
