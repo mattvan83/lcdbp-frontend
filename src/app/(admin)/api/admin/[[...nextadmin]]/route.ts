@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { createHandler } from "@premieroctet/next-admin/appHandler";
 import { options } from "@/lib/options";
+import { cookies } from "next/headers";
 
 // console.log("Prisma instance:", prisma);
 
@@ -10,11 +11,10 @@ const { run } = createHandler({
   /*options*/
   options,
   onRequest: async (req: Request) => {
-    const url = new URL(req.url);
-    const { searchParams } = url;
-
-    // Access query parameters
-    const userToken = searchParams.get("token");
+    // Get the token from cookies
+    const cookieStore = cookies();
+    const userToken = cookieStore.get("user_token")?.value;
+    // console.log("userToken: ", userToken);
 
     if (!userToken) {
       return Response.json({ error: "Forbidden" }, { status: 403 });
@@ -27,6 +27,7 @@ const { run } = createHandler({
         type: "admin",
       },
     });
+    // console.log("user: ", user);
 
     if (!user) {
       return Response.json({ error: "Forbidden" }, { status: 403 });

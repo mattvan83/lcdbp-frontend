@@ -13,6 +13,7 @@ import {
   faCirclePlay,
   faNewspaper,
   faAddressBook,
+  faSliders,
 } from "@fortawesome/free-solid-svg-icons";
 // import { IconContext } from "react-icons";
 import Image from "next/image";
@@ -37,6 +38,7 @@ import {
 } from "@/lib/features/UserState/UserSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
@@ -175,12 +177,26 @@ export default function Header() {
     }
   }
 
+  const handleAdminClick = () => {
+    if (user.token) {
+      // Set the token in a cookie before navigating
+      Cookies.set("user_token", user.token, { path: "/" });
+    }
+  };
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.headerIcons}>
           <Image src="/Logo.jpg" alt="Logo" width={100} height={100} />
           {userSection}
+          {user.token && user.type === "admin" && (
+            <Link href="/admin" onClick={handleAdminClick}>
+              <Button variant="warning" className={styles.buttonLink}>
+                Admin
+              </Button>
+            </Link>
+          )}
         </div>
         <Navbar expand="lg" className={styles.navbarBootstrap}>
           <Container className={styles.navbarContainer}>

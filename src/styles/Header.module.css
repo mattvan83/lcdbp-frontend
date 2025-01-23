@@ -55,6 +55,12 @@
   /* border: red solid 1px; */
 }
 
+.buttonLink {
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+}
+
 .navbarBootstrap {
   background: #eee0e0;
   /* font-size: 14px; */
