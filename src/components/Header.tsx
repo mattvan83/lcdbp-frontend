@@ -90,10 +90,16 @@ export default function Header() {
   const fillCnxInfos = (
     apiToken: string,
     apiUsername: string,
-    apiFirstname: string
+    apiFirstname: string,
+    apiType: string
   ): void => {
     dispatch(
-      login({ token: apiToken, username: apiUsername, firstname: apiFirstname })
+      login({
+        token: apiToken,
+        username: apiUsername,
+        firstname: apiFirstname,
+        type: apiType,
+      })
     );
   };
 
