@@ -86,6 +86,7 @@ export default function Header() {
     console.log("Logout done!");
     dispatch(logout());
     dispatch(updateActiveKey("home"));
+    Cookies.remove("user_token", { path: "/" });
     router.push("/");
   };
 
@@ -180,7 +181,12 @@ export default function Header() {
   const handleAdminClick = () => {
     if (user.token) {
       // Set the token in a cookie before navigating
-      Cookies.set("user_token", user.token, { path: "/" });
+      Cookies.set("user_token", user.token, {
+        path: "/",
+        secure: true,
+        sameSite: "strict",
+        expires: 7,
+      });
     }
   };
 
