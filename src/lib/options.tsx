@@ -29,6 +29,25 @@ export const options: NextAdminOptions = {
           "city",
           "price",
         ],
+        fields: {
+          eventDate: {
+            formatter: (value) => {
+              const inputDate = new Date(value);
+              const options: Intl.DateTimeFormatOptions = {
+                // weekday: "long", // full weekday name
+                day: "numeric", // day of the month
+                month: "numeric", // full month name
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+              };
+              return inputDate
+                .toLocaleString("fr-FR", options)
+                .replace(":", "h")
+                .toUpperCase();
+            },
+          },
+        },
         search: ["eventDate", "title"],
         defaultSort: {
           field: "eventDate",
@@ -102,6 +121,16 @@ export const options: NextAdminOptions = {
           "postalCode",
           "city",
         ],
+        fields: {
+          incomingDate: {
+            formatter: (value) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+          birthDate: {
+            formatter: (value) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+        },
         search: ["firstname", "lastname"],
         defaultSort: {
           field: "lastname",

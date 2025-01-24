@@ -144,7 +144,7 @@ model users {
   birthDate    DateTime @db.Date
   city         String
   createdAt    DateTime @db.Date @default(now())
-  email        String
+  email        String   @unique
   firstname    String
   incomingDate DateTime @db.Date
   lastname     String
