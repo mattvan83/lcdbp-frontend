@@ -77,10 +77,10 @@ model contacts {
 
 model events {
   id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  v                    Int      @map("__v")
+  v                    Int      @map("__v") @default(0)
   chores               String[]
   city                 String
-  createdAt            DateTime @db.Date
+  createdAt            DateTime @db.Date @default(now())
   eventDate            DateTime @db.Date
   place                String
   postalCode           String
@@ -88,7 +88,7 @@ model events {
   thumbnailDescription String
   thumbnailUrl         String
   title                String
-  updatedAt            DateTime @db.Date
+  updatedAt            DateTime @db.Date @updatedAt
 }
 
 model listenings {

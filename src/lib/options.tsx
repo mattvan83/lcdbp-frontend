@@ -1,4 +1,7 @@
 import { NextAdminOptions } from "@premieroctet/next-admin";
+import { cookies } from "next/headers";
+
+const { BACKEND_ADDRESS } = process.env;
 
 export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
@@ -12,8 +15,76 @@ export const options: NextAdminOptions = {
       icon: "InboxArrowDownIcon",
     },
     events: {
+      toString: (events) => `${events.thumbnailDescription}`,
       title: "Evènements",
       icon: "CalendarDaysIcon",
+      list: {
+        display: [
+          "id",
+          "eventDate",
+          "title",
+          "chores",
+          "place",
+          "postalCode",
+          "city",
+          "price",
+        ],
+        search: ["eventDate", "title"],
+        defaultSort: {
+          field: "eventDate",
+          direction: "desc",
+        },
+        filters: [],
+      },
+      edit: {
+        display: [
+          "id",
+          "eventDate",
+          "title",
+          "thumbnailUrl",
+          "thumbnailDescription",
+          "chores",
+          "place",
+          "postalCode",
+          "city",
+          "price",
+        ],
+        fields: {
+          thumbnailUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("thumbnailFromFront", file);
+                formData.append(
+                  "imageExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/events/uploadThumbnail`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.thumbnailUrl;
+                }
+                throw new Error("Upload to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload to Cloudinary failed",
+            },
+          },
+        },
+      },
     },
     users: {
       toString: (users) => `${users.firstname} ${users.lastname}`,
