@@ -43,5 +43,14 @@ export default async function AdminPage({ params, searchParams }: PageProps) {
     options,
   });
 
-  return <NextAdmin {...props} />;
+  return (
+    <NextAdmin
+      {...props}
+      user={{
+        data: {
+          name: `${user.firstname}`,
+        },
+      }}
+    />
+  );
 }

@@ -20,10 +20,9 @@ export const options: NextAdminOptions = {
       icon: "CalendarDaysIcon",
       list: {
         display: [
-          "id",
+          // "id",
           "eventDate",
           "title",
-          "chores",
           "place",
           "postalCode",
           "city",
@@ -104,6 +103,17 @@ export const options: NextAdminOptions = {
           },
         },
       },
+      aliases: {
+        eventDate: "Date",
+        title: "Titre",
+        thumbnailUrl: "Affiche",
+        thumbnailDescription: "Description de l'affiche",
+        chores: "Choeurs participants",
+        place: "Lieu",
+        postalCode: "Code postal",
+        city: "Ville",
+        price: "Prix",
+      },
     },
     users: {
       toString: (users) => `${users.firstname} ${users.lastname}`,
@@ -111,7 +121,7 @@ export const options: NextAdminOptions = {
       icon: "UserIcon",
       list: {
         display: [
-          "id",
+          // "id",
           "firstname",
           "lastname",
           "email",
@@ -206,6 +216,20 @@ export const options: NextAdminOptions = {
         //     format: "textarea",
         //   },
         // },
+      },
+      aliases: {
+        firstname: "Prénom",
+        lastname: "Nom",
+        email: "Mail",
+        voice: "Voix",
+        incomingDate: "Date d'entrée",
+        birthDate: "Anniversaire",
+        address: "Adresse",
+        postalCode: "Code postal",
+        city: "Ville",
+        phone: "Téléphone",
+        mobile: "Portable",
+        type: "Rôle",
       },
     },
     listenings: {
