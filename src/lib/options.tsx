@@ -11,8 +11,59 @@ export const options: NextAdminOptions = {
       icon: "BriefcaseIcon",
     },
     contacts: {
+      toString: (contacts) =>
+        `${contacts.firstname} ${contacts.lastname} (${contacts.email})`,
       title: "Contacts",
       icon: "InboxArrowDownIcon",
+      list: {
+        display: [
+          // "id",
+          "createdAt",
+          "firstname",
+          "lastname",
+          "email",
+          "phone",
+          "message",
+        ],
+        fields: {
+          createdAt: {
+            formatter: (value) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+        },
+        search: ["firstname", "lastname", "email"],
+        defaultSort: {
+          field: "createdAt",
+          direction: "desc",
+        },
+        filters: [],
+      },
+      edit: {
+        display: [
+          "id",
+          "createdAt",
+          "firstname",
+          "lastname",
+          "email",
+          "phone",
+          "message",
+          "ownCopy",
+        ],
+        fields: {
+          message: {
+            format: "textarea",
+          },
+        },
+      },
+      aliases: {
+        createdAt: "Date de réception",
+        firstname: "Prénom",
+        lastname: "Nom",
+        email: "Mail",
+        phone: "Téléphone",
+        message: "Message",
+        ownCopy: "Copie personnelle",
+      },
     },
     events: {
       toString: (events) => `${events.thumbnailDescription}`,
