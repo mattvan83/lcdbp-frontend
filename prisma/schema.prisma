@@ -93,19 +93,20 @@ model events {
 
 model listenings {
   id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  v                    Int      @map("__v")
+  v                    Int      @map("__v") @default(0)
   arrangement          String?
+  harmonization        String?
   artwork              String?
   audioUrl             String
   authorMusic          String
   authorText           String?
-  createdAt            DateTime @db.Date
+  createdAt            DateTime @db.Date @default(now())
   lastListening        Boolean
   recordingDate        DateTime @db.Date
   thumbnailDescription String
   thumbnailUrl         String
   title                String
-  updatedAt            DateTime @db.Date
+  updatedAt            DateTime @db.Date @updatedAt
 }
 
 model pressreviews {

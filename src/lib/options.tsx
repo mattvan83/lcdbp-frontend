@@ -233,8 +233,129 @@ export const options: NextAdminOptions = {
       },
     },
     listenings: {
+      toString: (listenings) =>
+        listenings.authorMusic
+          ? `${listenings.title} (${listenings.authorMusic})`
+          : `${listenings.title}`,
       title: "Prestations",
       icon: "MusicalNoteIcon",
+      list: {
+        display: [
+          // "id",
+          "recordingDate",
+          "title",
+          "authorMusic",
+        ],
+        fields: {
+          recordingDate: {
+            formatter: (value) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+        },
+        search: ["recordingDate", "title", "authorMusic"],
+        defaultSort: {
+          field: "recordingDate",
+          direction: "desc",
+        },
+        filters: [],
+      },
+      edit: {
+        display: [
+          "id",
+          "recordingDate",
+          "title",
+          "artwork",
+          "audioUrl",
+          "authorText",
+          "authorMusic",
+          "arrangement",
+          "harmonization",
+          "thumbnailUrl",
+          "thumbnailDescription",
+          "lastListening",
+        ],
+        fields: {
+          audioUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("listeningFromFront", file);
+                formData.append(
+                  "listeningExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/listenings/uploadListening`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.audioUrl;
+                }
+                throw new Error("Upload audio to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload audio to Cloudinary failed",
+            },
+          },
+          thumbnailUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("thumbnailFromFront", file);
+                formData.append(
+                  "imageExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/listenings/uploadThumbnail`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.thumbnailUrl;
+                }
+                throw new Error("Upload thumbnail to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload thumbnail to Cloudinary failed",
+            },
+          },
+        },
+      },
+      aliases: {
+        recordingDate: "Date d'enregistrement",
+        title: "Titre",
+        artwork: "Oeuvre",
+        audioUrl: "Enregistrement",
+        authorText: "Parolier",
+        authorMusic: "Compositeur",
+        arrangement: "Arrangement",
+        harmonization: "Harmonisation",
+        thumbnailUrl: "Image associée",
+        thumbnailDescription: "Description de l'image associée",
+        lastListening: "Enregistrement récent",
+      },
     },
     pressreviews: {
       toString: (pressreviews) => `${pressreviews.thumbnailDescription}`,
