@@ -110,16 +110,16 @@ model listenings {
 
 model pressreviews {
   id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  v                    Int      @map("__v")
+  v                    Int      @map("__v") @default(0)
   city                 String
-  createdAt            DateTime @db.Date
+  createdAt            DateTime @db.Date @default(now())
   journal              String
   lastPressReview      Boolean
   pressReviewDate      DateTime @db.Date
   thumbnailDescription String
   thumbnailUrl         String
   title                String
-  updatedAt            DateTime @db.Date
+  updatedAt            DateTime @db.Date @updatedAt
 }
 
 model studiedworks {

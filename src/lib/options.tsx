@@ -237,8 +237,85 @@ export const options: NextAdminOptions = {
       icon: "MusicalNoteIcon",
     },
     pressreviews: {
+      toString: (pressreviews) => `${pressreviews.thumbnailDescription}`,
       title: "Revues de Presse",
       icon: "NewspaperIcon",
+      list: {
+        display: [
+          // "id",
+          "pressReviewDate",
+          "title",
+          "journal",
+          "city",
+        ],
+        fields: {
+          pressReviewDate: {
+            formatter: (value) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+        },
+        search: ["pressReviewDate", "title"],
+        defaultSort: {
+          field: "pressReviewDate",
+          direction: "desc",
+        },
+        filters: [],
+      },
+      edit: {
+        display: [
+          "id",
+          "pressReviewDate",
+          "title",
+          "journal",
+          "thumbnailUrl",
+          "thumbnailDescription",
+          "city",
+          "lastPressReview",
+        ],
+        fields: {
+          thumbnailUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("thumbnailFromFront", file);
+                formData.append(
+                  "imageExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/pressReviews/uploadThumbnail`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.thumbnailUrl;
+                }
+                throw new Error("Upload to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload to Cloudinary failed",
+            },
+          },
+        },
+      },
+      aliases: {
+        pressReviewDate: "Date",
+        title: "Titre",
+        thumbnailUrl: "Coupure de presse",
+        thumbnailDescription: "Description de la coupure de presse",
+        city: "Ville",
+        lastPressReview: "Coupure de presse récente",
+      },
     },
   },
   // pages: {
