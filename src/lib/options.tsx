@@ -7,8 +7,102 @@ export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
   model: {
     studiedworks: {
+      toString: (studiedworks) => `${studiedworks.code} ${studiedworks.title}`,
       title: "Chants Travaillés",
       icon: "BriefcaseIcon",
+      list: {
+        display: [
+          // "id",
+          "code",
+          "title",
+          "authorMusic",
+          "isAtWork",
+        ],
+        fields: {},
+        search: ["code", "title", "authorMusic"],
+        defaultSort: {
+          field: "code",
+          direction: "asc",
+        },
+        filters: [
+          {
+            name: "Profanes",
+            active: false,
+            value: {
+              code: {
+                startsWith: "A",
+              },
+            },
+          },
+          {
+            name: "Religieux",
+            active: false,
+            value: {
+              code: {
+                startsWith: "B",
+              },
+            },
+          },
+          {
+            name: "Classique",
+            active: false,
+            value: {
+              code: {
+                startsWith: "C",
+              },
+            },
+          },
+          {
+            name: "Traditionnel",
+            active: false,
+            value: {
+              code: {
+                startsWith: "D",
+              },
+            },
+          },
+          {
+            name: "Noël",
+            active: false,
+            value: {
+              code: {
+                startsWith: "E",
+              },
+            },
+          },
+        ],
+        exports: [],
+      },
+      edit: {
+        display: [
+          "id",
+          "code",
+          "title",
+          "artwork",
+          "authorMusic",
+          "partitionUrl",
+          // "partitionThumbnailUrl",
+          "workRecordings",
+          "isAtWork",
+        ],
+        fields: {
+          partitionUrl: {
+            format: "file",
+          },
+          // partitionThumbnailUrl: {
+          //   format: "file",
+          // },
+        },
+      },
+      aliases: {
+        code: "Thème",
+        title: "Titre",
+        artwork: "Oeuvre",
+        authorMusic: "Compositeur",
+        partitionUrl: "Partition",
+        workRecordings: "Enregistrements de travail",
+        isAtWork: "En cours d'étude",
+      },
     },
     contacts: {
       toString: (contacts) =>
