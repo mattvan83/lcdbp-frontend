@@ -1,3 +1,20 @@
+type Recording {
+  id                   String  @map("_id") @db.ObjectId
+  recordingUrl         String?
+  recordingDescription String?
+}
+
+type WorkRecordings {
+  id      String  @map("_id") @db.ObjectId
+  baryton Recording[]
+  bass    Recording[]
+  tenor1  Recording[]
+  tenor2  Recording[]
+  tutti   Recording[]
+}
+
+
+
 enum Section {
   BARYTON
   BASS

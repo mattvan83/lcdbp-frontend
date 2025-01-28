@@ -17,6 +17,7 @@ export const options: NextAdminOptions = {
           "title",
           "authorMusic",
           "isAtWork",
+          // "workRecordings",
         ],
         fields: {},
         search: ["code", "title", "authorMusic"],
@@ -88,6 +89,9 @@ export const options: NextAdminOptions = {
         fields: {
           partitionUrl: {
             format: "file",
+          },
+          workRecordings: {
+            format: "json", // Enable JSON editing
           },
         },
       },
