@@ -82,16 +82,13 @@ export const options: NextAdminOptions = {
           "authorMusic",
           "partitionUrl",
           // "partitionThumbnailUrl",
-          "workRecordings",
           "isAtWork",
+          "workRecordings",
         ],
         fields: {
           partitionUrl: {
             format: "file",
           },
-          // partitionThumbnailUrl: {
-          //   format: "file",
-          // },
         },
       },
       aliases: {
@@ -293,7 +290,7 @@ export const options: NextAdminOptions = {
         },
         filters: [
           {
-            name: "Basses",
+            name: "Barytons",
             active: false,
             value: {
               voice: {
@@ -302,7 +299,7 @@ export const options: NextAdminOptions = {
             },
           },
           {
-            name: "Barytons",
+            name: "Basses",
             active: false,
             value: {
               voice: {

@@ -11,57 +11,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Voice {
-  B1
-  B2
-  T1
-  T2
-}
-
-enum Type {
-  admin
-  user
-}
-
-type StudiedworksWorkRecordings {
-  id      String                              @map("_id") @db.ObjectId
-  baryton StudiedworksWorkRecordingsBaryton[]
-  bass    StudiedworksWorkRecordingsBass[]
-  tenor1  StudiedworksWorkRecordingsTenor1[]
-  tenor2  StudiedworksWorkRecordingsTenor2[]
-  tutti   StudiedworksWorkRecordingsTutti[]
-}
-
-type StudiedworksWorkRecordingsBaryton {
-  id                   String @map("_id") @db.ObjectId
-  recordingDescription String
-  recordingUrl         String
-}
-
-type StudiedworksWorkRecordingsBass {
-  id                   String @map("_id") @db.ObjectId
-  recordingDescription String
-  recordingUrl         String
-}
-
-type StudiedworksWorkRecordingsTenor1 {
-  id                   String @map("_id") @db.ObjectId
-  recordingDescription String
-  recordingUrl         String
-}
-
-type StudiedworksWorkRecordingsTenor2 {
-  id                   String @map("_id") @db.ObjectId
-  recordingDescription String
-  recordingUrl         String
-}
-
-type StudiedworksWorkRecordingsTutti {
-  id                   String @map("_id") @db.ObjectId
-  recordingDescription String
-  recordingUrl         String
-}
-
 model contacts {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   v         Int      @map("__v") @default(0)
@@ -123,19 +72,46 @@ model pressreviews {
   updatedAt            DateTime @db.Date @updatedAt
 }
 
+type Recording {
+  id                   String  @map("_id") @db.ObjectId
+  recordingUrl         String?
+  recordingDescription String?
+}
+
+type WorkRecordings {
+  id      String  @map("_id") @db.ObjectId
+  baryton Recording[]
+  bass    Recording[]
+  tenor1  Recording[]
+  tenor2  Recording[]
+  tutti   Recording[]
+}
+
 model studiedworks {
   id                    String                     @id @default(auto()) @map("_id") @db.ObjectId
-  v                     Int                        @map("__v")
+  v                     Int                        @map("__v") @default(0)
   artwork               String?
   authorMusic           String?
   code                  String
-  createdAt             DateTime                   @db.Date
+  createdAt             DateTime                   @db.Date @default(now())
   isAtWork              Boolean
   partitionThumbnailUrl String
   partitionUrl          String
   title                 String
-  updatedAt             DateTime                   @db.Date
-  workRecordings        StudiedworksWorkRecordings
+  updatedAt             DateTime                   @db.Date @updatedAt
+  workRecordings        WorkRecordings?
+}
+
+enum Voice {
+  B1
+  B2
+  T1
+  T2
+}
+
+enum Type {
+  admin
+  user
 }
 
 model users {

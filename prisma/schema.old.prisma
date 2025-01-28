@@ -1,0 +1,41 @@
+enum Section {
+  BARYTON
+  BASS
+  TENOR1
+  TENOR2
+  TUTTI
+}
+
+model Recording {
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  recordingUrl           String?
+  recordingDescription   String?
+
+  workRecordingId        String   @db.ObjectId
+  workRecording          workRecordings @relation(fields: [workRecordingId], references: [id])
+
+  section               Section
+}
+
+model workRecordings {
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  recordings             Recording[]  // All recordings reference WorkRecording via workRecordingId
+
+  studiedWorkId          String   @db.ObjectId @unique
+  studiedWork            studiedworks @relation(fields: [studiedWorkId], references: [id])
+}
+
+model studiedworks {
+  id                    String                     @id @default(auto()) @map("_id") @db.ObjectId
+  v                     Int                        @map("__v")
+  artwork               String?
+  authorMusic           String?
+  code                  String
+  createdAt             DateTime                   @db.Date @default(now())
+  isAtWork              Boolean
+  partitionThumbnailUrl String
+  partitionUrl          String
+  title                 String
+  updatedAt             DateTime                   @db.Date @updatedAt
+  workRecordings        workRecordings?
+}
