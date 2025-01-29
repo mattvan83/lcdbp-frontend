@@ -117,8 +117,8 @@ enum VoiceType {
 model Recording {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
   v                   Int      @map("__v") @default(0)
-  recordingUrl        String?
-  recordingDescription String?
+  recordingUrl        String
+  recordingDescription String
   voiceType          VoiceType
   work               Work      @relation(fields: [workId], references: [id])
   workId             String    @db.ObjectId

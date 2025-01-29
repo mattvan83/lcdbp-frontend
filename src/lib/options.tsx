@@ -6,6 +6,34 @@ const { BACKEND_ADDRESS } = process.env;
 export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
   model: {
+    Recording: {
+      toString: (Recording) => `${Recording.recordingDescription}`,
+      title: "Enregistrements de Travail",
+      icon: "MusicalNoteIcon",
+      list: {
+        display: [
+          "id",
+          "recordingDescription",
+          // "recordingUrl",
+          "voiceType",
+          "work",
+        ],
+      },
+      edit: {
+        display: ["recordingDescription", "recordingUrl", "voiceType", "work"],
+        fields: {
+          recordingUrl: {
+            format: "file",
+          },
+        },
+      },
+      aliases: {
+        recordingUrl: "Fichier audio",
+        recordingDescription: "Description du fichier audio",
+        voiceType: "Voix",
+        work: "Chant travaillé",
+      },
+    },
     Work: {
       toString: (Work) => `${Work.code} ${Work.title}`,
       title: "Chants Travaillés",
@@ -17,7 +45,7 @@ export const options: NextAdminOptions = {
           "title",
           "authorMusic",
           "isAtWork",
-          // "recordings",
+          "recordings",
         ],
         fields: {},
         search: ["code", "title", "authorMusic"],
@@ -82,13 +110,71 @@ export const options: NextAdminOptions = {
           "artwork",
           "authorMusic",
           "partitionUrl",
-          // "partitionThumbnailUrl",
+          "partitionThumbnailUrl",
           "isAtWork",
           "recordings",
         ],
         fields: {
           partitionUrl: {
             format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("partitionFromFront", file);
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/studiedWorks/uploadPartition`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.partitionUrl;
+                }
+                throw new Error("Upload partition to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload partition to Cloudinary failed",
+            },
+          },
+          partitionThumbnailUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("partitionFromFront", file);
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/studiedWorks/uploadPartitionThumbnail`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.partitionThumbnailUrl;
+                }
+                throw new Error(
+                  "Upload partition thumbnail to Cloudinary failed"
+                );
+              },
+              uploadErrorMessage:
+                "Upload partition thumbnail to Cloudinary failed",
+            },
           },
         },
       },
@@ -98,7 +184,7 @@ export const options: NextAdminOptions = {
         artwork: "Oeuvre",
         authorMusic: "Compositeur",
         partitionUrl: "Partition",
-        workRecordings: "Enregistrements de travail",
+        recordings: "Enregistrements de travail",
         isAtWork: "En cours d'étude",
       },
     },
