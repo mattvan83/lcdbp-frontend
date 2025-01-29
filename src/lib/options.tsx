@@ -6,8 +6,8 @@ const { BACKEND_ADDRESS } = process.env;
 export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
   model: {
-    studiedworks: {
-      toString: (studiedworks) => `${studiedworks.code} ${studiedworks.title}`,
+    Work: {
+      toString: (Work) => `${Work.code} ${Work.title}`,
       title: "Chants Travaillés",
       icon: "BriefcaseIcon",
       list: {
@@ -17,7 +17,7 @@ export const options: NextAdminOptions = {
           "title",
           "authorMusic",
           "isAtWork",
-          // "workRecordings",
+          // "recordings",
         ],
         fields: {},
         search: ["code", "title", "authorMusic"],
@@ -84,14 +84,11 @@ export const options: NextAdminOptions = {
           "partitionUrl",
           // "partitionThumbnailUrl",
           "isAtWork",
-          "workRecordings",
+          "recordings",
         ],
         fields: {
           partitionUrl: {
             format: "file",
-          },
-          workRecordings: {
-            format: "json", // Enable JSON editing
           },
         },
       },

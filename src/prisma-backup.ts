@@ -59,6 +59,21 @@ model pressreviews {
   updatedAt            DateTime @db.Date @updatedAt
 }
 
+model studiedworks {
+  id                    String                     @id @default(auto()) @map("_id") @db.ObjectId
+  v                     Int                        @map("__v") @default(0)
+  artwork               String?
+  authorMusic           String?
+  code                  String
+  createdAt             DateTime                   @db.Date @default(now())
+  isAtWork              Boolean
+  partitionThumbnailUrl String
+  partitionUrl          String
+  title                 String
+  updatedAt             DateTime                   @db.Date @updatedAt
+  workRecordings        Json?
+}
+
 enum Voice {
   B1
   B2
@@ -91,43 +106,4 @@ model users {
   updatedAt    DateTime @db.Date @updatedAt
   username     String?
   voice        Voice
-}
-
-enum VoiceType {
-  BARYTON
-  BASS
-  TENOR1
-  TENOR2
-  TUTTI
-}
-
-model Recording {
-  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  v                   Int      @map("__v") @default(0)
-  recordingUrl        String?
-  recordingDescription String?
-  voiceType          VoiceType
-  work               Work      @relation(fields: [workId], references: [id])
-  workId             String    @db.ObjectId
-  createdAt          DateTime  @db.Date @default(now())
-  updatedAt          DateTime  @db.Date @updatedAt
-
-  @@map("recordings")
-}
-
-model Work {
-  id                    String     @id @default(auto()) @map("_id") @db.ObjectId
-  v                     Int        @map("__v") @default(0)
-  title                 String
-  code                  String
-  artwork               String?
-  partitionUrl          String
-  partitionThumbnailUrl String?
-  authorMusic           String?
-  isAtWork             Boolean    @default(false)
-  recordings           Recording[]
-  createdAt            DateTime   @db.Date @default(now())
-  updatedAt            DateTime   @db.Date @updatedAt
-
-  @@map("works")
 }
