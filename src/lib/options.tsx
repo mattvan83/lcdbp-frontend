@@ -6,34 +6,6 @@ const { BACKEND_ADDRESS } = process.env;
 export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
   model: {
-    Recording: {
-      toString: (Recording) => `${Recording.recordingDescription}`,
-      title: "Enregistrements de Travail",
-      icon: "MusicalNoteIcon",
-      list: {
-        display: [
-          "id",
-          "recordingDescription",
-          // "recordingUrl",
-          "voiceType",
-          "work",
-        ],
-      },
-      edit: {
-        display: ["recordingDescription", "recordingUrl", "voiceType", "work"],
-        fields: {
-          recordingUrl: {
-            format: "file",
-          },
-        },
-      },
-      aliases: {
-        recordingUrl: "Fichier audio",
-        recordingDescription: "Description du fichier audio",
-        voiceType: "Voix",
-        work: "Chant travaillé",
-      },
-    },
     Work: {
       toString: (Work) => `${Work.code} ${Work.title}`,
       title: "Chants Travaillés",
@@ -186,6 +158,116 @@ export const options: NextAdminOptions = {
         partitionUrl: "Partition",
         recordings: "Enregistrements de travail",
         isAtWork: "En cours d'étude",
+      },
+    },
+    Recording: {
+      toString: (Recording) => `${Recording.recordingDescription}`,
+      title: "Enregistrements de Travail",
+      icon: "MusicalNoteIcon",
+      list: {
+        display: [
+          // "id",
+          "recordingDescription",
+          // "recordingUrl",
+          "voiceType",
+          "work",
+        ],
+        search: ["recordingDescription", "voiceType"],
+        defaultSort: {
+          field: "voiceType",
+          direction: "asc",
+        },
+        filters: [
+          {
+            name: "Barytons",
+            active: false,
+            value: {
+              voiceType: {
+                equals: "BARYTON",
+              },
+            },
+          },
+          {
+            name: "Basses",
+            active: false,
+            value: {
+              voiceType: {
+                equals: "BASS",
+              },
+            },
+          },
+          {
+            name: "Ténors 1",
+            active: false,
+            value: {
+              voiceType: {
+                equals: "TENOR1",
+              },
+            },
+          },
+          {
+            name: "Ténors 2",
+            active: false,
+            value: {
+              voiceType: {
+                equals: "TENOR2",
+              },
+            },
+          },
+          {
+            name: "Tutti",
+            active: false,
+            value: {
+              voiceType: {
+                equals: "TUTTI",
+              },
+            },
+          },
+        ],
+      },
+      edit: {
+        display: ["recordingDescription", "recordingUrl", "voiceType", "work"],
+        fields: {
+          recordingUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer, { name }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("recordingFromFront", file);
+                formData.append(
+                  "recordingExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/studiedWorks/uploadRecording`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.recordingUrl;
+                }
+                throw new Error("Upload recording to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload recording to Cloudinary failed",
+            },
+          },
+        },
+      },
+      aliases: {
+        recordingUrl: "Fichier audio",
+        recordingDescription: "Description du fichier audio",
+        voiceType: "Voix",
+        work: "Chant travaillé",
       },
     },
     contacts: {
