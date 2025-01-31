@@ -178,18 +178,6 @@ export default function Header() {
     }
   }
 
-  const handleAdminClick = () => {
-    if (user.token) {
-      // Set the token in a cookie before navigating
-      Cookies.set("user_token", user.token, {
-        path: "/",
-        secure: true,
-        sameSite: "strict",
-        expires: 7,
-      });
-    }
-  };
-
   return (
     <>
       <header className={styles.header}>
@@ -197,7 +185,7 @@ export default function Header() {
           <Image src="/Logo.jpg" alt="Logo" width={100} height={100} />
           {userSection}
           {user.token && user.type === "admin" && (
-            <Link href="/admin" onClick={handleAdminClick}>
+            <Link href="/admin">
               <Button variant="warning" className={styles.buttonLink}>
                 Admin
               </Button>

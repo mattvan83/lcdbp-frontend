@@ -1,6 +1,7 @@
 import React from "react";
 import WorkRecordingsDivision from "@/components/WorkRecordingsDivision";
 import WorkRecordingsContainer from "@/components/WorkRecordingsContainer";
+import { cookies } from "next/headers";
 import styles from "./page.module.css";
 
 const { BACKEND_ADDRESS } = process.env;
@@ -22,8 +23,24 @@ interface WorkRecordingGroup {
 }
 
 export default async function WorkRecordings() {
+  // Get the token from cookies
+  const cookieStore = cookies();
+  const userToken = cookieStore.get("user_token")?.value;
+
+  // const response = await fetch(
+  //   `${BACKEND_ADDRESS}/studiedWorks/groupedWorkRecordings`
+  // );
   const response = await fetch(
-    `${BACKEND_ADDRESS}/studiedWorks/groupedWorkRecordings`
+    `${BACKEND_ADDRESS}/studiedWorks/groupedRecordingsWorks`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: userToken,
+      }),
+    }
   );
   const workRecordings = await response.json();
 
@@ -42,12 +59,12 @@ export default async function WorkRecordings() {
 
   return (
     <main>
-      {workRecordings.result && (
+      {userToken && workRecordings.result && (
         <WorkRecordingsDivision
           workRecordingsContainers={workRecordingsContainers}
         />
       )}
-      {!workRecordings.result && <p>{workRecordings.error}</p>}
+      {userToken && !workRecordings.result && <p>{workRecordings.error}</p>}
     </main>
   );
 }

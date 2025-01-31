@@ -174,7 +174,7 @@ export const options: NextAdminOptions = {
         ],
         search: ["recordingDescription", "voiceType"],
         defaultSort: {
-          field: "voiceType",
+          field: "recordingDescription",
           direction: "asc",
         },
         filters: [

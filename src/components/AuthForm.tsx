@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "../styles/AuthForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "react-bootstrap/Button";
+import Cookies from "js-cookie";
 
 const backendAddress = process.env.NEXT_PUBLIC_BACKEND_ADDRESS;
 // console.log("backendAddress: ", backendAddress);
@@ -58,6 +59,16 @@ export default function AuthForm({
         .then((data) => {
           if (data.result) {
             fillCnxInfos(data.token, data.username, data.firstname, data.type);
+            if (data.token) {
+              // Set the token in a cookie before navigating
+              Cookies.set("user_token", data.token, {
+                path: "/",
+                secure: true,
+                sameSite: "strict",
+                expires: 7,
+              });
+            }
+            // console.log("user_token", Cookies.get("user_token"));
             reset();
             setErrorMsg("");
             showModal();
@@ -80,6 +91,15 @@ export default function AuthForm({
         .then((data) => {
           if (data.result) {
             fillCnxInfos(data.token, data.username, data.firstname, data.type);
+            if (data.token) {
+              // Set the token in a cookie before navigating
+              Cookies.set("user_token", data.token, {
+                path: "/",
+                secure: true,
+                sameSite: "strict",
+                expires: 7,
+              });
+            }
             reset();
             setErrorMsg("");
             showModal();

@@ -67,19 +67,22 @@ function WorkRecordingCard({
             <p className={styles.workRecordingTitle}>{title}</p>
           )}
 
-          {authorMusic && recordingDescription && (
-            <p className={styles.workRecordingAuthor}>
+          <p className={styles.workRecordingAuthor}>
+            {authorMusic && (
               <span>
                 <b> Musique : </b>
                 {authorMusic}
               </span>
-              <br />
+            )}
+
+            <br />
+            {recordingDescription && (
               <span>
                 <b> Voix : </b>
                 {recordingDescription}
               </span>
-            </p>
-          )}
+            )}
+          </p>
         </div>
 
         <audio
