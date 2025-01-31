@@ -3,7 +3,7 @@
 import styles from "../styles/Carousel.module.css";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { EventMainPage, Event, PressReview } from "@/app/(public)/page";
+import { News, Event, PressReview } from "@/app/(public)/page";
 import { Partition } from "@/app/(public)/membersSpace/partitions/page";
 import { WorkRecording } from "@/app/(public)/membersSpace/workRecordings/page";
 import PressReviewCard from "./PressReviewCard";
@@ -14,12 +14,7 @@ import { getOptimizedCloudinaryUrl } from "../utils/cloudinary";
 import Button from "react-bootstrap/Button";
 
 type CarouselProps = {
-  images:
-    | EventMainPage[]
-    | Event[]
-    | PressReview[]
-    | Partition[]
-    | WorkRecording[];
+  images: News[] | Event[] | PressReview[] | Partition[] | WorkRecording[];
   width: number;
   height: number;
   category: string;
@@ -32,14 +27,14 @@ export default function Carousel({
   category,
 }: CarouselProps) {
   const [zoomedImage, setZoomedImage] = useState<
-    EventMainPage | Event | PressReview | null
+    News | Event | PressReview | null
   >(null);
   const [partitionPdf, setPartitionPdf] = useState<Partition | null>(null);
   const [workRecordingPdf, setworkRecordingPdf] =
     useState<WorkRecording | null>(null);
 
   // Function to open zoomed image
-  const openZoomedImage = (item: EventMainPage | Event | PressReview): void => {
+  const openZoomedImage = (item: News | Event | PressReview): void => {
     setZoomedImage(item);
   };
 
@@ -70,14 +65,7 @@ export default function Carousel({
     <>
       {category === "eventsMainPage" &&
         images.map(
-          (
-            item:
-              | EventMainPage
-              | Event
-              | PressReview
-              | Partition
-              | WorkRecording
-          ) => {
+          (item: News | Event | PressReview | Partition | WorkRecording) => {
             if (!("journal" in item)) {
               const containerWidth = width;
               const containerHeight = height;
@@ -95,9 +83,7 @@ export default function Carousel({
                   {"thumbnailUrl" in item && "thumbnailDescription" in item ? (
                     <Image
                       onClick={() =>
-                        openZoomedImage(
-                          item as EventMainPage | Event | PressReview
-                        )
+                        openZoomedImage(item as News | Event | PressReview)
                       }
                       src={item.thumbnailUrl}
                       alt={item.thumbnailDescription}
@@ -115,14 +101,7 @@ export default function Carousel({
 
       {category === "events" &&
         images.map(
-          (
-            item:
-              | EventMainPage
-              | Event
-              | PressReview
-              | Partition
-              | WorkRecording
-          ) => {
+          (item: News | Event | PressReview | Partition | WorkRecording) => {
             if ("chores" in item) {
               return (
                 <EventCard
@@ -137,14 +116,7 @@ export default function Carousel({
 
       {category === "pressReviews" &&
         images.map(
-          (
-            item:
-              | EventMainPage
-              | Event
-              | PressReview
-              | Partition
-              | WorkRecording
-          ) => {
+          (item: News | Event | PressReview | Partition | WorkRecording) => {
             if ("journal" in item) {
               return (
                 <PressReviewCard
@@ -160,14 +132,7 @@ export default function Carousel({
       {category === "partitions" &&
         !partitionPdf &&
         images.map(
-          (
-            item:
-              | EventMainPage
-              | Event
-              | PressReview
-              | Partition
-              | WorkRecording
-          ) => {
+          (item: News | Event | PressReview | Partition | WorkRecording) => {
             if ("partitionUrl" in item && "isAtWork" in item) {
               return (
                 <PartitionCard
@@ -199,14 +164,7 @@ export default function Carousel({
 
       {category === "workRecordings" &&
         images.map(
-          (
-            item:
-              | EventMainPage
-              | Event
-              | PressReview
-              | Partition
-              | WorkRecording
-          ) => {
+          (item: News | Event | PressReview | Partition | WorkRecording) => {
             if ("recordingUrl" in item) {
               return (
                 <WorkRecordingCard

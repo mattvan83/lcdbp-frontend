@@ -11,6 +11,13 @@ import ButtonLink from "@/components/ButtonLink";
 
 const { BACKEND_ADDRESS } = process.env;
 
+export interface News {
+  _id: string;
+  thumbnailUrl: string;
+  thumbnailDescription: string;
+  newsDate: Date;
+}
+
 export interface Event {
   _id: string;
   title: string;
