@@ -1,5 +1,6 @@
 import { NextAdminOptions } from "@premieroctet/next-admin";
 import { cookies } from "next/headers";
+import { prisma } from "@/lib/prisma";
 
 const { BACKEND_ADDRESS } = process.env;
 
@@ -73,6 +74,54 @@ export const options: NextAdminOptions = {
         thumbnailUrl: "Affiche News",
         thumbnailDescription: "Description de l'affiche",
       },
+      actions: [
+        {
+          type: "server",
+          id: "delete all",
+          icon: "TrashIcon",
+          title: "Delete All",
+          canExecute: () => true,
+          action: async (ids: (string | number)[]) => {
+            try {
+              const cookieStore = cookies();
+              const userToken = cookieStore.get("user_token")?.value;
+
+              const body = JSON.stringify({
+                token: userToken,
+                ids: ids,
+              });
+
+              const response = await fetch(
+                `${BACKEND_ADDRESS}/news/deleteAll`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: body,
+                }
+              );
+
+              const data = await response.json();
+
+              if (!data.result) {
+                throw new Error(data.error);
+              }
+              return {
+                type: "success",
+                message: "Deleted All Successfully",
+              };
+            } catch (error: Error | any) {
+              return {
+                type: "error",
+                message: `Failed to delete: ${error.message}`,
+              };
+            }
+          },
+          successMessage: "Deleted All Successfully",
+          errorMessage: "Failed To Delete All",
+        },
+      ],
     },
     Work: {
       toString: (Work: { code: string; title: string }) =>
