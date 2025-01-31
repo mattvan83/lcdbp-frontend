@@ -6,8 +6,77 @@ const { BACKEND_ADDRESS } = process.env;
 export const options: NextAdminOptions = {
   title: "⚡️ Admin du Chœur du Bon Pays",
   model: {
+    News: {
+      toString: (news: { thumbnailDescription: string }) =>
+        `${news.thumbnailDescription}`,
+      title: "News",
+      icon: "InformationCircleIcon",
+      list: {
+        display: [
+          // "id",
+          "newsDate",
+          "thumbnailDescription",
+        ],
+        fields: {
+          newsDate: {
+            formatter: (value: string | Date | null) =>
+              value ? new Date(value).toLocaleDateString("fr-FR") : "",
+          },
+        },
+        search: ["newsDate", "thumbnailDescription"],
+        defaultSort: {
+          field: "newsDate",
+          direction: "asc",
+        },
+        filters: [],
+      },
+      edit: {
+        display: ["id", "newsDate", "thumbnailUrl", "thumbnailDescription"],
+        fields: {
+          thumbnailUrl: {
+            format: "file",
+            handler: {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
+                const cookieStore = cookies();
+                const userToken = cookieStore.get("user_token")?.value;
+
+                const formData = new FormData();
+                const file = new File([buffer], name);
+                formData.append("thumbnailFromFront", file);
+                formData.append(
+                  "imageExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
+                formData.append("token", userToken || "");
+
+                const response = await fetch(
+                  `${BACKEND_ADDRESS}/news/uploadThumbnail`,
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const data = await response.json();
+                if (data.result) {
+                  return data.thumbnailUrl;
+                }
+                throw new Error("Upload to Cloudinary failed");
+              },
+              uploadErrorMessage: "Upload to Cloudinary failed",
+            },
+          },
+        },
+      },
+      aliases: {
+        eventDate: "Date",
+        thumbnailUrl: "Affiche News",
+        thumbnailDescription: "Description de l'affiche",
+      },
+    },
     Work: {
-      toString: (Work) => `${Work.code} ${Work.title}`,
+      toString: (Work: { code: string; title: string }) =>
+        `${Work.code} ${Work.title}`,
       title: "Chants Travaillés",
       icon: "BriefcaseIcon",
       list: {
@@ -90,7 +159,7 @@ export const options: NextAdminOptions = {
           partitionUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -119,7 +188,7 @@ export const options: NextAdminOptions = {
           partitionThumbnailUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -161,7 +230,8 @@ export const options: NextAdminOptions = {
       },
     },
     Recording: {
-      toString: (Recording) => `${Recording.recordingDescription}`,
+      toString: (Recording: { recordingDescription: string }) =>
+        `${Recording.recordingDescription}`,
       title: "Enregistrements de Travail",
       icon: "MusicalNoteIcon",
       list: {
@@ -231,7 +301,7 @@ export const options: NextAdminOptions = {
           recordingUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -271,8 +341,11 @@ export const options: NextAdminOptions = {
       },
     },
     contacts: {
-      toString: (contacts) =>
-        `${contacts.firstname} ${contacts.lastname} (${contacts.email})`,
+      toString: (contacts: {
+        firstname: string;
+        lastname: string;
+        email: string;
+      }) => `${contacts.firstname} ${contacts.lastname} (${contacts.email})`,
       title: "Contacts",
       icon: "InboxArrowDownIcon",
       list: {
@@ -287,7 +360,7 @@ export const options: NextAdminOptions = {
         ],
         fields: {
           createdAt: {
-            formatter: (value) =>
+            formatter: (value: string | Date | null) =>
               value ? new Date(value).toLocaleDateString("fr-FR") : "",
           },
         },
@@ -326,7 +399,8 @@ export const options: NextAdminOptions = {
       },
     },
     events: {
-      toString: (events) => `${events.thumbnailDescription}`,
+      toString: (events: { thumbnailDescription: string }) =>
+        `${events.thumbnailDescription}`,
       title: "Evènements",
       icon: "CalendarDaysIcon",
       list: {
@@ -341,7 +415,10 @@ export const options: NextAdminOptions = {
         ],
         fields: {
           eventDate: {
-            formatter: (value) => {
+            formatter: (value: string | Date | null) => {
+              if (!value) {
+                return "";
+              }
               const inputDate = new Date(value);
               const options: Intl.DateTimeFormatOptions = {
                 // weekday: "long", // full weekday name
@@ -382,7 +459,7 @@ export const options: NextAdminOptions = {
           thumbnailUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -427,7 +504,8 @@ export const options: NextAdminOptions = {
       },
     },
     users: {
-      toString: (users) => `${users.firstname} ${users.lastname}`,
+      toString: (users: { firstname: string; lastname: string }) =>
+        `${users.firstname} ${users.lastname}`,
       title: "Membres",
       icon: "UserIcon",
       list: {
@@ -444,11 +522,11 @@ export const options: NextAdminOptions = {
         ],
         fields: {
           incomingDate: {
-            formatter: (value) =>
+            formatter: (value: string | Date | null) =>
               value ? new Date(value).toLocaleDateString("fr-FR") : "",
           },
           birthDate: {
-            formatter: (value) =>
+            formatter: (value: string | Date | null) =>
               value ? new Date(value).toLocaleDateString("fr-FR") : "",
           },
         },
@@ -544,7 +622,7 @@ export const options: NextAdminOptions = {
       },
     },
     listenings: {
-      toString: (listenings) =>
+      toString: (listenings: { title: string; authorMusic?: string }) =>
         listenings.authorMusic
           ? `${listenings.title} (${listenings.authorMusic})`
           : `${listenings.title}`,
@@ -559,7 +637,7 @@ export const options: NextAdminOptions = {
         ],
         fields: {
           recordingDate: {
-            formatter: (value) =>
+            formatter: (value: string | Date | null) =>
               value ? new Date(value).toLocaleDateString("fr-FR") : "",
           },
         },
@@ -589,7 +667,7 @@ export const options: NextAdminOptions = {
           audioUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -622,7 +700,7 @@ export const options: NextAdminOptions = {
           thumbnailUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
@@ -669,7 +747,8 @@ export const options: NextAdminOptions = {
       },
     },
     pressreviews: {
-      toString: (pressreviews) => `${pressreviews.thumbnailDescription}`,
+      toString: (pressreviews: { thumbnailDescription: string }) =>
+        `${pressreviews.thumbnailDescription}`,
       title: "Revues de Presse",
       icon: "NewspaperIcon",
       list: {
@@ -682,7 +761,7 @@ export const options: NextAdminOptions = {
         ],
         fields: {
           pressReviewDate: {
-            formatter: (value) =>
+            formatter: (value: string | Date | null) =>
               value ? new Date(value).toLocaleDateString("fr-FR") : "",
           },
         },
@@ -708,7 +787,7 @@ export const options: NextAdminOptions = {
           thumbnailUrl: {
             format: "file",
             handler: {
-              upload: async (buffer, { name }) => {
+              upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
