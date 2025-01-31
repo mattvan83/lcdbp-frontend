@@ -11,12 +11,6 @@ import ButtonLink from "@/components/ButtonLink";
 
 const { BACKEND_ADDRESS } = process.env;
 
-export interface EventMainPage {
-  _id: string;
-  thumbnailUrl: string;
-  thumbnailDescription: string;
-}
-
 export interface Event {
   _id: string;
   title: string;
@@ -56,25 +50,30 @@ export interface PressReview {
   lastPressReview: boolean;
 }
 
-const eventImages: EventMainPage[] = [
-  {
-    _id: "1",
-    thumbnailUrl: "/NewYear_2025.jpeg",
-    thumbnailDescription: "Souhaits de Nouvelle Année 2025",
-  },
-  {
-    _id: "2",
-    thumbnailUrl: "/2025-04-26_Concert_de_Printemps.jpg",
-    thumbnailDescription: "Concert de Printemps à Marboz le 26 Avril 2025",
-  },
-  {
-    _id: "3",
-    thumbnailUrl: "/nousRecrutons.jpg",
-    thumbnailDescription: "Recrutement choristes",
-  },
-];
-
 export default async function Home() {
+  // Get last news
+  const responseNews = await fetch(`${BACKEND_ADDRESS}/news/list`);
+  const news = await responseNews.json();
+
+  const lastNews = news.result ? news.news : news.error;
+
+  // Get last events
+  const responseEvents = await fetch(`${BACKEND_ADDRESS}/events/listMainPage`);
+  const events = await responseEvents.json();
+
+  const eventsAsNews = events.result
+    ? events.events.map((event: Event) => {
+        return {
+          _id: event._id,
+          thumbnailUrl: event.thumbnailUrl,
+          thumbnailDescription: event.thumbnailDescription,
+          newsDate: event.eventDate,
+        };
+      })
+    : events.error;
+
+  const newsConcatenated = [...lastNews, ...eventsAsNews];
+
   // Get last listenings
   const responseAudio = await fetch(`${BACKEND_ADDRESS}/listenings`);
   const tracks = await responseAudio.json();
@@ -142,7 +141,7 @@ export default async function Home() {
           <h3>Actualités</h3>
           <div className={styles.pressContent}>
             <Carousel
-              images={eventImages}
+              images={newsConcatenated}
               width={400}
               height={550}
               category="eventsMainPage"
