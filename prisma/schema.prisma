@@ -64,7 +64,7 @@ model pressreviews {
   city                 String
   createdAt            DateTime @db.Date @default(now())
   journal              String
-  lastPressReview      Boolean
+  lastPressReview      Boolean @default(true)
   pressReviewDate      DateTime @db.Date
   thumbnailDescription String
   thumbnailUrl         String
