@@ -841,6 +841,54 @@ export const options: NextAdminOptions = {
         thumbnailDescription: "Description de l'image associée",
         lastListening: "Enregistrement récent",
       },
+      actions: [
+        {
+          type: "server",
+          id: "delete all",
+          icon: "TrashIcon",
+          title: "Delete All",
+          canExecute: () => true,
+          action: async (ids: (string | number)[]) => {
+            try {
+              const cookieStore = cookies();
+              const userToken = cookieStore.get("user_token")?.value;
+
+              const body = JSON.stringify({
+                token: userToken,
+                ids: ids,
+              });
+
+              const response = await fetch(
+                `${BACKEND_ADDRESS}/listenings/deleteAll`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: body,
+                }
+              );
+
+              const data = await response.json();
+
+              if (!data.result) {
+                throw new Error(data.error);
+              }
+              return {
+                type: "success",
+                message: "Deleted All Successfully",
+              };
+            } catch (error: Error | any) {
+              return {
+                type: "error",
+                message: `Failed to delete: ${error.message}`,
+              };
+            }
+          },
+          successMessage: "Deleted All Successfully",
+          errorMessage: "Failed To Delete All",
+        },
+      ],
     },
     pressreviews: {
       toString: (pressreviews: { thumbnailDescription: string }) =>

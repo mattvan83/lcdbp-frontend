@@ -50,7 +50,7 @@ model listenings {
   authorMusic          String
   authorText           String?
   createdAt            DateTime @db.Date @default(now())
-  lastListening        Boolean
+  lastListening        Boolean @default(true)
   recordingDate        DateTime @db.Date
   thumbnailDescription String
   thumbnailUrl         String
