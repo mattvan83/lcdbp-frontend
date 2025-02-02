@@ -276,6 +276,54 @@ export const options: NextAdminOptions = {
         recordings: "Enregistrements de travail",
         isAtWork: "En cours d'étude",
       },
+      actions: [
+        {
+          type: "server",
+          id: "delete all",
+          icon: "TrashIcon",
+          title: "Delete All",
+          canExecute: () => true,
+          action: async (ids: (string | number)[]) => {
+            try {
+              const cookieStore = cookies();
+              const userToken = cookieStore.get("user_token")?.value;
+
+              const body = JSON.stringify({
+                token: userToken,
+                ids: ids,
+              });
+
+              const response = await fetch(
+                `${BACKEND_ADDRESS}/studiedWorks/deleteAllWorks`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: body,
+                }
+              );
+
+              const data = await response.json();
+
+              if (!data.result) {
+                throw new Error(data.error);
+              }
+              return {
+                type: "success",
+                message: "Deleted All Successfully",
+              };
+            } catch (error: Error | any) {
+              return {
+                type: "error",
+                message: `Failed to delete: ${error.message}`,
+              };
+            }
+          },
+          successMessage: "Deleted All Successfully",
+          errorMessage: "Failed To Delete All",
+        },
+      ],
     },
     Recording: {
       toString: (Recording: { recordingDescription: string }) =>
@@ -387,6 +435,54 @@ export const options: NextAdminOptions = {
         voiceType: "Voix",
         work: "Chant travaillé",
       },
+      actions: [
+        {
+          type: "server",
+          id: "delete all",
+          icon: "TrashIcon",
+          title: "Delete All",
+          canExecute: () => true,
+          action: async (ids: (string | number)[]) => {
+            try {
+              const cookieStore = cookies();
+              const userToken = cookieStore.get("user_token")?.value;
+
+              const body = JSON.stringify({
+                token: userToken,
+                ids: ids,
+              });
+
+              const response = await fetch(
+                `${BACKEND_ADDRESS}/studiedWorks/deleteAllRecordings`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: body,
+                }
+              );
+
+              const data = await response.json();
+
+              if (!data.result) {
+                throw new Error(data.error);
+              }
+              return {
+                type: "success",
+                message: "Deleted All Successfully",
+              };
+            } catch (error: Error | any) {
+              return {
+                type: "error",
+                message: `Failed to delete: ${error.message}`,
+              };
+            }
+          },
+          successMessage: "Deleted All Successfully",
+          errorMessage: "Failed To Delete All",
+        },
+      ],
     },
     contacts: {
       toString: (contacts: {
