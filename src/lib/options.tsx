@@ -242,7 +242,11 @@ export const options: NextAdminOptions = {
 
                 const formData = new FormData();
                 const file = new File([buffer], name);
-                formData.append("partitionFromFront", file);
+                formData.append("partitionThumbnailFromFront", file);
+                formData.append(
+                  "imageExtension",
+                  name.substring(name.lastIndexOf("."))
+                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
@@ -273,6 +277,7 @@ export const options: NextAdminOptions = {
         artwork: "Oeuvre",
         authorMusic: "Compositeur",
         partitionUrl: "Partition",
+        partitionThumbnailUrl: "Affiche de la partition",
         recordings: "Enregistrements de travail",
         isAtWork: "En cours d'étude",
       },
