@@ -965,6 +965,8 @@ export const options: NextAdminOptions = {
                   );
                   const signData = await signResponse.json();
 
+                  console.log("signData: ", signData);
+
                   if (!signData.result) {
                     throw new Error(signData.error);
                   }
