@@ -424,6 +424,14 @@ export const options: NextAdminOptions = {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
+                // Add a size check before proceeding
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (buffer.length > maxSize) {
+                  throw new Error(
+                    `File size exceeds ${maxSize / (1024 * 1024)}MB limit`
+                  );
+                }
+
                 const recordingFile = new File([buffer], name);
 
                 try {
@@ -948,6 +956,14 @@ export const options: NextAdminOptions = {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
+
+                // Add a size check before proceeding
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (buffer.length > maxSize) {
+                  throw new Error(
+                    `File size exceeds ${maxSize / (1024 * 1024)}MB limit`
+                  );
+                }
 
                 const audioFile = new File([buffer], name);
 
