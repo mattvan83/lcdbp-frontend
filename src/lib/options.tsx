@@ -1016,6 +1016,8 @@ export const options: NextAdminOptions = {
 
                   const uploadResult = await uploadResponse.json();
 
+                  console.log("uploadResult: ", uploadResult);
+
                   // Step 4: Notify backend of successful upload
                   const completeResponse = await fetch(
                     `${BACKEND_ADDRESS}/listenings/uploadListeningComplete`,
