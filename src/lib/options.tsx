@@ -57,9 +57,9 @@ export const options: NextAdminOptions = {
                 if (data.result) {
                   return data.thumbnailUrl;
                 }
-                throw new Error("Upload to Cloudinary failed");
+                throw new Error("Upload news thumbnail to Cloudinary failed");
               },
-              uploadErrorMessage: "Upload to Cloudinary failed",
+              uploadErrorMessage: "Upload news thumbnail to Cloudinary failed",
             },
           },
         },
@@ -393,29 +393,126 @@ export const options: NextAdminOptions = {
         fields: {
           recordingUrl: {
             format: "file",
+            // handler: {
+            //   upload: async (buffer: Buffer, { name }: { name: string }) => {
+            //     const cookieStore = cookies();
+            //     const userToken = cookieStore.get("user_token")?.value;
+
+            //     const formData = new FormData();
+            //     const file = new File([buffer], name);
+            //     formData.append("recordingFromFront", file);
+            //     formData.append("token", userToken || "");
+
+            //     const response = await fetch(
+            //       `${BACKEND_ADDRESS}/studiedWorks/uploadRecording`,
+            //       {
+            //         method: "POST",
+            //         body: formData,
+            //       }
+            //     );
+
+            //     const data = await response.json();
+            //     if (data.result) {
+            //       return data.recordingUrl;
+            //     }
+            //     throw new Error("Upload recording to Cloudinary failed");
+            //   },
+            //   uploadErrorMessage: "Upload recording to Cloudinary failed",
+            // },
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
-                const formData = new FormData();
-                const file = new File([buffer], name);
-                formData.append("recordingFromFront", file);
-                formData.append("token", userToken || "");
+                const recordingFile = new File([buffer], name);
 
-                const response = await fetch(
-                  `${BACKEND_ADDRESS}/studiedWorks/uploadRecording`,
-                  {
+                try {
+                  // Step 1: Get the signed URL and upload parameters
+                  const signResponse = await fetch(
+                    `${BACKEND_ADDRESS}/studiedWorks/uploadRecording`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ token: userToken }),
+                    }
+                  );
+                  const signData = await signResponse.json();
+
+                  if (!signData.result) {
+                    throw new Error(signData.error);
+                  }
+
+                  // Step 2: Create form data for direct upload to Cloudinary
+                  const formData = new FormData();
+                  // Add parameters in the exact order they were signed
+                  formData.append(
+                    "eager_async",
+                    signData.params.eager_async.toString()
+                  );
+                  formData.append("folder", signData.params.folder);
+                  formData.append("public_id", signData.params.public_id);
+                  formData.append(
+                    "timestamp",
+                    signData.params.timestamp.toString()
+                  );
+                  // Add the file and remaining parameters after the signed ones
+                  formData.append("file", recordingFile);
+                  formData.append(
+                    "timeout",
+                    signData.params.timeout.toString()
+                  );
+                  formData.append(
+                    "chunk_size",
+                    signData.params.chunk_size.toString()
+                  );
+                  formData.append("api_key", signData.params.api_key);
+                  formData.append(
+                    "resource_type",
+                    signData.params.resource_type
+                  );
+                  formData.append("signature", signData.params.signature);
+
+                  // Step 3: Upload directly to Cloudinary
+                  const uploadResponse = await fetch(signData.uploadUrl, {
                     method: "POST",
                     body: formData,
-                  }
-                );
+                  });
 
-                const data = await response.json();
-                if (data.result) {
-                  return data.recordingUrl;
+                  if (!uploadResponse.ok) {
+                    const errorData = await uploadResponse.json();
+                    throw new Error(
+                      errorData.error?.message || "Upload failed"
+                    );
+                  }
+
+                  const uploadResult = await uploadResponse.json();
+
+                  // Step 4: Notify backend of successful upload
+                  const completeResponse = await fetch(
+                    `${BACKEND_ADDRESS}/studiedWorks/uploadRecordingComplete`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        token: userToken,
+                        recordingUrl: uploadResult.secure_url,
+                      }),
+                    }
+                  );
+
+                  const data = await completeResponse.json();
+                  if (data.result) {
+                    return data.recordingUrl;
+                  }
+                  throw new Error("Upload recording to Cloudinary failed");
+                } catch (error) {
+                  console.error("Upload error:", error);
+                  throw error;
                 }
-                throw new Error("Upload recording to Cloudinary failed");
               },
               uploadErrorMessage: "Upload recording to Cloudinary failed",
             },
@@ -603,10 +700,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("thumbnailFromFront", file);
-                formData.append(
-                  "imageExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
@@ -621,9 +714,9 @@ export const options: NextAdminOptions = {
                 if (data.result) {
                   return data.thumbnailUrl;
                 }
-                throw new Error("Upload to Cloudinary failed");
+                throw new Error("Upload event thumbnail to Cloudinary failed");
               },
-              uploadErrorMessage: "Upload to Cloudinary failed",
+              uploadErrorMessage: "Upload event thumbnail to Cloudinary failed",
             },
           },
         },
@@ -856,28 +949,95 @@ export const options: NextAdminOptions = {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
-                const formData = new FormData();
-                const file = new File([buffer], name);
-                formData.append("listeningFromFront", file);
-                formData.append(
-                  "listeningExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
-                formData.append("token", userToken || "");
+                const audioFile = new File([buffer], name);
 
-                const response = await fetch(
-                  `${BACKEND_ADDRESS}/listenings/uploadListening`,
-                  {
+                try {
+                  // Step 1: Get the signed URL and upload parameters
+                  const signResponse = await fetch(
+                    `${BACKEND_ADDRESS}/listenings/uploadListening`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ token: userToken }),
+                    }
+                  );
+                  const signData = await signResponse.json();
+
+                  if (!signData.result) {
+                    throw new Error(signData.error);
+                  }
+
+                  // Step 2: Create form data for direct upload to Cloudinary
+                  const formData = new FormData();
+                  // Add parameters in the exact order they were signed
+                  formData.append(
+                    "eager_async",
+                    signData.params.eager_async.toString()
+                  );
+                  formData.append("folder", signData.params.folder);
+                  formData.append("public_id", signData.params.public_id);
+                  formData.append(
+                    "timestamp",
+                    signData.params.timestamp.toString()
+                  );
+                  // Add the file and remaining parameters after the signed ones
+                  formData.append("file", audioFile);
+                  formData.append(
+                    "timeout",
+                    signData.params.timeout.toString()
+                  );
+                  formData.append(
+                    "chunk_size",
+                    signData.params.chunk_size.toString()
+                  );
+                  formData.append("api_key", signData.params.api_key);
+                  formData.append(
+                    "resource_type",
+                    signData.params.resource_type
+                  );
+                  formData.append("signature", signData.params.signature);
+
+                  // Step 3: Upload directly to Cloudinary
+                  const uploadResponse = await fetch(signData.uploadUrl, {
                     method: "POST",
                     body: formData,
-                  }
-                );
+                  });
 
-                const data = await response.json();
-                if (data.result) {
-                  return data.audioUrl;
+                  if (!uploadResponse.ok) {
+                    const errorData = await uploadResponse.json();
+                    throw new Error(
+                      errorData.error?.message || "Upload failed"
+                    );
+                  }
+
+                  const uploadResult = await uploadResponse.json();
+
+                  // Step 4: Notify backend of successful upload
+                  const completeResponse = await fetch(
+                    `${BACKEND_ADDRESS}/listenings/uploadListeningComplete`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        token: userToken,
+                        audioUrl: uploadResult.secure_url,
+                      }),
+                    }
+                  );
+
+                  const data = await completeResponse.json();
+                  if (data.result) {
+                    return data.audioUrl;
+                  }
+                  throw new Error("Upload audio to Cloudinary failed");
+                } catch (error) {
+                  console.error("Upload error:", error);
+                  throw error;
                 }
-                throw new Error("Upload audio to Cloudinary failed");
               },
               uploadErrorMessage: "Upload audio to Cloudinary failed",
             },
@@ -892,10 +1052,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("thumbnailFromFront", file);
-                formData.append(
-                  "imageExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
@@ -910,9 +1066,12 @@ export const options: NextAdminOptions = {
                 if (data.result) {
                   return data.thumbnailUrl;
                 }
-                throw new Error("Upload thumbnail to Cloudinary failed");
+                throw new Error(
+                  "Upload listening thumbnail to Cloudinary failed"
+                );
               },
-              uploadErrorMessage: "Upload thumbnail to Cloudinary failed",
+              uploadErrorMessage:
+                "Upload listening thumbnail to Cloudinary failed",
             },
           },
         },
@@ -1027,10 +1186,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("thumbnailFromFront", file);
-                formData.append(
-                  "imageExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
