@@ -43,10 +43,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("thumbnailFromFront", file);
-                formData.append(
-                  "imageExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
@@ -243,10 +239,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("partitionThumbnailFromFront", file);
-                formData.append(
-                  "imageExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
@@ -409,10 +401,6 @@ export const options: NextAdminOptions = {
                 const formData = new FormData();
                 const file = new File([buffer], name);
                 formData.append("recordingFromFront", file);
-                formData.append(
-                  "recordingExtension",
-                  name.substring(name.lastIndexOf("."))
-                );
                 formData.append("token", userToken || "");
 
                 const response = await fetch(
