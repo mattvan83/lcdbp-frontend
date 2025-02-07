@@ -8,10 +8,12 @@ export interface PressReviewGroup {
   pressReviews: PressReview[];
 }
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 export default async function PressReviews() {
-  const response = await fetch(`${BACKEND_ADDRESS}/pressReviews/grouped`);
+  const response = await fetch(`${BACKEND_ADDRESS}/pressReviews/grouped`, {
+    next: { tags: ["pressReviews"] },
+  });
   const reviews = await response.json();
 
   return (

@@ -7,7 +7,9 @@ import { Track } from "@/app/(public)/page";
 const { BACKEND_ADDRESS } = process.env;
 
 export default async function Listenings() {
-  const response = await fetch(`${BACKEND_ADDRESS}/listenings`);
+  const response = await fetch(`${BACKEND_ADDRESS}/listenings`, {
+    next: { tags: ["listenings"] },
+  });
   const tracks = await response.json();
 
   // console.log("tracks.listenings: ", tracks.listenings);

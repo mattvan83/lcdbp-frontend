@@ -12,7 +12,9 @@ export interface EventGroup {
 const { BACKEND_ADDRESS } = process.env;
 
 export default async function Events() {
-  const response = await fetch(`${BACKEND_ADDRESS}/events/grouped`);
+  const response = await fetch(`${BACKEND_ADDRESS}/events/grouped`, {
+    next: { tags: ["events"] },
+  });
   const events = await response.json();
 
   //   console.log("events: ", events.eventsGrouped[1].events);

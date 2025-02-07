@@ -40,6 +40,7 @@ export default async function WorkRecordings() {
       body: JSON.stringify({
         token: userToken,
       }),
+      next: { tags: ["recordings"] },
     }
   );
   const workRecordings = await response.json();

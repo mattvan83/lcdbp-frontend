@@ -59,13 +59,17 @@ export interface PressReview {
 
 export default async function Home() {
   // Get last news
-  const responseNews = await fetch(`${BACKEND_ADDRESS}/news/list`);
+  const responseNews = await fetch(`${BACKEND_ADDRESS}/news/list`, {
+    next: { tags: ["news"] },
+  });
   const news = await responseNews.json();
 
   const lastNews = news.result ? news.news : news.error;
 
   // Get last events
-  const responseEvents = await fetch(`${BACKEND_ADDRESS}/events/listMainPage`);
+  const responseEvents = await fetch(`${BACKEND_ADDRESS}/events/listMainPage`, {
+    next: { tags: ["events"] },
+  });
   const events = await responseEvents.json();
 
   const eventsAsNews = events.result
@@ -82,7 +86,9 @@ export default async function Home() {
   const newsConcatenated = [...lastNews, ...eventsAsNews];
 
   // Get last listenings
-  const responseAudio = await fetch(`${BACKEND_ADDRESS}/listenings`);
+  const responseAudio = await fetch(`${BACKEND_ADDRESS}/listenings`, {
+    next: { tags: ["listenings"] },
+  });
   const tracks = await responseAudio.json();
 
   // console.log("tracks.listenings: ", tracks.listenings);
@@ -94,7 +100,9 @@ export default async function Home() {
     : tracks.error;
 
   // Get last press reviews
-  const responsePress = await fetch(`${BACKEND_ADDRESS}/pressReviews/list`);
+  const responsePress = await fetch(`${BACKEND_ADDRESS}/pressReviews/list`, {
+    next: { tags: ["pressReviews"] },
+  });
   const reviews = await responsePress.json();
 
   const lastPressReviews = reviews.result

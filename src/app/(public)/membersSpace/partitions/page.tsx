@@ -37,6 +37,7 @@ export default async function Partitions() {
       body: JSON.stringify({
         token: userToken,
       }),
+      next: { tags: ["works"] },
     }
   );
   const partitions = await response.json();

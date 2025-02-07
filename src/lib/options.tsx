@@ -63,6 +63,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "news" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         eventDate: "Date",
@@ -102,6 +119,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "news" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",
@@ -109,7 +151,7 @@ export const options: NextAdminOptions = {
             } catch (error: Error | any) {
               return {
                 type: "error",
-                message: `Failed to delete: ${error.message}`,
+                message: `Failed To Delete All: ${error.message}`,
               };
             }
           },
@@ -262,6 +304,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "works" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         code: "Thème",
@@ -306,6 +365,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "works" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",
@@ -424,14 +508,6 @@ export const options: NextAdminOptions = {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
-                // Add a size check before proceeding
-                const maxSize = 10 * 1024 * 1024; // 10MB
-                if (buffer.length > maxSize) {
-                  throw new Error(
-                    `File size exceeds ${maxSize / (1024 * 1024)}MB limit`
-                  );
-                }
-
                 const recordingFile = new File([buffer], name);
 
                 try {
@@ -526,6 +602,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "recordings" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         recordingUrl: "Fichier audio",
@@ -566,6 +659,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "recordings" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",
@@ -728,6 +846,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "events" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         eventDate: "Date",
@@ -773,6 +908,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "events" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",
@@ -886,11 +1046,6 @@ export const options: NextAdminOptions = {
           "mobile",
           "type",
         ],
-        // fields: {
-        //   voice: {
-        //     format: "textarea",
-        //   },
-        // },
       },
       aliases: {
         firstname: "Prénom",
@@ -957,14 +1112,6 @@ export const options: NextAdminOptions = {
                 const cookieStore = cookies();
                 const userToken = cookieStore.get("user_token")?.value;
 
-                // Add a size check before proceeding
-                const maxSize = 10 * 1024 * 1024; // 10MB
-                if (buffer.length > maxSize) {
-                  throw new Error(
-                    `File size exceeds ${maxSize / (1024 * 1024)}MB limit`
-                  );
-                }
-
                 const audioFile = new File([buffer], name);
 
                 try {
@@ -981,7 +1128,7 @@ export const options: NextAdminOptions = {
                   );
                   const signData = await signResponse.json();
 
-                  console.log("signData: ", signData);
+                  // console.log("signData: ", signData);
 
                   if (!signData.result) {
                     throw new Error(signData.error);
@@ -1032,7 +1179,7 @@ export const options: NextAdminOptions = {
 
                   const uploadResult = await uploadResponse.json();
 
-                  console.log("uploadResult: ", uploadResult);
+                  // console.log("uploadResult: ", uploadResult);
 
                   // Step 4: Notify backend of successful upload
                   const completeResponse = await fetch(
@@ -1095,6 +1242,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "listenings" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         recordingDate: "Date d'enregistrement",
@@ -1142,6 +1306,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "listenings" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",
@@ -1226,6 +1415,23 @@ export const options: NextAdminOptions = {
             },
           },
         },
+        hooks: {
+          async afterDb(data, mode, request) {
+            if (mode === "create" || mode === "edit") {
+              await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ tag: "pressReviews" }),
+                  cache: "no-store",
+                }
+              );
+            }
+
+            return data;
+          },
+        },
       },
       aliases: {
         pressReviewDate: "Date",
@@ -1268,6 +1474,31 @@ export const options: NextAdminOptions = {
               if (!data.result) {
                 throw new Error(data.error);
               }
+
+              // Add revalidation after successful deletion
+              const revalidateResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ tag: "pressReviews" }),
+                  cache: "no-store",
+                }
+              );
+
+              if (!revalidateResponse.ok) {
+                throw new Error(
+                  `Revalidation failed: ${revalidateResponse.statusText}`
+                );
+              }
+
+              const revalidateData = await revalidateResponse.json();
+              if (!revalidateData.revalidated) {
+                throw new Error("Failed to revalidate cache");
+              }
+
               return {
                 type: "success",
                 message: "Deleted All Successfully",

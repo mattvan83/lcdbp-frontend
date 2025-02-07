@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import SimpleForm from "@/components/SimpleForm";
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 export default async function ContactUs() {
   return (
