@@ -35,6 +35,7 @@ export const options: NextAdminOptions = {
         fields: {
           thumbnailUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -174,7 +175,6 @@ export const options: NextAdminOptions = {
           "isAtWork",
           "recordings",
         ],
-        fields: {},
         search: ["code", "title", "authorMusic"],
         defaultSort: {
           field: "code",
@@ -244,6 +244,7 @@ export const options: NextAdminOptions = {
         fields: {
           partitionUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -273,6 +274,7 @@ export const options: NextAdminOptions = {
           },
           partitionThumbnailUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -477,32 +479,7 @@ export const options: NextAdminOptions = {
         fields: {
           recordingUrl: {
             format: "file",
-            // handler: {
-            //   upload: async (buffer: Buffer, { name }: { name: string }) => {
-            //     const cookieStore = cookies();
-            //     const userToken = cookieStore.get("user_token")?.value;
-
-            //     const formData = new FormData();
-            //     const file = new File([buffer], name);
-            //     formData.append("recordingFromFront", file);
-            //     formData.append("token", userToken || "");
-
-            //     const response = await fetch(
-            //       `${BACKEND_ADDRESS}/studiedWorks/uploadRecording`,
-            //       {
-            //         method: "POST",
-            //         body: formData,
-            //       }
-            //     );
-
-            //     const data = await response.json();
-            //     if (data.result) {
-            //       return data.recordingUrl;
-            //     }
-            //     throw new Error("Upload recording to Cloudinary failed");
-            //   },
-            //   uploadErrorMessage: "Upload recording to Cloudinary failed",
-            // },
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -605,15 +582,19 @@ export const options: NextAdminOptions = {
         hooks: {
           async afterDb(data, mode, request) {
             if (mode === "create" || mode === "edit") {
-              await fetch(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
-                {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ tag: "recordings" }),
-                  cache: "no-store",
-                }
-              );
+              try {
+                await fetch(
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate`,
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tag: "recordings" }),
+                    cache: "no-store",
+                  }
+                );
+              } catch (error) {
+                console.error("Revalidation error:", error);
+              }
             }
 
             return data;
@@ -818,6 +799,7 @@ export const options: NextAdminOptions = {
         fields: {
           thumbnailUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -1107,6 +1089,7 @@ export const options: NextAdminOptions = {
         fields: {
           audioUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -1211,6 +1194,7 @@ export const options: NextAdminOptions = {
           },
           thumbnailUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
@@ -1387,6 +1371,7 @@ export const options: NextAdminOptions = {
         fields: {
           thumbnailUrl: {
             format: "file",
+            visible: () => false,
             handler: {
               upload: async (buffer: Buffer, { name }: { name: string }) => {
                 const cookieStore = cookies();
