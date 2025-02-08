@@ -365,6 +365,7 @@ export default function Header() {
                             "membersSpace",
                             "partitions",
                             "workRecordings",
+                            "medias",
                           ])}
                         >
                           <FontAwesomeIcon
@@ -374,11 +375,13 @@ export default function Header() {
                                 "membersSpace",
                                 "partitions",
                                 "workRecordings",
+                                "medias",
                               ].includes(user.activeKey) ||
                               [
                                 "membersSpace",
                                 "partitions",
                                 "workRecordings",
+                                "medias",
                               ].includes(hoveredKey)
                                 ? "purple"
                                 : "#4b5c6b"
@@ -416,6 +419,18 @@ export default function Header() {
                         onClick={() => setShowOffcanvas(false)}
                       >
                         Nos Enregistrements de Travail
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        as={Link}
+                        href="/membersSpace/medias"
+                        eventKey="medias"
+                        className={styles.navbarLink}
+                        style={getNavbarDropdownItemStyle(["medias"])}
+                        onMouseEnter={() => setHoveredKey("medias")}
+                        onMouseLeave={() => setHoveredKey("")}
+                        onClick={() => setShowOffcanvas(false)}
+                      >
+                        Nos Souvenirs
                       </NavDropdown.Item>
                     </NavDropdown>
                   )}
