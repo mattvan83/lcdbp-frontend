@@ -1,0 +1,22 @@
+.mediasDivision {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 0px 0px;
+}
+
+.mediasHeader {
+  text-align: center;
+}
+
+.navbarLink {
+  font-size: 14px;
+}
+
+.tabDivision {
+  border: #eee0e0 solid 3px;
+}
+
+.tabSection {
+  text-align: center;
+}

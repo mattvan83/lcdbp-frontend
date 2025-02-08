@@ -1,0 +1,24 @@
+.mediasContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100vw; */
+  /* padding: 20px 0px 0px;
+  /* background-color: #ddd9d9; */
+}
+
+.dropdownMenu {
+  text-align: center;
+  background-color: #eee0e0;
+  min-width: 140px;
+  max-height: 140px;
+  overflow-y: auto;
+  border-radius: 5px;
+  /* border-color: #eee0e0; */
+}
+
+.dropdownMenu a:hover {
+  color: purple;
+  font-weight: bold;
+}

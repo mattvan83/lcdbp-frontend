@@ -19,7 +19,7 @@ interface PressReviewCard {
   openZoomedImage: (pressReview: PressReview) => void;
 }
 
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+const { BACKEND_ADDRESS } = process.env;
 
 function PressReviewCard({
   _id,

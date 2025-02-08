@@ -6,6 +6,7 @@ import Image from "next/image";
 import { News, Event, PressReview } from "@/app/(public)/page";
 import { Partition } from "@/app/(public)/membersSpace/partitions/page";
 import { WorkRecording } from "@/app/(public)/membersSpace/workRecordings/page";
+import { Media } from "@/app/(public)/membersSpace/medias/page";
 import PressReviewCard from "./PressReviewCard";
 import EventCard from "./EventCard";
 import PartitionCard from "./PartitionCard";
@@ -59,8 +60,6 @@ export default function Carousel({
     setworkRecordingPdf(null);
   };
 
-  // console.log("partitionPdf: ", partitionPdf);
-
   return (
     <>
       {category === "eventsMainPage" &&
@@ -88,6 +87,7 @@ export default function Carousel({
                       src={item.thumbnailUrl}
                       alt={item.thumbnailDescription}
                       // layout="fill"
+                      loading="lazy"
                       width={imageWidth}
                       height={imageHeight}
                       className={styles.event}
@@ -203,8 +203,9 @@ export default function Carousel({
                 : getOptimizedCloudinaryUrl(zoomedImage.thumbnailUrl)
             }
             alt={zoomedImage.thumbnailDescription}
-            layout="fill"
-            objectFit="contain"
+            fill
+            sizes="(max-width: 768px) 100vw, 90vw"
+            style={{ objectFit: "contain" }}
             className={styles.zoomedImage}
           />
         </div>

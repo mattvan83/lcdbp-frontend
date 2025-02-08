@@ -10,8 +10,7 @@ interface MediasDivisionProps {
 const MediasDivision: React.FC<MediasDivisionProps> = ({ mediaContainers }) => {
   return (
     <div className={styles.mediasDivision}>
-      <h3>Nos Souvenirs</h3>
-      "AGCA", "CONCERT", "DETENTE", "WORK"
+      <h3 className={styles.mediasHeader}>Nos Souvenirs</h3>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row className="mt-4 mb-4">
           <Col md={3}>
